@@ -2,8 +2,8 @@
 
 ## Identity Account Takeover
 
-1. Confirm the alert is scoped to `source:test-harness` and `synthetic:true`.
-2. Review the synthetic sign-in sequence, MFA reset signal, and privileged follow-on action.
+1. Confirm the alert is part of the test harness data.
+2. Review the modeled sign-in sequence, MFA reset signal, and privileged follow-on action.
 3. Determine whether the modeled behavior represents compromise, risky access, or a false positive.
 4. Document containment actions: reset session, require MFA, review privileged activity, and preserve evidence.
 
@@ -34,4 +34,3 @@
 2. Review object volume, actor, client, bucket sensitivity, and timing.
 3. Determine whether data exposure occurred.
 4. Block access, preserve logs, and escalate to incident response.
-

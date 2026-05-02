@@ -2,15 +2,15 @@
   {
     "id": "monitor-inventory",
     "title": "Datadog Monitor Inventory",
-    "type": "generated-panel",
-    "proves": "Custom monitors were designed around synthetic validation and source health.",
+    "type": "portfolio-panel",
+    "proves": "Custom monitors were designed around sample lab events and source health.",
     "scenario_ids": ["pipeline_health", "source_pipeline_health"]
   },
   {
-    "id": "synthetic-log-replay",
-    "title": "Synthetic Log Replay",
-    "type": "generated-panel",
-    "proves": "Replay events carry source:test-harness and synthetic:true boundaries.",
+    "id": "sample-log-replay",
+    "title": "Sample Log Replay",
+    "type": "portfolio-panel",
+    "proves": "Replay events stay clearly separated from production claims.",
     "scenario_ids": ["identity_account_takeover", "aws_iam_key_misuse", "eks_secret_access_chain", "endpoint_to_mongodb_pivot", "s3_data_access_exfiltration"]
   },
   {
@@ -29,18 +29,18 @@
   },
   {
     "id": "dashboard-overview-local",
-    "title": "Command Center Overview Screenshot",
+    "title": "Dashboard Overview Screenshot",
     "type": "browser-screenshot",
     "path": "evidence/dashboard-overview-local.png",
-    "proves": "The public-safe dashboard presents KPIs, ATT&CK coverage, active scenarios, signal stream, and validation path.",
+    "proves": "The dashboard presents project scope, ATT&CK coverage, scenarios, alert flow, and evidence path.",
     "scenario_ids": ["identity_account_takeover", "aws_iam_key_misuse", "eks_secret_access_chain", "endpoint_to_mongodb_pivot", "s3_data_access_exfiltration"]
   },
   {
     "id": "dashboard-monitor-inventory-local",
-    "title": "Detection Lifecycle Screenshot",
+    "title": "Detection Detail Screenshot",
     "type": "browser-screenshot",
     "path": "evidence/dashboard-monitor-inventory-local.png",
-    "proves": "The monitor inventory is presented as detection lifecycle evidence with query scope and detection-as-code context.",
+    "proves": "The monitor inventory is presented with query focus, tuning notes, and monitor definition context.",
     "scenario_ids": ["pipeline_health", "source_pipeline_health"]
   },
   {
@@ -56,7 +56,7 @@
     "title": "Mobile Dashboard Screenshot",
     "type": "browser-screenshot",
     "path": "evidence/dashboard-mobile-local.png",
-    "proves": "The command-center dashboard remains usable on a narrow reviewer viewport.",
+    "proves": "The dashboard remains usable on a narrow reviewer viewport.",
     "scenario_ids": ["identity_account_takeover", "aws_iam_key_misuse", "eks_secret_access_chain", "endpoint_to_mongodb_pivot", "s3_data_access_exfiltration"]
   }
 ]

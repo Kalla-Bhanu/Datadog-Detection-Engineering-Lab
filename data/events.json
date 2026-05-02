@@ -7,7 +7,7 @@
     "source": "test-harness",
     "status": "info",
     "severity": "low",
-    "message": "Synthetic replay heartbeat observed for detection validation pipeline.",
+    "message": "Sample replay heartbeat observed for the detection test pipeline.",
     "tags": ["source:test-harness", "synthetic:true", "purpose:detection-rule-validation", "scenario:pipeline_health"],
     "expected_detection": "CloudSec Test Harness - Pipeline Health"
   },
@@ -108,4 +108,3 @@
     "expected_detection": "CloudSec Live Source - MongoDB Pipeline Health"
   }
 ]
-

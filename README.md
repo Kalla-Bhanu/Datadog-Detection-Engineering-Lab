@@ -1,57 +1,57 @@
 # Datadog Detection Engineering Lab
 
-[![Project: Portfolio](https://img.shields.io/badge/project-portfolio-2f6f5e)](#)
-[![Validation: Public Safe](https://img.shields.io/badge/validation-public--safe-3b7f72)](#privacy-and-safety)
-[![Dashboard: GitHub Pages](https://img.shields.io/badge/dashboard-GitHub%20Pages-1f6feb)](#run-the-dashboard-locally)
+This project preserves a Datadog detection engineering lab in a form that is
+safe to share publicly. The goal is simple: show the monitor logic, the sample
+events used to test it, the analyst triage paths, and the evidence that supports
+the work without keeping a paid trial account open.
 
-Public-safe Datadog detection engineering project focused on monitor design,
-synthetic log validation, alert triage, and a professional SOC-style dashboard
-for evidence review.
+The dashboard is designed as a portfolio walkthrough. A recruiter can quickly
+see the scope of the project, and a security interviewer can drill into the
+detection logic, ATT&CK mapping, tuning notes, and response decisions.
 
-This project preserves the useful Datadog work from a temporary lab account
-without requiring the Datadog trial to remain active. It uses synthetic events,
-sanitized monitor definitions, generated evidence panels, and local validation
-checks so it can be reviewed from GitHub alone.
+## What I Built
 
-## What This Project Shows
+- Datadog log monitor examples for identity, cloud, runtime, endpoint, and data
+  access scenarios.
+- Monitor definitions in JSON and Terraform-style form.
+- A polished dashboard for coverage, detections, scenarios, evidence, and final
+  readiness checks.
+- Sample Datadog-style log events with scenario IDs and expected outcomes.
+- Triage runbooks that explain how an analyst would investigate each alert.
+- Evidence notes and screenshots that remain useful after the Datadog trial is
+  closed.
 
-- Datadog log monitor patterns for security validation events.
-- Detection-as-code examples in JSON and Terraform-style form.
-- A static command-center dashboard for coverage, detections, scenarios,
-  telemetry, and retirement readiness.
-- Synthetic Datadog-style log events with scenario IDs and expected outcomes.
-- Public-safe evidence handling before a paid Datadog trial is retired.
-- Runbooks that explain how an analyst would validate, triage, and escalate.
+## Dashboard
 
-## Dashboard Experience
+The dashboard includes:
 
-The dashboard is built as a static GitHub Pages-ready workbench with:
-
-- KPI strip, ATT&CK coverage matrix, active scenario queue, and signal stream.
-- Detection lifecycle cards with query focus, tuning rationale, validation, and
-  sanitized detection-as-code context.
-- Source health, synthetic replay timeline, evidence meters, and readiness
-  gates.
-- Engineer and Recruiter modes for deep technical review or fast screening.
+- Project snapshot cards for monitor count, sample events, scenario coverage,
+  and privacy checks.
+- ATT&CK coverage mapped to the detections in the lab.
+- Detection cards with query focus, tuning notes, noise considerations, and
+  analyst handoff.
+- Scenario walkthroughs that connect trigger, triage path, and outcome.
+- Source health, replay timing, evidence confidence, and wrap-up checks.
+- Engineer and Recruiter views for different review styles.
 
 ## Detection Scenarios
 
-1. Pipeline health for synthetic replay and live-source feeds.
-2. Identity account takeover validation.
-3. AWS credential misuse validation.
-4. EKS secret access chain validation.
-5. Endpoint-to-MongoDB pivot validation.
-6. S3 data access and exfiltration validation.
+1. Pipeline health for the test harness and source feeds.
+2. Identity account takeover.
+3. AWS credential misuse.
+4. EKS secret access chain.
+5. Endpoint-to-MongoDB pivot.
+6. S3 data access and exfiltration.
 
-## Repository Structure
+## Repository Layout
 
 ```text
-dashboard/              Static reviewer dashboard
-data/                   Synthetic Datadog-style events
-detections/             Public-safe monitor JSON and Terraform examples
-docs/                   Runbooks, preservation notes, and Claude review prompts
-evidence/               Evidence catalog metadata and local dashboard captures
-tools/                  Validation and public-safe scanners
+dashboard/              Portfolio dashboard
+data/                   Sample Datadog-style events
+detections/             Monitor JSON and Terraform-style examples
+docs/                   Runbooks, project notes, and preservation guidance
+evidence/               Evidence catalog and local dashboard captures
+tools/                  Local checks for detections, dashboard, and privacy
 ```
 
 ## Run The Dashboard Locally
@@ -63,7 +63,7 @@ powershell -ExecutionPolicy Bypass -File .\run-dashboard.ps1
 
 Then open the local URL printed by the script.
 
-## Validate The Package
+## Check The Project
 
 ```powershell
 npm run validate
@@ -75,12 +75,13 @@ powershell -NoLogo -NoProfile -ExecutionPolicy Bypass -File .\tools\verify-publi
 
 Suggested resume bullet:
 
-> Built a public-safe Datadog detection engineering lab with synthetic log
-> replay, monitor-as-code examples, triage runbooks, and a static dashboard to
-> demonstrate alert validation, evidence handling, and SOC workflow design.
+> Built a Datadog detection engineering lab with sample log replay, monitor
+> definitions, triage runbooks, and a portfolio dashboard to demonstrate alert
+> validation, evidence handling, and SOC workflow design.
 
-## Privacy And Safety
+## Privacy
 
-This repository does not include Datadog API keys, application keys, session
-tokens, private tenant screenshots, real user data, real account IDs, or private
-resource names. All data and screenshots are synthetic, generated, or sanitized.
+This repository does not include Datadog keys, session tokens, private tenant
+screenshots, real user data, real account IDs, or private resource names. The
+events and screenshots are either modeled for the lab or sanitized for public
+review.

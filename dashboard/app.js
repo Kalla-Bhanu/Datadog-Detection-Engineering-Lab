@@ -52,7 +52,7 @@ function sparkBars(values) {
 }
 
 function kpiStrip() {
-  return `<section class="kpi-strip" aria-label="Lab metrics">${data.kpis.map((kpi) => `
+  return `<section class="kpi-strip" aria-label="Project snapshot">${data.kpis.map((kpi) => `
     <article class="kpi-tile ${kpi.tone}">
       <span>${kpi.label}</span>
       <strong>${kpi.value}</strong>
@@ -76,11 +76,11 @@ function coverageMatrix(compact = false) {
     <section class="panel coverage-panel">
       <div class="panel-head">
         <div>
-          <span class="section-kicker">ATT&CK coverage</span>
+          <span class="section-kicker">Mapped coverage</span>
           <h3>Detection coverage matrix</h3>
         </div>
         <div class="legend">
-          <span class="validated">Validated</span>
+          <span class="validated">Checked</span>
           <span class="partial">Partial</span>
           <span class="planned">Planned</span>
         </div>
@@ -95,7 +95,7 @@ function scenarioQueue() {
     <section class="panel scenario-queue">
       <div class="panel-head">
         <div>
-          <span class="section-kicker">Active scenarios</span>
+          <span class="section-kicker">Scenario queue</span>
           <h3>Alert paths ready for walkthrough</h3>
         </div>
       </div>
@@ -117,8 +117,8 @@ function signalStream() {
     <section class="panel signal-panel">
       <div class="panel-head">
         <div>
-          <span class="section-kicker">Signal stream</span>
-          <h3>Synthetic alert feed</h3>
+          <span class="section-kicker">Alert trail</span>
+          <h3>Sample alert flow</h3>
         </div>
       </div>
       <div class="signal-list">
@@ -140,8 +140,8 @@ function pipelineRail() {
     <section class="panel pipeline-panel">
       <div class="panel-head">
         <div>
-          <span class="section-kicker">Validation path</span>
-          <h3>Event to evidence</h3>
+          <span class="section-kicker">How I checked it</span>
+          <h3>From alert to evidence</h3>
         </div>
       </div>
       <ol class="pipeline-rail">
@@ -163,7 +163,7 @@ function sourceHealth() {
       <div class="panel-head">
         <div>
           <span class="section-kicker">Source health</span>
-          <h3>Telemetry inputs</h3>
+          <h3>Data sources used in the lab</h3>
         </div>
       </div>
       <div class="source-grid">
@@ -235,15 +235,15 @@ function detectionCard(monitor) {
           <p>${monitor.hypothesis}</p>
         </section>
         <section>
-          <strong>Threshold rationale</strong>
+          <strong>Why this logic</strong>
           <p>${monitor.rationale}</p>
         </section>
         <section>
-          <strong>False-positive notes</strong>
+          <strong>Noise and exceptions</strong>
           <p>${monitor.fp}</p>
         </section>
         <section>
-          <strong>Validation</strong>
+          <strong>How it was checked</strong>
           <p>${monitor.validation}</p>
         </section>
       </div>
@@ -261,8 +261,8 @@ function codePreview() {
     <section class="panel code-panel">
       <div class="panel-head">
         <div>
-          <span class="section-kicker">Detection as code</span>
-          <h3>Sanitized Terraform monitor shape</h3>
+          <span class="section-kicker">Monitor definition</span>
+          <h3>Sanitized Terraform example</h3>
         </div>
       </div>
       <pre><code>${data.codePreview.join("\n")}</code></pre>
@@ -327,8 +327,8 @@ function replayTimeline() {
     <section class="panel replay-panel">
       <div class="panel-head">
         <div>
-          <span class="section-kicker">Synthetic replay</span>
-          <h3>One scenario timing model</h3>
+          <span class="section-kicker">Replay timing</span>
+          <h3>One scenario from start to evidence</h3>
         </div>
       </div>
       <ol class="replay-line">
@@ -353,7 +353,7 @@ function evidencePanels() {
       <span class="section-kicker">${item.id}</span>
       <h3>${item.title}</h3>
       <p>${item.claim}</p>
-      <strong>${item.score}% review strength</strong>
+      <strong>${item.score}% evidence confidence</strong>
     </article>
   `).join("")}</div>`;
 }
@@ -375,7 +375,7 @@ function tuningTable() {
     <section class="panel tuning-panel">
       <div class="panel-head">
         <div>
-          <span class="section-kicker">Tuning log</span>
+          <span class="section-kicker">Tuning notes</span>
           <h3>Operational tradeoffs</h3>
         </div>
       </div>
@@ -409,8 +409,8 @@ function changelog() {
     <section class="panel changelog-panel">
       <div class="panel-head">
         <div>
-          <span class="section-kicker">Version notes</span>
-          <h3>Project trail</h3>
+          <span class="section-kicker">Project notes</span>
+          <h3>What changed</h3>
         </div>
       </div>
       <div class="change-list">

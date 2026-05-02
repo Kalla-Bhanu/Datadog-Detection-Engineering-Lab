@@ -1,27 +1,28 @@
-# Evidence Preservation And Datadog Retirement
+# Evidence Preservation And Datadog Closure
 
-This project is designed so the Datadog trial can be closed after evidence is
-preserved. The durable proof lives in GitHub, not in a paid tenant.
+This lab was built in a temporary Datadog account, but the useful work should
+not depend on that account staying open. The repository keeps the parts that are
+safe and useful for review: monitor logic, sample events, triage notes, and
+dashboard screenshots.
 
-## Preserved Proof
+## What Was Preserved
 
-- Public-safe Datadog monitor definitions.
-- Terraform-style detection-as-code examples.
-- Synthetic Datadog-style event data.
-- Static dashboard for reviewer walkthroughs.
-- Evidence catalog and triage runbooks.
-- Validation tools for JSON, dashboard references, and public-safe content.
+- Public monitor definitions.
+- Terraform-style monitor examples.
+- Sample Datadog-style events.
+- A local dashboard for walkthroughs.
+- Evidence screenshots and catalog notes.
+- Runbooks for each detection scenario.
+- Local checks for detection files, dashboard files, and privacy boundaries.
 
 ## Closure Boundary
 
-Closing the Datadog trial does not change the local repository, generated
-dashboard, monitor examples, synthetic data, or documentation. Do not describe
-the tenant as currently active after closure. Present it as a completed lab with
-preserved evidence and responsible cost control.
+After the Datadog trial is closed, the live tenant should not be described as
+active. The project should be presented as a completed lab with preserved
+evidence and responsible cost control.
 
 ## Reviewer Wording
 
 ```text
-I built this as a temporary Datadog detection engineering lab, then preserved the monitor logic, synthetic events, triage flow, and dashboard in a public-safe GitHub project before retiring the paid trial.
+I built this as a temporary Datadog detection engineering lab, then preserved the monitor logic, sample events, triage flow, and dashboard in a public GitHub project before closing the paid trial.
 ```
-

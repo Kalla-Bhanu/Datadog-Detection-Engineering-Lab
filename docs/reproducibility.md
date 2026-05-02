@@ -1,6 +1,6 @@
 # Reproducibility
 
-The supported review path is local and public-safe.
+The project can be reviewed locally without a live Datadog account.
 
 ## Requirements
 
@@ -8,7 +8,7 @@ The supported review path is local and public-safe.
 - PowerShell.
 - Python for the optional local dashboard server.
 
-## Commands
+## Project Checks
 
 ```powershell
 npm run validate
@@ -23,5 +23,4 @@ cd .\dashboard
 powershell -ExecutionPolicy Bypass -File .\run-dashboard.ps1
 ```
 
-The project does not require a live Datadog account to review.
-
+The script prints a local URL that opens the dashboard in a browser.

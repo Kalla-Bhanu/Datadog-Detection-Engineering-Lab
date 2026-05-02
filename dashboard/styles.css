@@ -92,7 +92,6 @@ button {
   border-radius: 8px;
   color: #ffffff;
   background: linear-gradient(135deg, #7a5cff, #2ec4b6);
-  font-family: "Cascadia Mono", "SFMono-Regular", Consolas, monospace;
   font-weight: 800;
 }
 
@@ -153,7 +152,6 @@ button {
   border-radius: 999px;
   color: var(--teal);
   background: rgba(46, 196, 182, 0.12);
-  font-family: "Cascadia Mono", "SFMono-Regular", Consolas, monospace;
 }
 
 .rail-card {
@@ -181,7 +179,6 @@ button {
   margin: 0 0 4px;
   color: var(--soft);
   font-size: 0.78rem;
-  text-transform: uppercase;
 }
 
 .workspace {
@@ -210,7 +207,6 @@ button {
   align-items: center;
   margin-bottom: 12px;
   color: var(--muted);
-  font-family: "Cascadia Mono", "SFMono-Regular", Consolas, monospace;
   font-size: 0.8rem;
 }
 
@@ -274,7 +270,6 @@ h3 {
 .scope-pill,
 .status-text {
   border-radius: 999px;
-  font-family: "Cascadia Mono", "SFMono-Regular", Consolas, monospace;
 }
 
 .scope-pill {
@@ -343,10 +338,8 @@ h3 {
 
 .section-kicker {
   color: var(--teal);
-  font-family: "Cascadia Mono", "SFMono-Regular", Consolas, monospace;
   font-size: 0.72rem;
   font-weight: 800;
-  text-transform: uppercase;
 }
 
 .kpi-strip {
@@ -383,7 +376,6 @@ h3 {
 .kpi-tile strong {
   display: block;
   margin: 8px 0 4px;
-  font-family: "Cascadia Mono", "SFMono-Regular", Consolas, monospace;
   font-size: 1.6rem;
 }
 
@@ -707,7 +699,6 @@ h3 {
 .query-strip span {
   color: var(--soft);
   font-size: 0.76rem;
-  text-transform: uppercase;
 }
 
 .lifecycle-grid {
@@ -775,7 +766,6 @@ code {
   padding: 0 9px;
   border: 1px solid currentColor;
   border-radius: 999px;
-  font-family: "Cascadia Mono", "SFMono-Regular", Consolas, monospace;
   font-size: 0.72rem;
   font-weight: 800;
 }
@@ -889,7 +879,6 @@ dd {
 .source-tile strong {
   display: block;
   margin: 8px 0 5px;
-  font-family: "Cascadia Mono", "SFMono-Regular", Consolas, monospace;
   font-size: 1.4rem;
 }
 
@@ -939,7 +928,6 @@ dd {
 
 .evidence-panel strong {
   color: var(--green);
-  font-family: "Cascadia Mono", "SFMono-Regular", Consolas, monospace;
   font-size: 0.84rem;
 }
 

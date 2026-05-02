@@ -1,59 +1,59 @@
 window.DD_LAB_DATA = {
   meta: {
     title: "Datadog Detection Engineering Lab",
-    subtitle: "Public-safe SOC workbench for detection design, validation, and retirement-ready evidence.",
-    environment: "PUBLIC-SAFE LAB",
-    update: "v1.0 local validation"
+    subtitle: "A reviewer-friendly Datadog security portfolio with detection logic, sample events, and clear evidence.",
+    environment: "Safe to share",
+    update: "Checked locally"
   },
   stages: [
     {
       id: "overview",
       label: "Overview",
       badge: "5",
-      kicker: "Command center",
-      title: "Detection engineering review surface for a Datadog lab.",
-      summary: "A compact operator view that connects monitor patterns, ATT&CK coverage, synthetic replay, and public-safe evidence without depending on a live trial tenant."
+      kicker: "Project overview",
+      title: "A Datadog detection engineering portfolio, built for review.",
+      summary: "This dashboard shows the work behind the lab: monitor patterns, mapped threat scenarios, ATT&CK coverage, sample alert flow, and the evidence needed to discuss it after the trial tenant is closed."
     },
     {
       id: "monitors",
       label: "Detections",
       badge: "7",
-      kicker: "Detection lifecycle",
-      title: "Monitor logic with query scope, tuning rationale, validation, and analyst handoff.",
-      summary: "Each public-safe detection can be reviewed as a lifecycle artifact instead of a flat monitor list."
+      kicker: "Monitor design",
+      title: "Monitor logic with context, tuning notes, and analyst handoff.",
+      summary: "Each detection explains the idea behind the alert, the data it uses, how I tested it, and how an analyst would respond."
     },
     {
       id: "scenarios",
       label: "Scenarios",
       badge: "5",
       kicker: "Threat walkthroughs",
-      title: "Scenario paths show how a signal becomes an investigation decision.",
-      summary: "Synthetic events are grouped into interview-ready stories with trigger, pivot, outcome, and evidence references."
+      title: "Scenario paths show how an alert becomes an investigation decision.",
+      summary: "The sample events are grouped into practical stories with trigger, triage path, expected outcome, and evidence references."
     },
     {
       id: "evidence",
-      label: "Telemetry",
+      label: "Evidence",
       badge: "6",
-      kicker: "Replay and evidence",
-      title: "Generated proof panels replace private Datadog screenshots.",
-      summary: "The telemetry view shows source health, replay timing, and artifact traceability using only sanitized project data."
+      kicker: "Evidence trail",
+      title: "Readable proof without private Datadog screenshots.",
+      summary: "This section keeps the useful parts of the lab visible: source health, replay timing, and the evidence behind each project claim."
     },
     {
       id: "readiness",
-      label: "Operations",
+      label: "Wrap-up",
       badge: "6",
-      kicker: "Publication gates",
-      title: "The lab remains reviewable after Datadog account closure.",
-      summary: "Quality gates keep the repo safe to publish and preserve the project as resume evidence after paid services are retired."
+      kicker: "Before publishing",
+      title: "The lab remains useful after the Datadog trial is closed.",
+      summary: "These notes show what was checked, what was preserved, and how the project can be presented honestly without keeping paid services running."
     }
   ],
   kpis: [
     { label: "Monitor patterns", value: "7", note: "6 detections + source health", tone: "green", spark: [44, 55, 49, 68, 73, 88] },
     { label: "Threat scenarios", value: "5", note: "End-to-end walkthroughs", tone: "violet", spark: [28, 36, 58, 62, 75, 82] },
-    { label: "Synthetic events", value: "9", note: "Mapped to expected alerts", tone: "blue", spark: [35, 42, 56, 52, 70, 76] },
+    { label: "Sample events", value: "9", note: "Mapped to expected alerts", tone: "blue", spark: [35, 42, 56, 52, 70, 76] },
     { label: "ATT&CK tactics", value: "5", note: "Honest partial coverage", tone: "amber", spark: [22, 26, 34, 41, 51, 58] },
     { label: "Critical paths", value: "2", note: "Runtime and data exposure", tone: "red", spark: [18, 32, 39, 56, 72, 86] },
-    { label: "Public-safe scan", value: "Pass", note: "No private tenant material", tone: "slate", spark: [75, 76, 75, 78, 79, 80] }
+    { label: "Privacy check", value: "Pass", note: "No private tenant material", tone: "slate", spark: [75, 76, 75, 78, 79, 80] }
   ],
   coverage: [
     { tactic: "Initial Access", technique: "T1078.004", name: "Cloud Accounts", status: "validated", scenario: "identity_account_takeover", source: "Okta" },
@@ -69,7 +69,7 @@ window.DD_LAB_DATA = {
     { source: "CloudTrail", path: "AWS -> Datadog Logs", lag: "5m", schema: "cloudsec.v1", state: "healthy" },
     { source: "Okta", path: "System Log -> Datadog", lag: "6m", schema: "identity.v1", state: "healthy" },
     { source: "Kubernetes", path: "Audit replay -> Logs", lag: "8m", schema: "runtime.v1", state: "watch" },
-    { source: "Endpoint", path: "Synthetic EDR -> Logs", lag: "9m", schema: "endpoint.v1", state: "healthy" },
+    { source: "Endpoint", path: "Modeled EDR -> Logs", lag: "9m", schema: "endpoint.v1", state: "healthy" },
     { source: "MongoDB Atlas", path: "Audit replay -> Logs", lag: "12m", schema: "data.v1", state: "watch" }
   ],
   signalStream: [
@@ -80,18 +80,18 @@ window.DD_LAB_DATA = {
     { time: "13:25", severity: "Critical", source: "data", text: "Object access spike maps to S3 exfiltration model", scenario: "s3_data_access_exfiltration" }
   ],
   pipeline: [
-    { step: "Synthetic event", detail: "Scenario payload generated", state: "complete" },
+    { step: "Sample event", detail: "Scenario payload prepared", state: "complete" },
     { step: "Scoped query", detail: "source:test-harness", state: "complete" },
     { step: "Monitor alert", detail: "Severity and tags matched", state: "complete" },
     { step: "Triage runbook", detail: "Pivot path documented", state: "complete" },
-    { step: "Portfolio proof", detail: "Evidence catalog updated", state: "complete" }
+    { step: "Portfolio note", detail: "Evidence catalog updated", state: "complete" }
   ],
   replayTimeline: [
-    { time: "T+00s", label: "Replay starts", detail: "Synthetic scenario event enters test harness." },
+    { time: "T+00s", label: "Replay starts", detail: "Sample scenario event enters the test harness." },
     { time: "T+12s", label: "Fields normalize", detail: "Scenario ID, source, actor, and object context are available." },
     { time: "T+38s", label: "Monitor evaluates", detail: "Windowed query matches the expected detection pattern." },
     { time: "T+45s", label: "Alert routes", detail: "Sanitized priority route maps to triage runbook." },
-    { time: "T+02m", label: "Evidence preserved", detail: "Result is captured as a GitHub-reviewable artifact." }
+    { time: "T+02m", label: "Evidence preserved", detail: "Result is captured as a clear portfolio artifact." }
   ],
   monitors: [
     {
@@ -105,10 +105,10 @@ window.DD_LAB_DATA = {
       query: "source:test-harness synthetic:true",
       owner: "Detection Engineering",
       confidence: 92,
-      hypothesis: "If validation events stop arriving, downstream detection claims are no longer trustworthy.",
-      rationale: "The monitor protects the lab itself by alerting on missing validation telemetry.",
+      hypothesis: "If test events stop arriving, the rest of the detection story needs to be treated carefully.",
+      rationale: "The monitor protects the lab itself by alerting when test telemetry goes quiet.",
       fp: "Expected during deliberate account shutdown; documented as retirement-safe.",
-      validation: "Validated with a synthetic health event and a missing-event check.",
+      validation: "Checked with a health event and a missing-event test.",
       route: "P3 lab review queue",
       mitre: "N/A"
     },
@@ -205,7 +205,7 @@ window.DD_LAB_DATA = {
     {
       name: "CloudSec Live Source - Pipeline Health Pattern",
       severity: "Medium",
-      status: "Telemetry Health",
+      status: "Source health",
       scenario: "source_pipeline_health",
       source: "Live source heartbeat",
       type: "missing data",
@@ -216,7 +216,7 @@ window.DD_LAB_DATA = {
       hypothesis: "Source-level silence can hide real security signals and should be visible in the portfolio.",
       rationale: "Health monitoring demonstrates operational ownership beyond detection content.",
       fp: "Trial shutdown and planned connector removal are expected exceptions.",
-      validation: "Validated against sanitized source health status events.",
+      validation: "Checked against sanitized source health status events.",
       route: "P3 platform review",
       mitre: "N/A"
     }
@@ -228,11 +228,11 @@ window.DD_LAB_DATA = {
       severity: "High",
       surface: "Identity",
       killChain: "Initial Access",
-      trigger: "Impossible travel and MFA reset behavior are replayed as synthetic validation events.",
+      trigger: "Impossible travel and MFA reset behavior are replayed as sample events.",
       triage: "Review sign-in sequence, device change, MFA reset, privileged action, and containment decision.",
       outcome: "Escalate as account compromise if follow-on privileged action is confirmed.",
       pivots: ["MFA reset", "New device", "Privileged action"],
-      evidence: "synthetic-log-replay"
+      evidence: "sample-log-replay"
     },
     {
       id: "aws_iam_key_misuse",
@@ -276,20 +276,20 @@ window.DD_LAB_DATA = {
       severity: "Critical",
       surface: "Data",
       killChain: "Collection",
-      trigger: "Object access spike and archive download behavior are represented in synthetic logs.",
+      trigger: "Object access spike and archive download behavior are represented in sample logs.",
       triage: "Review object volume, actor, client, bucket sensitivity, and timing.",
       outcome: "Block access, preserve logs, and validate data exposure.",
       pivots: ["Object volume", "Actor", "Bucket sensitivity"],
-      evidence: "retirement-boundary"
+      evidence: "account-closure-boundary"
     }
   ],
   evidence: [
-    { id: "monitor-inventory", title: "Monitor Inventory", claim: "Custom monitors are mapped to scenario IDs, severity, query focus, ownership, and validation notes.", tone: "monitor", score: 96 },
-    { id: "synthetic-log-replay", title: "Synthetic Log Replay", claim: "source:test-harness and synthetic:true keep lab validation separate from production claims.", tone: "log", score: 94 },
+    { id: "monitor-inventory", title: "Monitor Inventory", claim: "Custom monitors are mapped to scenario IDs, severity, query focus, ownership, and review notes.", tone: "monitor", score: 96 },
+    { id: "sample-log-replay", title: "Sample Log Replay", claim: "The test-harness scope keeps lab events separate from any production claim.", tone: "log", score: 94 },
     { id: "source-health", title: "Source Health", claim: "Pipeline health monitors show observability around ingest freshness and missing data.", tone: "health", score: 88 },
     { id: "triage-runbooks", title: "Triage Runbooks", claim: "Each alert has a pivot path, response decision, and escalation boundary.", tone: "runbook", score: 91 },
-    { id: "detection-as-code", title: "Detection As Code", claim: "Monitor JSON and Terraform-style definitions make the logic inspectable.", tone: "code", score: 93 },
-    { id: "retirement-boundary", title: "Retirement Boundary", claim: "The paid trial can be closed without losing the reviewable project artifact.", tone: "retire", score: 90 }
+    { id: "detection-as-code", title: "Monitor Definitions", claim: "Monitor JSON and Terraform-style examples make the logic easy to inspect.", tone: "code", score: 93 },
+    { id: "account-closure-boundary", title: "Account Closure Boundary", claim: "The paid trial can be closed without losing the project evidence.", tone: "retire", score: 90 }
   ],
   tuning: [
     { monitor: "Identity takeover", issue: "Helpdesk MFA reset overlap", fix: "Require new device and privileged follow-on action", result: "Reduced noisy single-signal alerts" },
@@ -297,11 +297,11 @@ window.DD_LAB_DATA = {
     { monitor: "S3 data access", issue: "Backup job volume spikes", fix: "Document approved job window as allowlist input", result: "Clearer response decision" }
   ],
   readiness: [
-    { label: "Monitor JSON validates", state: "passed", detail: "Required fields, tags, query scope, and evidence refs are checked." },
-    { label: "Dashboard smoke check", state: "passed", detail: "Static entrypoint, stage data, and app render path are verified." },
-    { label: "Public-safe scan", state: "passed", detail: "Secrets, emails, account IDs, and token-like strings are blocked." },
-    { label: "Claude UI/UX review", state: "passed", detail: "Sanitized feedback was applied to the command-center redesign." },
-    { label: "GitHub Pages publish", state: "pending", detail: "Publish after final local and browser verification." },
+    { label: "Monitor JSON checked", state: "passed", detail: "Required fields, tags, query scope, and evidence references are present." },
+    { label: "Dashboard opened locally", state: "passed", detail: "The local page renders and the main sections are usable." },
+    { label: "Privacy check", state: "passed", detail: "Secrets, emails, account IDs, and token-like strings are blocked." },
+    { label: "Design review", state: "passed", detail: "The dashboard was tightened for a cleaner portfolio presentation." },
+    { label: "GitHub Pages publish", state: "pending", detail: "Publish after the final local and browser check." },
     { label: "Datadog closure", state: "pending", detail: "Close only after evidence and repository are preserved." }
   ],
   codePreview: [
@@ -309,13 +309,13 @@ window.DD_LAB_DATA = {
     "  name    = \"CloudSec Test Harness - AWS Credential Misuse\"",
     "  type    = \"log alert\"",
     "  query   = \"logs(\\\"@scenario:aws_iam_key_misuse\\\").index(\\\"main\\\").rollup(\\\"count\\\").last(\\\"10m\\\") > 0\"",
-    "  message = \"Synthetic validation alert. Follow docs/triage-runbooks.md.\"",
+    "  message = \"Sample validation alert. Follow docs/triage-runbooks.md.\"",
     "  tags    = [\"lab:datadog-detection\", \"public-safe:true\"]",
     "}"
   ],
   changelog: [
-    { version: "v1.0", change: "Built static command-center dashboard and public-safe evidence catalog." },
-    { version: "v0.9", change: "Mapped Datadog monitor patterns to synthetic scenario events." },
+    { version: "v1.0", change: "Built the portfolio dashboard and evidence catalog." },
+    { version: "v0.9", change: "Mapped Datadog monitor patterns to sample scenario events." },
     { version: "v0.8", change: "Separated portfolio evidence from private tenant screenshots." }
   ]
 };
