@@ -212,7 +212,7 @@ window.DD_LAB_DATA = {
       owner: "Platform",
       confidence: 84,
       hypothesis: "Source-level silence can hide real security signals and should be visible in the portfolio.",
-      rationale: "Health monitoring demonstrates operational ownership beyond detection content.",
+      rationale: "Health monitoring shows ownership beyond detection content.",
       fp: "Trial shutdown and intentional connector retirement are expected exceptions.",
       validation: "Checked against sanitized source health status events.",
       route: "P3 platform review",

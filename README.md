@@ -4,15 +4,14 @@
 
 Live dashboard: https://kalla-bhanu.github.io/Datadog-Detection-Engineering-Lab/
 
-This is a public-safe Datadog detection engineering lab. It preserves the work
-that matters after a temporary Datadog tenant is shut down: monitor logic,
-sample events, validation cases, tuning decisions, runbooks, screenshots, and a
-portfolio dashboard.
+I built this as the detection engineer's workshop that sits next to my CloudSec
+SOC case-file project. The focus is not a bigger pile of alerts; it is whether
+each Datadog monitor has a threat idea, query logic, validation pressure,
+tuning notes, and evidence that survives after the trial tenant is gone.
 
-The project is built to show detection engineering judgment, not just alert
-screenshots. A reviewer can see what each detection is supposed to catch, what
-it should ignore, how it was tested, what evidence exists, and what gaps would
-need production telemetry.
+The repo keeps the useful parts of the temporary Datadog environment: monitor
+logic, sample events, validation cases, tuning decisions, runbooks, sanitized
+screenshots, and a dashboard a reviewer can open without a paid tenant.
 
 ## What This Project Shows
 
@@ -61,6 +60,14 @@ logic, validation pressure, tuning decisions, and analyst handoff.
 
 The scenarios support the detection design. They do not retell the same
 investigation story.
+
+## Why It Is Framed This Way
+
+I think detection projects can overvalue monitor count and undervalue the
+boring parts that decide whether an alert is useful: validation pairs, noise
+notes, source health, and what the rule should not claim. I kept the active
+monitor set small so the engineering loop is visible instead of buried under
+more scenarios.
 
 ## Dashboard
 
@@ -129,9 +136,9 @@ Suggested resume bullet:
 
 > Built a Datadog detection engineering lab with monitor-as-code artifacts,
 > positive/negative/edge-case validation, harness failure controls, sanitized
-> Datadog evidence, tuning history, and a portfolio dashboard demonstrating
-> alert logic, false-positive handling, ATT&CK coverage, and detection
-> lifecycle ownership.
+> Datadog evidence, tuning history, and a portfolio dashboard covering alert
+> logic, false-positive handling, ATT&CK coverage, and detection lifecycle
+> ownership.
 
 Short interview framing:
 

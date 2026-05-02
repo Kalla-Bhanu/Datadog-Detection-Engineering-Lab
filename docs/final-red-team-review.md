@@ -75,4 +75,4 @@ Review the dashboard locally before release:
 
 | Date | Reviewer | Result | Notes |
 | --- | --- | --- | --- |
-| 2026-05-02 | Codex | Pass | `npm run verify:all` passed; public-safe scan passed across 66 files; evidence catalog and release manifest checks passed; desktop and mobile dashboard QA passed with no console warnings or horizontal overflow; no walkthrough video is required or claimed. |
+| 2026-05-02 | Local release review | Pass | `npm run verify:all` passed; public-safe scan passed across 66 files; evidence catalog and release manifest checks passed; desktop and mobile dashboard QA passed with no console warnings or horizontal overflow; no walkthrough video is required or claimed. |
