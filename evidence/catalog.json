@@ -58,5 +58,37 @@
     "path": "evidence/dashboard-mobile-local.png",
     "proves": "The dashboard remains usable on a narrow reviewer viewport.",
     "scenario_ids": ["identity_account_takeover", "aws_iam_key_misuse", "eks_secret_access_chain", "endpoint_to_mongodb_pivot", "s3_data_access_exfiltration"]
+  },
+  {
+    "id": "datadog-log-explorer-sanitized",
+    "title": "Sanitized Datadog Log Explorer",
+    "type": "real-datadog-screenshot",
+    "path": "evidence/datadog-log-explorer-sanitized.png",
+    "proves": "Sample lab events were visible in Datadog Logs with scenario fields and service context.",
+    "scenario_ids": ["identity_account_takeover", "aws_iam_key_misuse", "eks_secret_access_chain", "endpoint_to_mongodb_pivot", "s3_data_access_exfiltration"]
+  },
+  {
+    "id": "datadog-monitor-list-sanitized",
+    "title": "Sanitized Datadog Monitor List",
+    "type": "real-datadog-screenshot",
+    "path": "evidence/datadog-monitor-list-sanitized.png",
+    "proves": "The temporary Datadog tenant contained custom monitor inventory and monitor status evidence.",
+    "scenario_ids": ["pipeline_health", "source_pipeline_health", "identity_account_takeover", "endpoint_to_mongodb_pivot"]
+  },
+  {
+    "id": "datadog-monitor-detail-identity-sanitized",
+    "title": "Sanitized Identity Monitor Detail",
+    "type": "real-datadog-screenshot",
+    "path": "evidence/datadog-monitor-detail-identity-sanitized.png",
+    "proves": "The identity detection existed as a Datadog log monitor with query, threshold, status, and message template.",
+    "scenario_ids": ["identity_account_takeover"]
+  },
+  {
+    "id": "datadog-metrics-overview-sanitized",
+    "title": "Sanitized Datadog Metrics Overview",
+    "type": "real-datadog-screenshot",
+    "path": "evidence/datadog-metrics-overview-sanitized.png",
+    "proves": "The lab tenant had live metric telemetry available while detection evidence was preserved.",
+    "scenario_ids": ["source_pipeline_health"]
   }
 ]
