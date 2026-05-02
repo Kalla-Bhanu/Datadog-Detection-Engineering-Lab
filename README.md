@@ -60,6 +60,12 @@ investigation story.
 
 ## Dashboard
 
+Live dashboard:
+
+```text
+https://kalla-bhanu.github.io/Datadog-Detection-Engineering-Lab/
+```
+
 Run the dashboard locally:
 
 ```powershell
