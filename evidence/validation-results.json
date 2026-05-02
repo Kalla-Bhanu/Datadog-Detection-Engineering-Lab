@@ -1,0 +1,424 @@
+{
+  "report_type": "local_detection_validation",
+  "validation_window_end": "2026-05-02T13:31:00Z",
+  "scope": "Public-safe local replay approximation of the Datadog log monitor queries in detections/monitors.",
+  "summary": {
+    "monitor_count": 7,
+    "case_count": 21,
+    "passed_count": 21,
+    "failed_count": 0,
+    "pass_rate": 1
+  },
+  "results": [
+    {
+      "monitor_id": "datadog_replay_pipeline_health",
+      "monitor_name": "Datadog Lab Replay - Pipeline Health",
+      "case_id": "pipeline_health_positive",
+      "case_type": "positive",
+      "expected_outcome": "fire",
+      "actual_outcome": "fire",
+      "passed": true,
+      "matched_event_count": 1,
+      "matched_event_ids": [
+        "tc-pipeline-positive-001"
+      ],
+      "threshold": ">= 1",
+      "query_terms": [
+        "source:test-harness",
+        "@synthetic:true",
+        "@purpose:detection-rule-validation"
+      ],
+      "rationale": "A current synthetic replay heartbeat should prove the test harness is alive."
+    },
+    {
+      "monitor_id": "datadog_replay_pipeline_health",
+      "monitor_name": "Datadog Lab Replay - Pipeline Health",
+      "case_id": "pipeline_health_negative",
+      "case_type": "negative",
+      "expected_outcome": "suppress",
+      "actual_outcome": "suppress",
+      "passed": true,
+      "matched_event_count": 0,
+      "matched_event_ids": [],
+      "threshold": ">= 1",
+      "query_terms": [
+        "source:test-harness",
+        "@synthetic:true",
+        "@purpose:detection-rule-validation"
+      ],
+      "rationale": "A normal host metric event should not prove the detection replay harness is alive."
+    },
+    {
+      "monitor_id": "datadog_replay_pipeline_health",
+      "monitor_name": "Datadog Lab Replay - Pipeline Health",
+      "case_id": "pipeline_health_edge",
+      "case_type": "edge_case",
+      "expected_outcome": "suppress",
+      "actual_outcome": "suppress",
+      "passed": true,
+      "matched_event_count": 0,
+      "matched_event_ids": [],
+      "threshold": ">= 1",
+      "query_terms": [
+        "source:test-harness",
+        "@synthetic:true",
+        "@purpose:detection-rule-validation"
+      ],
+      "rationale": "A synthetic event without the detection-rule-validation purpose tag should not count as replay proof."
+    },
+    {
+      "monitor_id": "identity_account_takeover",
+      "monitor_name": "Datadog Lab Replay - Identity Account Takeover",
+      "case_id": "identity_account_takeover_positive",
+      "case_type": "positive",
+      "expected_outcome": "fire",
+      "actual_outcome": "fire",
+      "passed": true,
+      "matched_event_count": 1,
+      "matched_event_ids": [
+        "tc-identity-positive-001"
+      ],
+      "threshold": ">= 1",
+      "query_terms": [
+        "source:test-harness",
+        "@synthetic:true",
+        "@purpose:detection-rule-validation",
+        "@scenario:identity_account_takeover"
+      ],
+      "rationale": "MFA fatigue, new device, and privileged follow-on action should trigger the identity monitor."
+    },
+    {
+      "monitor_id": "identity_account_takeover",
+      "monitor_name": "Datadog Lab Replay - Identity Account Takeover",
+      "case_id": "identity_account_takeover_negative",
+      "case_type": "negative",
+      "expected_outcome": "suppress",
+      "actual_outcome": "suppress",
+      "passed": true,
+      "matched_event_count": 0,
+      "matched_event_ids": [],
+      "threshold": ">= 1",
+      "query_terms": [
+        "source:test-harness",
+        "@synthetic:true",
+        "@purpose:detection-rule-validation",
+        "@scenario:identity_account_takeover"
+      ],
+      "rationale": "A helpdesk-assisted MFA reset is a benign lookalike unless paired with risky follow-on behavior."
+    },
+    {
+      "monitor_id": "identity_account_takeover",
+      "monitor_name": "Datadog Lab Replay - Identity Account Takeover",
+      "case_id": "identity_account_takeover_edge",
+      "case_type": "edge_case",
+      "expected_outcome": "suppress",
+      "actual_outcome": "suppress",
+      "passed": true,
+      "matched_event_count": 0,
+      "matched_event_ids": [],
+      "threshold": ">= 1",
+      "query_terms": [
+        "source:test-harness",
+        "@synthetic:true",
+        "@purpose:detection-rule-validation",
+        "@scenario:identity_account_takeover"
+      ],
+      "rationale": "Travel from a new country is review-worthy, but without the validation purpose and follow-on action it should not fire this lab monitor."
+    },
+    {
+      "monitor_id": "aws_credential_misuse",
+      "monitor_name": "Datadog Lab Replay - AWS Credential Misuse",
+      "case_id": "aws_credential_misuse_positive",
+      "case_type": "positive",
+      "expected_outcome": "fire",
+      "actual_outcome": "fire",
+      "passed": true,
+      "matched_event_count": 1,
+      "matched_event_ids": [
+        "tc-aws-positive-001"
+      ],
+      "threshold": ">= 1",
+      "query_terms": [
+        "source:test-harness",
+        "@synthetic:true",
+        "@purpose:detection-rule-validation",
+        "@scenario:aws_iam_key_misuse"
+      ],
+      "rationale": "A known key used from a new source for sensitive IAM actions should trigger the monitor."
+    },
+    {
+      "monitor_id": "aws_credential_misuse",
+      "monitor_name": "Datadog Lab Replay - AWS Credential Misuse",
+      "case_id": "aws_credential_misuse_negative",
+      "case_type": "negative",
+      "expected_outcome": "suppress",
+      "actual_outcome": "suppress",
+      "passed": true,
+      "matched_event_count": 0,
+      "matched_event_ids": [],
+      "threshold": ">= 1",
+      "query_terms": [
+        "source:test-harness",
+        "@synthetic:true",
+        "@purpose:detection-rule-validation",
+        "@scenario:aws_iam_key_misuse"
+      ],
+      "rationale": "A known deployment runner can generate an API burst, but approved automation should not fire this monitor."
+    },
+    {
+      "monitor_id": "aws_credential_misuse",
+      "monitor_name": "Datadog Lab Replay - AWS Credential Misuse",
+      "case_id": "aws_credential_misuse_edge",
+      "case_type": "edge_case",
+      "expected_outcome": "fire",
+      "actual_outcome": "fire",
+      "passed": true,
+      "matched_event_count": 1,
+      "matched_event_ids": [
+        "tc-aws-edge-001"
+      ],
+      "threshold": ">= 1",
+      "query_terms": [
+        "source:test-harness",
+        "@synthetic:true",
+        "@purpose:detection-rule-validation",
+        "@scenario:aws_iam_key_misuse"
+      ],
+      "rationale": "The current lab monitor fires on the scenario tag; production tuning would separate enumeration-only behavior from policy changes."
+    },
+    {
+      "monitor_id": "eks_secret_access_chain",
+      "monitor_name": "Datadog Lab Replay - EKS Secret Access Chain",
+      "case_id": "eks_secret_access_chain_positive",
+      "case_type": "positive",
+      "expected_outcome": "fire",
+      "actual_outcome": "fire",
+      "passed": true,
+      "matched_event_count": 1,
+      "matched_event_ids": [
+        "tc-eks-positive-001"
+      ],
+      "threshold": ">= 1",
+      "query_terms": [
+        "source:test-harness",
+        "@synthetic:true",
+        "@purpose:detection-rule-validation",
+        "@scenario:eks_secret_access_chain"
+      ],
+      "rationale": "Workload identity touching a protected secret path should trigger runtime response."
+    },
+    {
+      "monitor_id": "eks_secret_access_chain",
+      "monitor_name": "Datadog Lab Replay - EKS Secret Access Chain",
+      "case_id": "eks_secret_access_chain_negative",
+      "case_type": "negative",
+      "expected_outcome": "suppress",
+      "actual_outcome": "suppress",
+      "passed": true,
+      "matched_event_count": 0,
+      "matched_event_ids": [],
+      "threshold": ">= 1",
+      "query_terms": [
+        "source:test-harness",
+        "@synthetic:true",
+        "@purpose:detection-rule-validation",
+        "@scenario:eks_secret_access_chain"
+      ],
+      "rationale": "A tagged maintenance job reading its own namespace secret is expected behavior."
+    },
+    {
+      "monitor_id": "eks_secret_access_chain",
+      "monitor_name": "Datadog Lab Replay - EKS Secret Access Chain",
+      "case_id": "eks_secret_access_chain_edge",
+      "case_type": "edge_case",
+      "expected_outcome": "fire",
+      "actual_outcome": "fire",
+      "passed": true,
+      "matched_event_count": 1,
+      "matched_event_ids": [
+        "tc-eks-edge-001"
+      ],
+      "threshold": ">= 1",
+      "query_terms": [
+        "source:test-harness",
+        "@synthetic:true",
+        "@purpose:detection-rule-validation",
+        "@scenario:eks_secret_access_chain"
+      ],
+      "rationale": "A decrypt event paired with secret access is intentionally escalated by the lab monitor."
+    },
+    {
+      "monitor_id": "endpoint_to_mongodb_pivot",
+      "monitor_name": "Datadog Lab Replay - Endpoint To MongoDB Pivot",
+      "case_id": "endpoint_to_mongodb_pivot_positive",
+      "case_type": "positive",
+      "expected_outcome": "fire",
+      "actual_outcome": "fire",
+      "passed": true,
+      "matched_event_count": 1,
+      "matched_event_ids": [
+        "tc-endpoint-positive-001"
+      ],
+      "threshold": ">= 1",
+      "query_terms": [
+        "source:test-harness",
+        "@synthetic:true",
+        "@purpose:detection-rule-validation",
+        "@scenario:endpoint_to_mongodb_pivot"
+      ],
+      "rationale": "Suspicious process activity followed by MongoDB access should trigger the pivot monitor."
+    },
+    {
+      "monitor_id": "endpoint_to_mongodb_pivot",
+      "monitor_name": "Datadog Lab Replay - Endpoint To MongoDB Pivot",
+      "case_id": "endpoint_to_mongodb_pivot_negative",
+      "case_type": "negative",
+      "expected_outcome": "suppress",
+      "actual_outcome": "suppress",
+      "passed": true,
+      "matched_event_count": 0,
+      "matched_event_ids": [],
+      "threshold": ">= 1",
+      "query_terms": [
+        "source:test-harness",
+        "@synthetic:true",
+        "@purpose:detection-rule-validation",
+        "@scenario:endpoint_to_mongodb_pivot"
+      ],
+      "rationale": "A database admin using approved tools from an admin host should not fire this detection."
+    },
+    {
+      "monitor_id": "endpoint_to_mongodb_pivot",
+      "monitor_name": "Datadog Lab Replay - Endpoint To MongoDB Pivot",
+      "case_id": "endpoint_to_mongodb_pivot_edge",
+      "case_type": "edge_case",
+      "expected_outcome": "suppress",
+      "actual_outcome": "suppress",
+      "passed": true,
+      "matched_event_count": 0,
+      "matched_event_ids": [],
+      "threshold": ">= 1",
+      "query_terms": [
+        "source:test-harness",
+        "@synthetic:true",
+        "@purpose:detection-rule-validation",
+        "@scenario:endpoint_to_mongodb_pivot"
+      ],
+      "rationale": "A developer MongoDB query is suspicious enough to review but should not fire without the endpoint process chain."
+    },
+    {
+      "monitor_id": "s3_data_access_exfiltration",
+      "monitor_name": "Datadog Lab Replay - S3 Data Access Exfiltration",
+      "case_id": "s3_data_access_exfiltration_positive",
+      "case_type": "positive",
+      "expected_outcome": "fire",
+      "actual_outcome": "fire",
+      "passed": true,
+      "matched_event_count": 1,
+      "matched_event_ids": [
+        "tc-s3-positive-001"
+      ],
+      "threshold": ">= 1",
+      "query_terms": [
+        "source:test-harness",
+        "@synthetic:true",
+        "@purpose:detection-rule-validation",
+        "@scenario:s3_data_access_exfiltration"
+      ],
+      "rationale": "High-volume reads from a sensitive bucket by an unusual actor should trigger data response."
+    },
+    {
+      "monitor_id": "s3_data_access_exfiltration",
+      "monitor_name": "Datadog Lab Replay - S3 Data Access Exfiltration",
+      "case_id": "s3_data_access_exfiltration_negative",
+      "case_type": "negative",
+      "expected_outcome": "suppress",
+      "actual_outcome": "suppress",
+      "passed": true,
+      "matched_event_count": 0,
+      "matched_event_ids": [],
+      "threshold": ">= 1",
+      "query_terms": [
+        "source:test-harness",
+        "@synthetic:true",
+        "@purpose:detection-rule-validation",
+        "@scenario:s3_data_access_exfiltration"
+      ],
+      "rationale": "A scheduled backup job can create read volume but should be handled by allowlist context."
+    },
+    {
+      "monitor_id": "s3_data_access_exfiltration",
+      "monitor_name": "Datadog Lab Replay - S3 Data Access Exfiltration",
+      "case_id": "s3_data_access_exfiltration_edge",
+      "case_type": "edge_case",
+      "expected_outcome": "fire",
+      "actual_outcome": "fire",
+      "passed": true,
+      "matched_event_count": 1,
+      "matched_event_ids": [
+        "tc-s3-edge-001"
+      ],
+      "threshold": ">= 1",
+      "query_terms": [
+        "source:test-harness",
+        "@synthetic:true",
+        "@purpose:detection-rule-validation",
+        "@scenario:s3_data_access_exfiltration"
+      ],
+      "rationale": "The current lab monitor fires on the scenario tag; production tuning would separate list-only behavior from bulk download."
+    },
+    {
+      "monitor_id": "source_pipeline_health",
+      "monitor_name": "Datadog Source Health - Pipeline Health Pattern",
+      "case_id": "source_pipeline_health_positive",
+      "case_type": "positive",
+      "expected_outcome": "fire",
+      "actual_outcome": "fire",
+      "passed": true,
+      "matched_event_count": 0,
+      "matched_event_ids": [],
+      "threshold": "< 1",
+      "query_terms": [
+        "datadog-detection-lab",
+        "pipeline-health"
+      ],
+      "rationale": "No heartbeat events in the evaluation window should trigger a missing-data source health alert."
+    },
+    {
+      "monitor_id": "source_pipeline_health",
+      "monitor_name": "Datadog Source Health - Pipeline Health Pattern",
+      "case_id": "source_pipeline_health_negative",
+      "case_type": "negative",
+      "expected_outcome": "suppress",
+      "actual_outcome": "suppress",
+      "passed": true,
+      "matched_event_count": 1,
+      "matched_event_ids": [
+        "tc-source-health-negative-001"
+      ],
+      "threshold": "< 1",
+      "query_terms": [
+        "datadog-detection-lab",
+        "pipeline-health"
+      ],
+      "rationale": "A valid source heartbeat should suppress the missing-data monitor."
+    },
+    {
+      "monitor_id": "source_pipeline_health",
+      "monitor_name": "Datadog Source Health - Pipeline Health Pattern",
+      "case_id": "source_pipeline_health_edge",
+      "case_type": "edge_case",
+      "expected_outcome": "fire",
+      "actual_outcome": "fire",
+      "passed": true,
+      "matched_event_count": 0,
+      "matched_event_ids": [],
+      "threshold": "< 1",
+      "query_terms": [
+        "datadog-detection-lab",
+        "pipeline-health"
+      ],
+      "rationale": "A generic live-source event without the pipeline-health marker should not satisfy source heartbeat coverage."
+    }
+  ]
+}

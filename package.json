@@ -6,8 +6,9 @@
   "type": "module",
   "scripts": {
     "validate": "node tools/validate-detections.mjs",
+    "validate:cases": "node tools/validate-detection-cases.mjs",
     "verify:dashboard": "node tools/verify-dashboard.mjs",
-    "verify:all": "npm run validate && npm run verify:dashboard"
+    "verify:all": "npm run validate && npm run validate:cases && npm run verify:dashboard"
   },
   "engines": {
     "node": ">=18"
