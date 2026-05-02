@@ -11,7 +11,7 @@ window.DD_LAB_DATA = {
       label: "Overview",
       badge: "5",
       kicker: "Project overview",
-      title: "A Datadog detection engineering portfolio, built for review.",
+      title: "Datadog Detection Engineering Lab.",
       summary: "This dashboard shows the work behind the lab: monitor patterns, mapped threat scenarios, ATT&CK coverage, sample alert flow, and the evidence needed to discuss it after the trial tenant is closed."
     },
     {
