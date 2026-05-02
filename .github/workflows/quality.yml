@@ -4,18 +4,21 @@ on:
   push:
   pull_request:
 
+permissions:
+  contents: read
+
 jobs:
   validate:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v6
         with:
-          node-version: 20
-      - name: Validate detections
-        run: npm run validate
-      - name: Verify dashboard
-        run: npm run verify:dashboard
+          persist-credentials: false
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+      - name: Verify release artifacts
+        run: npm run verify:all
       - name: Public-safe scan
         shell: pwsh
         run: ./tools/verify-public-safe.ps1

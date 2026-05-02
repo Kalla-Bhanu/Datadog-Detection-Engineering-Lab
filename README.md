@@ -1,5 +1,9 @@
 # Datadog Detection Engineering Lab
 
+[![deploy-dashboard](https://github.com/Kalla-Bhanu/Datadog-Detection-Engineering-Lab/actions/workflows/deploy-dashboard.yml/badge.svg)](https://github.com/Kalla-Bhanu/Datadog-Detection-Engineering-Lab/actions/workflows/deploy-dashboard.yml)
+
+Live dashboard: https://kalla-bhanu.github.io/Datadog-Detection-Engineering-Lab/
+
 This is a public-safe Datadog detection engineering lab. It preserves the work
 that matters after a temporary Datadog tenant is shut down: monitor logic,
 sample events, validation cases, tuning decisions, runbooks, screenshots, and a
@@ -30,7 +34,7 @@ need production telemetry.
 
 ## Five-Minute Review Path
 
-1. Open the dashboard and start with the Evidence section.
+1. Open the live dashboard and start with the Evidence section.
 2. Review [evidence/validation-results.json](evidence/validation-results.json)
    for the 21/21 local validation result.
 3. Read [docs/validation-harness.md](docs/validation-harness.md) to see how
@@ -43,8 +47,8 @@ need production telemetry.
 6. Inspect [detections/monitors](detections/monitors) for the monitor logic.
 
 No walkthrough video is included by design. The project is meant to be reviewed
-through the local dashboard, preserved screenshots, checked-in evidence files,
-and runnable verification commands.
+through the live dashboard, local dashboard fallback, preserved screenshots,
+checked-in evidence files, and runnable verification commands.
 
 ## How This Is Different From CloudSec SOC Detection Lab
 
