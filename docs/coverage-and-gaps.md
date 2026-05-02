@@ -2,10 +2,10 @@
 
 This lab is a focused Datadog detection engineering project. It shows monitor
 design, sample-event validation, harness self-tests, tuning decisions,
-source-health thinking, and evidence preservation. It does not claim full
+source-health thinking, and evidence retention. It does not claim full
 enterprise SOC coverage.
 
-The coverage below should be read as portfolio coverage: what the lab proves
+The coverage below should be read as lab coverage: what the lab proves
 with public-safe artifacts, what is only partially represented, and what would
 need production telemetry before I would call it complete in a real environment.
 
@@ -51,7 +51,7 @@ claim broad technique coverage.
 | Ingest identity risk and device trust fields | Makes account-takeover logic more precise. | Identity products can emit noisy context changes without clear owner review. | Use when MFA reset, new device, and geo signals can be tied to a user baseline and support workflow. |
 | Expand Kubernetes audit logging | Improves secret, exec, role binding, and namespace visibility. | Full audit ingestion can be noisy and expensive in busy clusters. | Scope first to critical namespaces, sensitive verbs, and service-account ownership. |
 | Add endpoint process telemetry | Strengthens endpoint-to-data pivot correlation. | Endpoint telemetry can be high-volume and requires host ownership context. | Keep only process, parent, command-line, host role, and user fields needed for the detection. |
-| Add MongoDB audit logs | Proves database operation, collection, user, and source context. | Audit logs can be large and sensitive in high-traffic data stores. | Start with auth, admin actions, sensitive collections, and unusual client sources. |
+| Add MongoDB audit logs | Proves database operation, collection, user, and source context. | Audit logs can be large and sensitive in high-traffic data stores. | Initial scope should cover auth, admin actions, sensitive collections, and unusual client sources. |
 | Increase Datadog log retention or indexing | Improves investigation lookback and replayability. | Retention and indexing costs can outgrow the lab value quickly. | Index only fields needed for detection, keep cold evidence separately, and avoid retaining raw private data. |
 
 ## What I Would Not Collect Or Overclaim
@@ -65,8 +65,8 @@ claim broad technique coverage.
 - I would not claim production tuning without production alert history.
 - I would not claim full ATT&CK technique coverage when the lab covers only one
   sub-technique or one modeled behavior.
-- I would not keep paid Datadog or AWS resources running solely to preserve a
-  portfolio artifact after the evidence is captured.
+- I would not keep paid Datadog or AWS resources running solely to keep a public
+  artifact alive after the evidence is captured.
 
 ## Evidence Confidence
 
@@ -78,7 +78,7 @@ claim broad technique coverage.
 | Local validation report | High | The harness evaluates 21 cases across 7 monitors with expected outcomes met. |
 | Field-correlation example | Medium | One AWS example proves nested field matching, but it is intentionally not counted as an active monitor. |
 | Sanitized Datadog screenshots | High | They prove the lab existed in Datadog before account retirement. |
-| Dashboard screenshots | Medium | They prove the portfolio experience renders locally. |
+| Dashboard screenshots | Medium | They prove the static dashboard renders locally. |
 | Production behavior | Not claimed | The repo is a lab, not an active production deployment. |
 
 ## Red Flags Removed
@@ -89,7 +89,7 @@ claim broad technique coverage.
 - Screenshots are sanitized and documented instead of left as unexplained proof.
 - Detection names are normalized to `Datadog Lab Replay` for public review.
 - False positives are documented as part of the engineering work, not hidden.
-- The local harness makes expected outcomes reproducible without live billing.
+- The local harness makes expected outcomes reproducible without live paid services.
 - The harness control self-test proves the validation result is not a
   happy-path-only claim.
 
@@ -105,17 +105,10 @@ claim broad technique coverage.
 | Response automation | Some actions can be safely automated. | Add guarded examples for disable key, expire session, isolate host, or block bucket access after approval rules exist. |
 | Data exposure proof | Exfiltration needs more than storage reads. | Add byte volume, destination, DLP label, and network egress evidence before claiming exfiltration. |
 
-## Interview Framing
+## Detection Engineering Takeaways
 
-The strongest way to present this project is:
-
-1. I built the detection lifecycle, not just screenshots.
-2. I kept the lab public-safe while preserving real Datadog evidence.
-3. I tested each monitor with positive, negative, and edge cases.
-4. I added harness controls so the validation loop proves it can fail safely.
-5. I documented tuning decisions, telemetry tradeoffs, and known gaps like a
-   detection engineer would.
-6. I retired paid services after preserving the artifacts needed for review.
-
-That framing is honest and useful. It shows judgment, cost awareness, and the
-ability to turn a temporary lab into a durable portfolio project.
+The durable engineering work is the lifecycle itself: monitor design,
+positive/negative/edge-case validation, harness controls, tuning decisions,
+telemetry tradeoffs, and known gaps. The temporary Datadog tenant helped produce
+the evidence, but the repo's value is in the retained logic and repeatable
+checks.

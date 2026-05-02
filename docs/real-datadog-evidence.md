@@ -19,7 +19,7 @@ JSON, Terraform-style monitor examples, sample events, and local checks.
 Before publishing, each screenshot must be checked for:
 
 - Account emails, usernames, avatar menus, and profile text.
-- Tenant URLs, organization names, billing links, and account settings.
+- Tenant URLs, organization names, account administration links, and settings.
 - Monitor IDs, account IDs, real ARNs, private hostnames, and real resource
   names.
 - API keys, app keys, tokens, cookies, session material, and request headers.
@@ -33,6 +33,5 @@ treated as high-sensitivity evidence whenever the repo is reviewed.
 
 Some Datadog screenshots show the original challenge-era monitor prefix. The
 public repository normalizes the project language to "Datadog Lab Replay" so the
-portfolio reads as a Datadog detection engineering lab instead of a continuation
+project reads as a Datadog detection engineering lab instead of a continuation
 of the earlier CloudSec project.
-

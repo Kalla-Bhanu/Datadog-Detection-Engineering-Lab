@@ -1,6 +1,6 @@
 # Release QA
 
-This note records the final review gates for the public portfolio version of
+This note records the final review gates for the public version of
 the lab.
 
 ## Required Checks
@@ -32,7 +32,7 @@ The dashboard should be opened locally and checked in two sizes:
 - Mobile evidence view: cards stack cleanly, file paths wrap, and there is no
   horizontal overflow.
 
-Preserved browser QA screenshots:
+Retained browser QA screenshots:
 
 - `evidence/dashboard-evidence-upgraded-local.png`
 - `evidence/dashboard-mobile-evidence-upgraded-local.png`
@@ -40,5 +40,5 @@ Preserved browser QA screenshots:
 ## Release Boundary
 
 The repo is ready to publish when the checks above pass and the README still
-describes the project as a completed lab with preserved evidence, not as an
-active Datadog tenant or a video-dependent demo.
+describes the project as a completed lab with retained evidence, not as an
+active Datadog tenant or video-dependent material.

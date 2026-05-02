@@ -30,7 +30,7 @@
     "not_claimed": ["T1041", "T1562"]
   },
   "lab_modeling_disclosure": {
-    "real_preserved_evidence": [
+    "real_retained_evidence": [
       "Sanitized Datadog Logs Explorer screenshot",
       "Sanitized Datadog monitor inventory screenshot",
       "Sanitized identity monitor detail screenshot",
@@ -57,7 +57,7 @@
       "Production false-positive rates",
       "Full Datadog query-engine parity",
       "Live paid Datadog or AWS dependency",
-      "Walkthrough video"
+      "Project video"
     ]
   },
   "verification_commands": [

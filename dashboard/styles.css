@@ -1117,13 +1117,13 @@ dd {
   color: var(--muted);
 }
 
-[data-mode="recruiter"] .lifecycle-grid,
-[data-mode="recruiter"] .code-panel,
-[data-mode="recruiter"] .query-strip {
+[data-mode="overview"] .lifecycle-grid,
+[data-mode="overview"] .code-panel,
+[data-mode="overview"] .query-strip {
   display: none;
 }
 
-[data-mode="recruiter"] .detection-layout {
+[data-mode="overview"] .detection-layout {
   grid-template-columns: 1fr;
 }
 

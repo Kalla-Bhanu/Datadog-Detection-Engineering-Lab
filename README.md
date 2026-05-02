@@ -11,7 +11,7 @@ tuning notes, and evidence that survives after the trial tenant is gone.
 
 The repo keeps the useful parts of the temporary Datadog environment: monitor
 logic, sample events, validation cases, tuning decisions, runbooks, sanitized
-screenshots, and a dashboard a reviewer can open without a paid tenant.
+screenshots, and a dashboard that works without a paid tenant.
 
 ## What This Project Shows
 
@@ -28,26 +28,24 @@ screenshots, and a dashboard a reviewer can open without a paid tenant.
 - Tuning history, monitor changelog, coverage analysis, and triage runbooks.
 - Conservative ATT&CK mapping with 4 validated entries, 2 bounded partial
   entries, and T1041/T1562 explicitly not claimed.
-- A polished dashboard that presents the project for recruiters and technical
-  interviewers.
+- A polished dashboard with overview and technical views.
 
-## Five-Minute Review Path
+## Primary Artifacts
 
-1. Open the live dashboard and start with the Evidence section.
-2. Review [evidence/validation-results.json](evidence/validation-results.json)
-   for the 21/21 local validation result.
-3. Read [docs/validation-harness.md](docs/validation-harness.md) to see how
-   the harness proves passing behavior, intentional failure controls, and the
-   AWS field-correlation example.
-4. Read [docs/tuning-history.md](docs/tuning-history.md) to see the false
-   positive and production-readiness thinking.
-5. Read [docs/coverage-and-gaps.md](docs/coverage-and-gaps.md) to see what is
-   validated, partial, and not claimed.
-6. Inspect [detections/monitors](detections/monitors) for the monitor logic.
+- Live dashboard with evidence, monitor logic, validation, and closure state.
+- [evidence/validation-results.json](evidence/validation-results.json) for
+  the 21/21 local validation result.
+- [docs/validation-harness.md](docs/validation-harness.md) for passing
+  behavior, intentional failure controls, and the AWS field-correlation example.
+- [docs/tuning-history.md](docs/tuning-history.md) for false-positive and
+  production-readiness thinking.
+- [docs/coverage-and-gaps.md](docs/coverage-and-gaps.md) for validated,
+  partial, and not-claimed coverage.
+- [detections/monitors](detections/monitors) for the monitor logic.
 
-No walkthrough video is included by design. The project is meant to be reviewed
-through the live dashboard, local dashboard fallback, preserved screenshots,
-checked-in evidence files, and runnable verification commands.
+No video is included by design. The project is meant to stand on the live
+dashboard, local dashboard fallback, sanitized screenshots, checked-in evidence
+files, and runnable verification commands.
 
 ## How This Is Different From CloudSec SOC Detection Lab
 
@@ -96,7 +94,7 @@ The dashboard includes:
   endpoint-to-MongoDB pivot, and S3 data access.
 - Evidence cards for sanitized Datadog screenshots, local validation, tuning,
   coverage gaps, and closure-ready artifacts.
-- Engineer and Recruiter modes for different review styles.
+- Technical and Overview modes for different levels of detail.
 
 ## Validation
 
@@ -122,28 +120,12 @@ The validation harness is documented in
 ## Repository Layout
 
 ```text
-dashboard/              Portfolio dashboard
+dashboard/              Static dashboard
 data/                   Sample events and paired detection test cases
 detections/             Monitor JSON and Terraform-style examples
 docs/                   Design notes, tuning history, runbooks, coverage, QA
 evidence/               Evidence catalog, screenshots, validation result
 tools/                  Local checks for detections, dashboard, cases, privacy
-```
-
-## Resume Positioning
-
-Suggested resume bullet:
-
-> Built a Datadog detection engineering lab with monitor-as-code artifacts,
-> positive/negative/edge-case validation, harness failure controls, sanitized
-> Datadog evidence, tuning history, and a portfolio dashboard covering alert
-> logic, false-positive handling, ATT&CK coverage, and detection lifecycle
-> ownership.
-
-Short interview framing:
-
-```text
-I built this as a temporary Datadog detection engineering lab, preserved the monitor logic and real sanitized evidence, then added local validation so the project stays reviewable without keeping paid services running.
 ```
 
 ## Privacy And Closure Boundary
@@ -153,5 +135,5 @@ URLs, real user data, real account IDs, or private resource names. Screenshots
 are sanitized, and sample events use public-safe placeholders.
 
 The live Datadog tenant should not be described as active after closure. The
-project should be presented as a completed lab with preserved evidence and
-responsible cost control.
+project remains a completed lab with durable evidence and responsible cost
+control.

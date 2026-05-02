@@ -86,7 +86,7 @@ Modeled iteration record:
 | v1 | Alert on MFA reset, new geography, or new device as independent signals. | Too broad. Helpdesk resets, travel, and device replacement would produce review noise without enough compromise context. |
 | v2 | Require the account-takeover chain: risky sign-in pressure plus MFA or device change plus privileged follow-on behavior. | Better matches the threat hypothesis and explains why the positive case fires while the helpdesk reset and travel edge case suppress. |
 | v2a abandoned | Suppress all events with helpdesk or support-ticket context. | Reverted as a production design idea because a compromised account can still pass through support workflows. Ticket context should reduce severity or guide triage, not blindly suppress. |
-| v3 current | Keep the public monitor scoped to the validation scenario and document the production correlation requirements. | Preserves the portfolio proof loop without pretending the lab has live identity baselines. |
+| v3 current | Keep the public monitor scoped to the validation scenario and document the production correlation requirements. | Keeps the public proof loop without pretending the lab has live identity baselines. |
 
 Accepted residual risk: the lab suppresses single-signal travel and helpdesk
 MFA reset cases. That is acceptable here because the monitor is proving chained
@@ -127,7 +127,7 @@ Modeled iteration record:
 | v1 | Alert on a burst of IAM read and write APIs from any access key. | Too noisy for production because CI runners, scanners, and inventory jobs can create API bursts. |
 | v2 | Require a suspicious key-use scenario with source context and sensitive IAM pressure. | Keeps the lab focused on credential misuse instead of generic cloud activity. |
 | v2a abandoned | Suppress `aws-cli/*` user agents to reduce developer and automation noise. | Reverted because attackers and legitimate operators both use AWS CLI. Suppressing by user agent would remove too much coverage. |
-| v3 current | Keep the lab monitor scenario-level, but document that production should split enumeration-only behavior from write actions. | The edge case still fires in the lab so reviewers can see the conservative boundary decision. |
+| v3 current | Keep the lab monitor scenario-level, but document that production should split enumeration-only behavior from write actions. | The edge case still fires in the lab so readers can see the conservative boundary decision. |
 
 Accepted residual risk: the lab treats enumeration-only activity as a firing
 edge case. In production I would likely route enumeration-only activity to a

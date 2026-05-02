@@ -2,7 +2,7 @@
   "name": "datadog-detection-engineering-lab",
   "version": "1.0.0",
   "private": true,
-  "description": "Datadog detection engineering portfolio lab with safe sample data.",
+  "description": "Datadog detection engineering lab with safe sample data.",
   "type": "module",
   "scripts": {
     "validate": "node tools/validate-detections.mjs",

@@ -2,17 +2,17 @@
 
 This checklist is the last public-release gate for the Datadog Detection
 Engineering Lab. It is intentionally stricter than a normal README review
-because the project is a security portfolio artifact: small contradictions,
+because the project is a security release artifact: small contradictions,
 privacy leaks, or unsupported claims can weaken the whole project.
 
 ## Privacy And Public-Safety Checks
 
 | Check | Pass Criteria | Status |
 | --- | --- | --- |
-| Private identities | No real emails, personal usernames, customer names, or user records. | Pass |
+| Private identities | No real emails, personal usernames, organization names, or user records. | Pass |
 | Cloud identifiers | No real account IDs, private ARNs, tenant URLs, or resource names. | Pass |
 | Secrets | No Datadog keys, cloud keys, session tokens, cookies, or headers. | Pass |
-| Screenshots | Preserved images are sanitized and referenced by purpose. | Pass |
+| Screenshots | Retained images are sanitized and referenced by purpose. | Pass |
 | Evidence catalog | Screenshot and validation references match files that exist. | Pass |
 
 ## Claim Consistency Checks
@@ -24,8 +24,8 @@ privacy leaks, or unsupported claims can weaken the whole project.
 | Harness controls | `verify:all` includes the negative-control self-test. | Pass |
 | Field example | The AWS field-correlation example is validated but not counted as an active monitor. | Pass |
 | Release manifest | Counts and no-video/no-live-service boundaries are locally verified. | Pass |
-| Datadog status | Repo describes the tenant as retired or evidence-preserved, not active. | Pass |
-| Walkthrough status | README does not claim a video unless a real link exists. | Pass |
+| Datadog status | Repo describes the tenant as retired or evidence-retained, not active. | Pass |
+| Video status | README does not claim a video unless a real link exists. | Pass |
 | Production claims | No document says detections were tuned or operated in production. | Pass |
 
 ## ATT&CK Mapping Review
@@ -73,6 +73,6 @@ Review the dashboard locally before release:
 
 ## Final Execution Log
 
-| Date | Reviewer | Result | Notes |
+| Date | Owner | Result | Notes |
 | --- | --- | --- | --- |
-| 2026-05-02 | Local release review | Pass | `npm run verify:all` passed; public-safe scan passed across 66 files; evidence catalog and release manifest checks passed; desktop and mobile dashboard QA passed with no console warnings or horizontal overflow; no walkthrough video is required or claimed. |
+| 2026-05-02 | Local release review | Pass | `npm run verify:all` passed; public-safe scan passed across 66 files; evidence catalog and release manifest checks passed; desktop and mobile dashboard QA passed with no console warnings or horizontal overflow; no project video is required or claimed. |

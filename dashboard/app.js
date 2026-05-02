@@ -1,6 +1,6 @@
 const data = window.DD_LAB_DATA;
 let activeFilter = "all";
-let viewMode = "engineer";
+let viewMode = "technical";
 
 const shell = document.querySelector(".app-shell");
 const nav = document.querySelector("#stageNav");
@@ -383,7 +383,7 @@ function artifactTrail() {
       <div class="panel-head">
         <div>
           <span class="section-kicker">Evidence artifacts</span>
-          <h3>What a reviewer can inspect</h3>
+          <h3>What the repo keeps inspectable</h3>
         </div>
       </div>
       <div class="artifact-list">

@@ -1,7 +1,7 @@
 # Monitor Changelog
 
 This changelog tracks the detection lifecycle as versioned project work. The
-dates are tied to the preserved lab artifacts, not to an active Datadog tenant.
+dates are tied to the retained lab artifacts, not to an active Datadog tenant.
 
 ## 2026-05-02 - Evidence Preservation
 
@@ -18,7 +18,7 @@ dates are tied to the preserved lab artifacts, not to an active Datadog tenant.
   for every monitor.
 - Added `data/test-cases.md` and expanded `data/schema.md` to document the test
   case shape.
-- Made benign lookalikes explicit so reviewers can see what each detection is
+- Made benign lookalikes explicit so readers can see what each detection is
   designed not to alert on.
 
 ## 2026-05-02 - Local Validation Harness

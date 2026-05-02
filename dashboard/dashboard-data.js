@@ -12,7 +12,7 @@ window.DD_LAB_DATA = {
       badge: "5",
       kicker: "Detection workshop",
       title: "Datadog Detection Engineering Lab.",
-      summary: "This dashboard shows the work behind the lab: threat hypotheses, monitor patterns, validation events, ATT&CK coverage, tuning notes, and the evidence needed to discuss it after the trial tenant is closed."
+      summary: "This dashboard shows the work behind the lab: threat hypotheses, monitor patterns, validation events, ATT&CK coverage, tuning notes, and the evidence retained after the trial tenant is closed."
     },
     {
       id: "monitors",
@@ -36,7 +36,7 @@ window.DD_LAB_DATA = {
       badge: "10",
       kicker: "Evidence trail",
       title: "Real Datadog evidence, local validation, and a clean review trail.",
-      summary: "This section keeps the strongest proof visible: sanitized Datadog screenshots, 21 passing validation cases, 5 harness controls, a field-correlation example, source health notes, and the preserved artifacts behind each claim."
+      summary: "This section keeps the strongest proof visible: sanitized Datadog screenshots, 21 passing validation cases, 5 harness controls, a field-correlation example, source health notes, and the retained artifacts behind each claim."
     },
     {
       id: "readiness",
@@ -44,7 +44,7 @@ window.DD_LAB_DATA = {
       badge: "6",
       kicker: "Before publishing",
       title: "The lab remains useful after the Datadog trial is closed.",
-      summary: "These notes show what was checked, what was preserved, and how the project can be presented honestly without keeping paid services running."
+      summary: "These notes show what was checked, what was retained, and how the project stays honest without keeping paid services running."
     }
   ],
   kpis: [
@@ -89,7 +89,7 @@ window.DD_LAB_DATA = {
     { time: "T+12s", label: "Fields normalize", detail: "Scenario ID, source, actor, and object context are available." },
     { time: "T+38s", label: "Monitor evaluates", detail: "Windowed query matches the expected detection pattern." },
     { time: "T+45s", label: "Alert routes", detail: "Sanitized priority route maps to triage runbook." },
-    { time: "T+02m", label: "Evidence preserved", detail: "Result is captured as a clear portfolio artifact." }
+    { time: "T+02m", label: "Evidence retained", detail: "Result is captured as a clear project artifact." }
   ],
   monitors: [
     {
@@ -211,7 +211,7 @@ window.DD_LAB_DATA = {
       query: "datadog-detection-lab pipeline-health",
       owner: "Platform",
       confidence: 84,
-      hypothesis: "Source-level silence can hide real security signals and should be visible in the portfolio.",
+      hypothesis: "Source-level silence can hide real security signals and should be visible in the lab.",
       rationale: "Health monitoring shows ownership beyond detection content.",
       fp: "Trial shutdown and intentional connector retirement are expected exceptions.",
       validation: "Checked against sanitized source health status events.",
@@ -240,7 +240,7 @@ window.DD_LAB_DATA = {
       killChain: "Credential Access",
       trigger: "Unusual cloud API burst from a new source is replayed into Datadog logs.",
       triage: "Review access-key age, actor, API sequence, source location, and privilege changes.",
-      outcome: "Disable key, rotate credentials, and preserve audit evidence.",
+      outcome: "Disable key, rotate credentials, and retain audit evidence.",
       pivots: ["API burst", "Source change", "Privilege delta"],
       evidence: "monitor-inventory"
     },
@@ -276,7 +276,7 @@ window.DD_LAB_DATA = {
       killChain: "Collection",
       trigger: "Object access spike and archive download behavior are represented in sample logs.",
       triage: "Review object volume, actor, client, bucket sensitivity, and timing.",
-      outcome: "Block access, preserve logs, and validate data exposure.",
+      outcome: "Block access, retain logs, and validate data exposure.",
       pivots: ["Object volume", "Actor", "Bucket sensitivity"],
       evidence: "account-closure-boundary"
     }
@@ -295,10 +295,10 @@ window.DD_LAB_DATA = {
     ]
   },
   evidenceArtifacts: [
-    { title: "Datadog Logs Explorer", type: "Real screenshot", path: "evidence/datadog-log-explorer-sanitized.png", proves: "Scenario-tagged lab logs appeared in Datadog with service and event context.", state: "preserved" },
-    { title: "Monitor Inventory", type: "Real screenshot", path: "evidence/datadog-monitor-list-sanitized.png", proves: "The temporary Datadog tenant contained custom monitor inventory.", state: "preserved" },
-    { title: "Identity Monitor Detail", type: "Real screenshot", path: "evidence/datadog-monitor-detail-identity-sanitized.png", proves: "The identity monitor existed with query, threshold, status, and message detail.", state: "preserved" },
-    { title: "Metrics Overview", type: "Real screenshot", path: "evidence/datadog-metrics-overview-sanitized.png", proves: "The lab tenant had live telemetry available while evidence was captured.", state: "preserved" },
+    { title: "Datadog Logs Explorer", type: "Real screenshot", path: "evidence/datadog-log-explorer-sanitized.png", proves: "Scenario-tagged lab logs appeared in Datadog with service and event context.", state: "retained" },
+    { title: "Monitor Inventory", type: "Real screenshot", path: "evidence/datadog-monitor-list-sanitized.png", proves: "The temporary Datadog tenant contained custom monitor inventory.", state: "retained" },
+    { title: "Identity Monitor Detail", type: "Real screenshot", path: "evidence/datadog-monitor-detail-identity-sanitized.png", proves: "The identity monitor existed with query, threshold, status, and message detail.", state: "retained" },
+    { title: "Metrics Overview", type: "Real screenshot", path: "evidence/datadog-metrics-overview-sanitized.png", proves: "The lab tenant had live telemetry available while evidence was captured.", state: "retained" },
     { title: "Validation Results", type: "Local report", path: "evidence/validation-results.json", proves: "The repo can re-check monitor behavior without a paid Datadog account.", state: "repeatable" },
     { title: "Harness Controls", type: "Self-test report", path: "evidence/harness-control-results.json", proves: "The evaluator catches malformed queries, missing fields, mismatches, threshold errors, and monitor identity drift.", state: "repeatable" },
     { title: "AWS Field Correlation", type: "Example report", path: "evidence/field-correlation-example-results.json", proves: "A non-active AWS example validates nested CloudTrail-style fields without increasing the active monitor count.", state: "repeatable" },
@@ -306,7 +306,7 @@ window.DD_LAB_DATA = {
     { title: "Release Manifest", type: "Release artifact", path: "release_manifest.json", proves: "Counts, boundaries, and no-video/no-live-service assumptions are locally verifiable.", state: "reviewed" }
   ],
   evidence: [
-    { id: "real-datadog", title: "Real Datadog Proof", claim: "Sanitized screenshots preserve logs, monitors, and metrics without private tenant details.", tone: "monitor", score: 97 },
+    { id: "real-datadog", title: "Real Datadog Proof", claim: "Sanitized screenshots retain logs, monitors, and metrics without private tenant details.", tone: "monitor", score: 97 },
     { id: "local-validation", title: "Validation Harness", claim: "All 21 public-safe cases passed and 5 control failures were caught by the harness.", tone: "log", score: 98 },
     { id: "test-pressure", title: "False-Positive Pressure", claim: "Each monitor includes a benign lookalike and an edge decision, not only a positive sample.", tone: "health", score: 95 },
     { id: "tuning-record", title: "Tuning Record", claim: "Noise, exceptions, and production next steps are written as detection engineering decisions.", tone: "runbook", score: 94 },
@@ -315,13 +315,13 @@ window.DD_LAB_DATA = {
   ],
   tuning: [
     { monitor: "Identity takeover", issue: "Helpdesk MFA reset overlap", fix: "Require new device and privileged follow-on action", result: "Reduced noisy single-signal alerts" },
-    { monitor: "AWS credential misuse", issue: "Deployment runner API bursts", fix: "Add known automation context to triage note", result: "Preserved sensitivity without pretending zero noise" },
+    { monitor: "AWS credential misuse", issue: "Deployment runner API bursts", fix: "Add known automation context to triage note", result: "Kept sensitivity without pretending zero noise" },
     { monitor: "S3 data access", issue: "Backup job volume spikes", fix: "Document approved job window as allowlist input", result: "Clearer response decision" }
   ],
   readiness: [
     { label: "Monitor JSON checked", state: "passed", detail: "Required fields, tags, query scope, and evidence references are present." },
     { label: "Validation harness", state: "passed", detail: "21 positive, negative, and edge cases matched expectations; 5 controls failed safely." },
-    { label: "Real evidence preserved", state: "passed", detail: "Datadog logs, monitors, and metrics screenshots are sanitized and documented." },
+    { label: "Real evidence retained", state: "passed", detail: "Datadog logs, monitors, and metrics screenshots are sanitized and documented." },
     { label: "Privacy check", state: "passed", detail: "Secrets, emails, account IDs, and token-like strings are blocked." },
     { label: "Coverage gaps written", state: "passed", detail: "The repo says what is validated, partial, and not claimed." },
     { label: "Release manifest", state: "passed", detail: "Final counts, evidence boundaries, and no-video review mode are checked by script." },
@@ -340,7 +340,7 @@ window.DD_LAB_DATA = {
     { version: "v1.5", change: "Added evidence catalog checks, release manifest verification, Terraform parity, and one AWS field-correlation example." },
     { version: "v1.4", change: "Added validation results, real evidence trail, and coverage gaps to the dashboard." },
     { version: "v1.3", change: "Added the local detection validation harness, 21 passing test cases, and control self-tests." },
-    { version: "v1.2", change: "Preserved sanitized Datadog screenshots for logs, monitors, and metrics." },
+    { version: "v1.2", change: "Retained sanitized Datadog screenshots for logs, monitors, and metrics." },
     { version: "v1.1", change: "Added tuning history, monitor changelog, and coverage analysis." }
   ]
 };

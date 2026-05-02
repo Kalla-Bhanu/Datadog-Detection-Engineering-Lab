@@ -1,8 +1,8 @@
 # Local Detection Validation Harness
 
-The local harness gives this portfolio project a repeatable engineering loop:
+The local harness gives this project a repeatable engineering loop:
 monitor definitions, positive cases, benign lookalikes, and edge cases are all
-checked together before the project is presented.
+checked together before the project is released.
 
 Run it with:
 

@@ -90,7 +90,7 @@ Field-correlation example: the non-active example in
 `detections/field-correlation-examples/aws_credential_misuse_field_correlation.json`
 checks nested fields such as `@aws.eventSource`, `@aws.eventName`, and
 `@aws.userIdentity.type`. It intentionally suppresses read-only enumeration so
-reviewers can see the difference between the deterministic lab replay monitor
+readers can see the difference between the deterministic lab replay monitor
 and a more production-shaped field query.
 
 Tuning decision: deployment runners and approved automation can look like API

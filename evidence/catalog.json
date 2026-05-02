@@ -2,14 +2,14 @@
   {
     "id": "monitor-inventory",
     "title": "Datadog Monitor Inventory",
-    "type": "portfolio-panel",
+    "type": "dashboard-panel",
     "proves": "Custom monitors were designed around sample lab events and source health.",
     "scenario_ids": ["pipeline_health", "source_pipeline_health"]
   },
   {
     "id": "sample-log-replay",
     "title": "Sample Log Replay",
-    "type": "portfolio-panel",
+    "type": "dashboard-panel",
     "proves": "Replay events stay clearly separated from production claims.",
     "scenario_ids": ["identity_account_takeover", "aws_iam_key_misuse", "eks_secret_access_chain", "endpoint_to_mongodb_pivot", "s3_data_access_exfiltration"]
   },
@@ -42,7 +42,7 @@
     "title": "S3 Data Access Triage Path",
     "type": "runbook",
     "path": "docs/triage-runbooks.md",
-    "proves": "The S3 data access monitor has a documented containment and exposure-review path.",
+    "proves": "The S3 data access monitor has a documented containment and exposure-validation path.",
     "scenario_ids": ["s3_data_access_exfiltration"]
   },
   {
@@ -72,7 +72,7 @@
     "title": "Dashboard Overview Screenshot",
     "type": "browser-screenshot",
     "path": "evidence/dashboard-overview-local.png",
-    "proves": "The dashboard presents project scope, ATT&CK coverage, scenarios, alert flow, and evidence path.",
+    "proves": "The dashboard shows project scope, ATT&CK coverage, scenarios, alert flow, and evidence path.",
     "scenario_ids": ["identity_account_takeover", "aws_iam_key_misuse", "eks_secret_access_chain", "endpoint_to_mongodb_pivot", "s3_data_access_exfiltration"]
   },
   {
@@ -80,12 +80,12 @@
     "title": "Detection Detail Screenshot",
     "type": "browser-screenshot",
     "path": "evidence/dashboard-monitor-inventory-local.png",
-    "proves": "The monitor inventory is presented with query focus, tuning notes, and monitor definition context.",
+    "proves": "The monitor inventory includes query focus, tuning notes, and monitor definition context.",
     "scenario_ids": ["pipeline_health", "source_pipeline_health"]
   },
   {
     "id": "dashboard-scenarios-local",
-    "title": "Scenario Walkthrough Screenshot",
+    "title": "Scenario Path Screenshot",
     "type": "browser-screenshot",
     "path": "evidence/dashboard-scenarios-local.png",
     "proves": "Threat scenarios are mapped to kill-chain stage, trigger, triage, outcome, and evidence reference.",
@@ -96,7 +96,7 @@
     "title": "Mobile Dashboard Screenshot",
     "type": "browser-screenshot",
     "path": "evidence/dashboard-mobile-local.png",
-    "proves": "The dashboard remains usable on a narrow reviewer viewport.",
+    "proves": "The dashboard remains usable on a narrow viewport.",
     "scenario_ids": ["identity_account_takeover", "aws_iam_key_misuse", "eks_secret_access_chain", "endpoint_to_mongodb_pivot", "s3_data_access_exfiltration"]
   },
   {
@@ -104,7 +104,7 @@
     "title": "Upgraded Evidence Dashboard Screenshot",
     "type": "browser-screenshot",
     "path": "evidence/dashboard-evidence-upgraded-local.png",
-    "proves": "The dashboard now surfaces validation results, real Datadog artifacts, and coverage evidence in one reviewer-facing section.",
+    "proves": "The dashboard surfaces validation results, real Datadog artifacts, and coverage evidence in one public section.",
     "scenario_ids": ["pipeline_health", "source_pipeline_health", "identity_account_takeover", "aws_iam_key_misuse", "eks_secret_access_chain", "endpoint_to_mongodb_pivot", "s3_data_access_exfiltration"]
   },
   {
@@ -112,7 +112,7 @@
     "title": "Mobile Evidence Dashboard Screenshot",
     "type": "browser-screenshot",
     "path": "evidence/dashboard-mobile-evidence-upgraded-local.png",
-    "proves": "The upgraded evidence section remains readable on a narrow reviewer viewport without horizontal overflow.",
+    "proves": "The upgraded evidence section remains readable on a narrow viewport without horizontal overflow.",
     "scenario_ids": ["pipeline_health", "source_pipeline_health", "identity_account_takeover", "aws_iam_key_misuse", "eks_secret_access_chain", "endpoint_to_mongodb_pivot", "s3_data_access_exfiltration"]
   },
   {
@@ -144,7 +144,7 @@
     "title": "Sanitized Datadog Metrics Overview",
     "type": "real-datadog-screenshot",
     "path": "evidence/datadog-metrics-overview-sanitized.png",
-    "proves": "The lab tenant had live metric telemetry available while detection evidence was preserved.",
+    "proves": "The lab tenant had live metric telemetry available while detection evidence was retained.",
     "scenario_ids": ["source_pipeline_health"]
   },
   {

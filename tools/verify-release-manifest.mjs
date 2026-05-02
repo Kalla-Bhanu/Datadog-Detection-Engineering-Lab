@@ -77,7 +77,7 @@ for (const technique of ["T1098", "T1021"]) {
 if (!manifest.lab_modeling_disclosure) {
   fail("lab_modeling_disclosure is required.");
 }
-for (const field of ["real_preserved_evidence", "real_local_execution", "lab_modeled_artifacts", "not_claimed"]) {
+for (const field of ["real_retained_evidence", "real_local_execution", "lab_modeled_artifacts", "not_claimed"]) {
   if (!Array.isArray(manifest.lab_modeling_disclosure[field]) || manifest.lab_modeling_disclosure[field].length === 0) {
     fail(`lab_modeling_disclosure.${field} must be a non-empty array.`);
   }
