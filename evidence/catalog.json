@@ -60,6 +60,22 @@
     "scenario_ids": ["identity_account_takeover", "aws_iam_key_misuse", "eks_secret_access_chain", "endpoint_to_mongodb_pivot", "s3_data_access_exfiltration"]
   },
   {
+    "id": "dashboard-evidence-upgraded-local",
+    "title": "Upgraded Evidence Dashboard Screenshot",
+    "type": "browser-screenshot",
+    "path": "evidence/dashboard-evidence-upgraded-local.png",
+    "proves": "The dashboard now surfaces validation results, real Datadog artifacts, and coverage evidence in one reviewer-facing section.",
+    "scenario_ids": ["pipeline_health", "source_pipeline_health", "identity_account_takeover", "aws_iam_key_misuse", "eks_secret_access_chain", "endpoint_to_mongodb_pivot", "s3_data_access_exfiltration"]
+  },
+  {
+    "id": "dashboard-mobile-evidence-upgraded-local",
+    "title": "Mobile Evidence Dashboard Screenshot",
+    "type": "browser-screenshot",
+    "path": "evidence/dashboard-mobile-evidence-upgraded-local.png",
+    "proves": "The upgraded evidence section remains readable on a narrow reviewer viewport without horizontal overflow.",
+    "scenario_ids": ["pipeline_health", "source_pipeline_health", "identity_account_takeover", "aws_iam_key_misuse", "eks_secret_access_chain", "endpoint_to_mongodb_pivot", "s3_data_access_exfiltration"]
+  },
+  {
     "id": "datadog-log-explorer-sanitized",
     "title": "Sanitized Datadog Log Explorer",
     "type": "real-datadog-screenshot",

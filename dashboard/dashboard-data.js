@@ -33,10 +33,10 @@ window.DD_LAB_DATA = {
     {
       id: "evidence",
       label: "Evidence",
-      badge: "6",
+      badge: "10",
       kicker: "Evidence trail",
-      title: "Readable proof without private Datadog screenshots.",
-      summary: "This section keeps the useful parts of the lab visible: source health, replay timing, and the evidence behind each project claim."
+      title: "Real Datadog evidence, local validation, and a clean review trail.",
+      summary: "This section keeps the strongest proof visible: sanitized Datadog screenshots, 21 passing validation cases, source health notes, and the preserved artifacts behind each claim."
     },
     {
       id: "readiness",
@@ -49,11 +49,11 @@ window.DD_LAB_DATA = {
   ],
   kpis: [
     { label: "Monitor patterns", value: "7", note: "6 detections + source health", tone: "green", spark: [44, 55, 49, 68, 73, 88] },
-    { label: "Threat scenarios", value: "5", note: "End-to-end walkthroughs", tone: "violet", spark: [28, 36, 58, 62, 75, 82] },
-    { label: "Sample events", value: "9", note: "Mapped to expected alerts", tone: "blue", spark: [35, 42, 56, 52, 70, 76] },
-    { label: "ATT&CK tactics", value: "5", note: "Honest partial coverage", tone: "amber", spark: [22, 26, 34, 41, 51, 58] },
+    { label: "Validation cases", value: "21/21", note: "Positive, negative, edge", tone: "violet", spark: [30, 42, 58, 70, 86, 100] },
+    { label: "Real evidence", value: "4", note: "Sanitized Datadog captures", tone: "blue", spark: [20, 34, 45, 57, 73, 88] },
+    { label: "ATT&CK entries", value: "8", note: "Validated, partial, planned", tone: "amber", spark: [22, 26, 34, 41, 51, 58] },
     { label: "Critical paths", value: "2", note: "Runtime and data exposure", tone: "red", spark: [18, 32, 39, 56, 72, 86] },
-    { label: "Privacy check", value: "Pass", note: "No private tenant material", tone: "slate", spark: [75, 76, 75, 78, 79, 80] }
+    { label: "Safety scan", value: "Pass", note: "No private tenant material", tone: "slate", spark: [75, 76, 75, 78, 79, 80] }
   ],
   coverage: [
     { tactic: "Initial Access", technique: "T1078.004", name: "Cloud Accounts", status: "validated", scenario: "identity_account_takeover", source: "Okta" },
@@ -80,11 +80,11 @@ window.DD_LAB_DATA = {
     { time: "13:25", severity: "Critical", source: "data", text: "Object access spike maps to S3 exfiltration model", scenario: "s3_data_access_exfiltration" }
   ],
   pipeline: [
-    { step: "Sample event", detail: "Scenario payload prepared", state: "complete" },
-    { step: "Scoped query", detail: "source:test-harness", state: "complete" },
-    { step: "Monitor alert", detail: "Severity and tags matched", state: "complete" },
-    { step: "Triage runbook", detail: "Pivot path documented", state: "complete" },
-    { step: "Portfolio note", detail: "Evidence catalog updated", state: "complete" }
+    { step: "Threat idea", detail: "Scenario and risky behavior are written down first.", state: "complete" },
+    { step: "Monitor logic", detail: "Query scope, threshold, tags, and route are versioned.", state: "complete" },
+    { step: "Test pressure", detail: "Positive, negative, and edge cases are paired to each monitor.", state: "complete" },
+    { step: "Validation result", detail: "The local harness reports 21 passing cases across 7 monitors.", state: "complete" },
+    { step: "Evidence package", detail: "Screenshots, tuning notes, and gaps remain after trial shutdown.", state: "complete" }
   ],
   replayTimeline: [
     { time: "T+00s", label: "Replay starts", detail: "Sample scenario event enters the test harness." },
@@ -283,13 +283,32 @@ window.DD_LAB_DATA = {
       evidence: "account-closure-boundary"
     }
   ],
+  validation: {
+    headline: "21/21",
+    label: "test cases passed",
+    report: "evidence/validation-results.json",
+    summary: "The harness checks every monitor against a true-positive case, a benign lookalike, and an edge case.",
+    breakdown: [
+      { label: "Positive", count: 7, note: "Expected to fire" },
+      { label: "Negative", count: 7, note: "Expected to suppress" },
+      { label: "Edge", count: 7, note: "Boundary decision documented" }
+    ]
+  },
+  evidenceArtifacts: [
+    { title: "Datadog Logs Explorer", type: "Real screenshot", path: "evidence/datadog-log-explorer-sanitized.png", proves: "Scenario-tagged lab logs appeared in Datadog with service and event context.", state: "preserved" },
+    { title: "Monitor Inventory", type: "Real screenshot", path: "evidence/datadog-monitor-list-sanitized.png", proves: "The temporary Datadog tenant contained custom monitor inventory.", state: "preserved" },
+    { title: "Identity Monitor Detail", type: "Real screenshot", path: "evidence/datadog-monitor-detail-identity-sanitized.png", proves: "The identity monitor existed with query, threshold, status, and message detail.", state: "preserved" },
+    { title: "Metrics Overview", type: "Real screenshot", path: "evidence/datadog-metrics-overview-sanitized.png", proves: "The lab tenant had live telemetry available while evidence was captured.", state: "preserved" },
+    { title: "Validation Results", type: "Local report", path: "evidence/validation-results.json", proves: "The repo can re-check monitor behavior without a paid Datadog account.", state: "repeatable" },
+    { title: "Coverage And Gaps", type: "Analysis note", path: "docs/coverage-and-gaps.md", proves: "Validated, partial, planned, and not-claimed areas are separated clearly.", state: "reviewed" }
+  ],
   evidence: [
-    { id: "monitor-inventory", title: "Monitor Inventory", claim: "Custom monitors are mapped to scenario IDs, severity, query focus, ownership, and review notes.", tone: "monitor", score: 96 },
-    { id: "sample-log-replay", title: "Sample Log Replay", claim: "The test-harness scope keeps lab events separate from any production claim.", tone: "log", score: 94 },
-    { id: "source-health", title: "Source Health", claim: "Pipeline health monitors show observability around ingest freshness and missing data.", tone: "health", score: 88 },
-    { id: "triage-runbooks", title: "Triage Runbooks", claim: "Each alert has a pivot path, response decision, and escalation boundary.", tone: "runbook", score: 91 },
-    { id: "detection-as-code", title: "Monitor Definitions", claim: "Monitor JSON and Terraform-style examples make the logic easy to inspect.", tone: "code", score: 93 },
-    { id: "account-closure-boundary", title: "Account Closure Boundary", claim: "The paid trial can be closed without losing the project evidence.", tone: "retire", score: 90 }
+    { id: "real-datadog", title: "Real Datadog Proof", claim: "Sanitized screenshots preserve logs, monitors, and metrics without private tenant details.", tone: "monitor", score: 97 },
+    { id: "local-validation", title: "Validation Harness", claim: "All 21 public-safe cases passed against the monitor query patterns.", tone: "log", score: 98 },
+    { id: "test-pressure", title: "False-Positive Pressure", claim: "Each monitor includes a benign lookalike and an edge decision, not only a positive sample.", tone: "health", score: 95 },
+    { id: "tuning-record", title: "Tuning Record", claim: "Noise, exceptions, and production next steps are written as detection engineering decisions.", tone: "runbook", score: 94 },
+    { id: "coverage-gaps", title: "Coverage Honesty", claim: "The project separates validated lab coverage from partial and planned ATT&CK claims.", tone: "code", score: 93 },
+    { id: "retirement-ready", title: "Closure Ready", claim: "The work remains reviewable after paid lab services are shut down.", tone: "retire", score: 96 }
   ],
   tuning: [
     { monitor: "Identity takeover", issue: "Helpdesk MFA reset overlap", fix: "Require new device and privileged follow-on action", result: "Reduced noisy single-signal alerts" },
@@ -298,24 +317,25 @@ window.DD_LAB_DATA = {
   ],
   readiness: [
     { label: "Monitor JSON checked", state: "passed", detail: "Required fields, tags, query scope, and evidence references are present." },
-    { label: "Dashboard opened locally", state: "passed", detail: "The local page renders and the main sections are usable." },
+    { label: "Validation harness", state: "passed", detail: "21 positive, negative, and edge cases matched their expected outcomes." },
+    { label: "Real evidence preserved", state: "passed", detail: "Datadog logs, monitors, and metrics screenshots are sanitized and documented." },
     { label: "Privacy check", state: "passed", detail: "Secrets, emails, account IDs, and token-like strings are blocked." },
-    { label: "Design review", state: "passed", detail: "The dashboard was tightened for a cleaner portfolio presentation." },
-    { label: "GitHub Pages publish", state: "pending", detail: "Publish after the final local and browser check." },
-    { label: "Datadog closure", state: "pending", detail: "Close only after evidence and repository are preserved." }
+    { label: "Coverage gaps written", state: "passed", detail: "The repo says what is validated, partial, planned, and not claimed." },
+    { label: "Final browser QA", state: "pending", detail: "Run after this dashboard pass and before publishing." }
   ],
   codePreview: [
     "resource \"datadog_monitor\" \"aws_credential_misuse\" {",
     "  name    = \"Datadog Lab Replay - AWS Credential Misuse\"",
     "  type    = \"log alert\"",
-    "  query   = \"logs(\\\"@scenario:aws_iam_key_misuse\\\").index(\\\"main\\\").rollup(\\\"count\\\").last(\\\"10m\\\") > 0\"",
-    "  message = \"Sample validation alert. Follow docs/triage-runbooks.md.\"",
-    "  tags    = [\"lab:datadog-detection\", \"public-safe:true\"]",
+    "  query   = \"logs(\\\"source:test-harness @synthetic:true @purpose:detection-rule-validation @scenario:aws_iam_key_misuse\\\").index(\\\"*\\\").rollup(\\\"count\\\").last(\\\"10m\\\") >= 1\"",
+    "  message = \"Synthetic AWS credential misuse replay observed.\"",
+    "  tags    = [\"datadog-detection-lab\", \"test-harness\", \"synthetic\"]",
     "}"
   ],
   changelog: [
-    { version: "v1.0", change: "Built the portfolio dashboard and evidence catalog." },
-    { version: "v0.9", change: "Mapped Datadog monitor patterns to sample scenario events." },
-    { version: "v0.8", change: "Separated portfolio evidence from private tenant screenshots." }
+    { version: "v1.4", change: "Added validation results, real evidence trail, and coverage gaps to the dashboard." },
+    { version: "v1.3", change: "Added the local detection validation harness and 21 passing test cases." },
+    { version: "v1.2", change: "Preserved sanitized Datadog screenshots for logs, monitors, and metrics." },
+    { version: "v1.1", change: "Added tuning history, monitor changelog, and coverage analysis." }
   ]
 };

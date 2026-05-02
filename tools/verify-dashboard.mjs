@@ -36,6 +36,20 @@ for (const token of ["overview", "monitors", "scenarios", "evidence", "readiness
   }
 }
 
+for (const token of ["validation", "evidenceArtifacts", "21/21", "Real Datadog evidence"]) {
+  if (!data.includes(token)) {
+    console.error(`dashboard-data.js missing evidence token ${token}`);
+    failed = true;
+  }
+}
+
+for (const token of ["validationPanel", "artifactTrail", "evidence-hero"]) {
+  if (!app.includes(token)) {
+    console.error(`app.js missing upgraded evidence renderer ${token}`);
+    failed = true;
+  }
+}
+
 if (!app.includes("render()")) {
   console.error("app.js missing render entrypoint.");
   failed = true;
@@ -46,4 +60,3 @@ if (failed) {
 }
 
 console.log("Dashboard static verification passed.");
-

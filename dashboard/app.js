@@ -344,6 +344,60 @@ function replayTimeline() {
   `;
 }
 
+function validationPanel() {
+  const summary = data.validation;
+  return `
+    <section class="panel validation-panel">
+      <div class="panel-head">
+        <div>
+          <span class="section-kicker">Local validation</span>
+          <h3>Every monitor has test pressure</h3>
+        </div>
+        <code>${summary.report}</code>
+      </div>
+      <div class="validation-score">
+        <strong>${summary.headline}</strong>
+        <span>${summary.label}</span>
+      </div>
+      <p>${summary.summary}</p>
+      <div class="validation-breakdown">
+        ${summary.breakdown.map((item) => `
+          <article>
+            <strong>${item.count}</strong>
+            <span>${item.label}</span>
+            <small>${item.note}</small>
+          </article>
+        `).join("")}
+      </div>
+    </section>
+  `;
+}
+
+function artifactTrail() {
+  return `
+    <section class="panel artifact-panel">
+      <div class="panel-head">
+        <div>
+          <span class="section-kicker">Evidence artifacts</span>
+          <h3>What a reviewer can inspect</h3>
+        </div>
+      </div>
+      <div class="artifact-list">
+        ${data.evidenceArtifacts.map((item) => `
+          <article class="${cssClass(item.state)}">
+            <div>
+              <span class="artifact-type">${item.type}</span>
+              <strong>${item.title}</strong>
+              <p>${item.proves}</p>
+            </div>
+            <code>${item.path}</code>
+          </article>
+        `).join("")}
+      </div>
+    </section>
+  `;
+}
+
 function evidencePanels() {
   return `<div class="evidence-grid">${data.evidence.map((item) => `
     <article class="evidence-panel ${item.tone}">
@@ -361,6 +415,10 @@ function evidencePanels() {
 function evidenceStage(stage) {
   return `
     <section class="stage-panel">
+      <div class="evidence-hero">
+        ${validationPanel()}
+        ${artifactTrail()}
+      </div>
       <div class="telemetry-layout">
         ${sourceHealth()}
         ${replayTimeline()}
