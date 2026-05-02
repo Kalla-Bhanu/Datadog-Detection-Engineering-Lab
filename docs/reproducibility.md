@@ -11,10 +11,12 @@ The project can be reviewed locally without a live Datadog account.
 ## Project Checks
 
 ```powershell
-npm run validate
-npm run verify:dashboard
+npm run verify:all
 powershell -NoLogo -NoProfile -ExecutionPolicy Bypass -File .\tools\verify-public-safe.ps1
 ```
+
+`npm run verify:all` validates monitor files, runs the local detection case
+harness, and verifies the dashboard files.
 
 ## Local Dashboard
 

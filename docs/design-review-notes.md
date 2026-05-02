@@ -30,7 +30,7 @@ way.
 
 ## Boundaries
 
-- No private Datadog screenshots.
+- No unsanitized Datadog screenshots.
 - No real tenant URLs, account IDs, user emails, keys, or session material.
 - No production claims. This is a completed lab preserved for portfolio review.
 - No marketing language that makes the project sound bigger than it is.

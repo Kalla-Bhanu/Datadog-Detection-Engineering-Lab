@@ -1,78 +1,54 @@
 # Datadog Detection Engineering Lab
 
-This project preserves a Datadog detection engineering lab in a form that is
-safe to share publicly. The goal is simple: show the monitor logic, the sample
-events used to test it, the tuning decisions, and the evidence that supports the
-work without keeping a paid trial account open.
+This is a public-safe Datadog detection engineering lab. It preserves the work
+that matters after a temporary Datadog tenant is shut down: monitor logic,
+sample events, validation cases, tuning decisions, runbooks, screenshots, and a
+portfolio dashboard.
 
-The dashboard is designed as a portfolio walkthrough. A recruiter can quickly
-see the scope of the project, and a security interviewer can drill into the
-detection logic, ATT&CK mapping, tuning notes, and response decisions.
+The project is built to show detection engineering judgment, not just alert
+screenshots. A reviewer can see what each detection is supposed to catch, what
+it should ignore, how it was tested, what evidence exists, and what gaps would
+need production telemetry.
+
+## What This Project Shows
+
+- Datadog log monitors for identity, cloud, runtime, endpoint, data access, and
+  source-health scenarios.
+- Monitor-as-code artifacts in JSON and Terraform-style form.
+- Positive, negative, and edge-case validation for every monitor.
+- A local validation harness with 21 passing cases across 7 monitors.
+- Sanitized Datadog screenshots from Logs Explorer, monitor inventory, monitor
+  detail, and metrics overview.
+- Tuning history, monitor changelog, coverage analysis, and triage runbooks.
+- A polished dashboard that presents the project for recruiters and technical
+  interviewers.
+
+## Five-Minute Review Path
+
+1. Open the dashboard and start with the Evidence section.
+2. Review [evidence/validation-results.json](evidence/validation-results.json)
+   for the 21/21 local validation result.
+3. Read [docs/tuning-history.md](docs/tuning-history.md) to see the false
+   positive and production-readiness thinking.
+4. Read [docs/coverage-and-gaps.md](docs/coverage-and-gaps.md) to see what is
+   validated, partial, planned, and not claimed.
+5. Inspect [detections/monitors](detections/monitors) for the monitor logic.
 
 ## How This Is Different From CloudSec SOC Detection Lab
 
-CloudSec SOC Detection Lab is the broad SOC analyst case file: AWS-first
-scenarios, investigation flow, evidence preservation, and a leadership-ready
-readout.
+CloudSec SOC Detection Lab is the broader SOC analyst case file: investigation
+flow, AWS-first evidence, and a leadership-ready incident readout.
 
-This repository is the detection engineer's workshop. It leads with the
-Datadog monitor lifecycle: threat hypothesis, source assumptions, query logic,
-validation events, tuning decisions, and handoff notes. The scenarios are here
-to prove the monitor design, not to retell the same investigation story.
+This repository is the detection engineer's workshop. The center of gravity is
+the Datadog monitor lifecycle: threat hypothesis, source assumptions, query
+logic, validation pressure, tuning decisions, and analyst handoff.
 
-This is not a second investigation walkthrough. It is a public-safe record of
-how I would design, review, tune, and preserve Datadog detections as versioned
-artifacts.
-
-## What I Built
-
-- Datadog log monitor examples for identity, cloud, runtime, endpoint, and data
-  access scenarios.
-- Monitor definitions in JSON and Terraform-style form.
-- Detection design notes that explain hypothesis, query rationale, validation,
-  tuning, and known gaps.
-- A polished dashboard for coverage, detections, scenarios, evidence, and final
-  readiness checks.
-- Sample Datadog-style log events with scenario IDs and expected outcomes.
-- Triage runbooks that explain how each alert would move from signal to
-  response decision.
-- Evidence notes and screenshots that remain useful after the Datadog trial is
-  closed.
+The scenarios support the detection design. They do not retell the same
+investigation story.
 
 ## Dashboard
 
-The dashboard includes:
-
-- Project snapshot cards for monitor count, sample events, scenario coverage,
-  and privacy checks.
-- ATT&CK coverage mapped to the detections in the lab.
-- Detection cards with query focus, tuning notes, noise considerations, and
-  analyst handoff.
-- Validation paths that connect trigger, expected monitor behavior, and outcome.
-- Source health, replay timing, evidence confidence, and wrap-up checks.
-- Engineer and Recruiter views for different review styles.
-
-## Validation Scenarios
-
-1. Pipeline health for the test harness and source feeds.
-2. Identity account takeover.
-3. AWS credential misuse.
-4. EKS secret access chain.
-5. Endpoint-to-MongoDB pivot.
-6. S3 data access and exfiltration.
-
-## Repository Layout
-
-```text
-dashboard/              Portfolio dashboard
-data/                   Sample Datadog-style events
-detections/             Monitor JSON and Terraform-style examples
-docs/                   Design notes, runbooks, positioning, and preservation guidance
-evidence/               Evidence catalog and local dashboard captures
-tools/                  Local checks for detections, dashboard, and privacy
-```
-
-## Run The Dashboard Locally
+Run the dashboard locally:
 
 ```powershell
 cd .\dashboard
@@ -81,25 +57,68 @@ powershell -ExecutionPolicy Bypass -File .\run-dashboard.ps1
 
 Then open the local URL printed by the script.
 
-## Check The Project
+The dashboard includes:
+
+- Project snapshot cards for monitors, validation cases, evidence, ATT&CK
+  mapping, critical paths, and safety checks.
+- Detection cards with query focus, tuning notes, expected noise, and analyst
+  handoff.
+- Scenario walkthroughs for identity, AWS credential misuse, EKS secret access,
+  endpoint-to-MongoDB pivot, and S3 data access.
+- Evidence cards for sanitized Datadog screenshots, local validation, tuning,
+  coverage gaps, and closure-ready artifacts.
+- Engineer and Recruiter modes for different review styles.
+
+## Validation
+
+Run the local checks:
 
 ```powershell
-npm run validate
-npm run verify:dashboard
+npm run verify:all
 powershell -NoLogo -NoProfile -ExecutionPolicy Bypass -File .\tools\verify-public-safe.ps1
+```
+
+`npm run verify:all` runs:
+
+- Monitor and sample-event schema validation.
+- Positive, negative, and edge-case detection validation.
+- Static dashboard verification.
+
+The validation harness is documented in
+[docs/validation-harness.md](docs/validation-harness.md).
+
+## Repository Layout
+
+```text
+dashboard/              Portfolio dashboard
+data/                   Sample events and paired detection test cases
+detections/             Monitor JSON and Terraform-style examples
+docs/                   Design notes, tuning history, runbooks, coverage, QA
+evidence/               Evidence catalog, screenshots, validation result
+tools/                  Local checks for detections, dashboard, cases, privacy
 ```
 
 ## Resume Positioning
 
 Suggested resume bullet:
 
-> Built a Datadog detection engineering lab with monitor-as-code examples,
-> sample log validation, tuning notes, and a portfolio dashboard to demonstrate
-> alert logic, coverage mapping, and detection lifecycle ownership.
+> Built a Datadog detection engineering lab with monitor-as-code artifacts,
+> positive/negative/edge-case validation, sanitized Datadog evidence, tuning
+> history, and a portfolio dashboard demonstrating alert logic, false-positive
+> handling, ATT&CK coverage, and detection lifecycle ownership.
 
-## Privacy
+Short interview framing:
+
+```text
+I built this as a temporary Datadog detection engineering lab, preserved the monitor logic and real sanitized evidence, then added local validation so the project stays reviewable without keeping paid services running.
+```
+
+## Privacy And Closure Boundary
 
 This repository does not include Datadog keys, session tokens, private tenant
-screenshots, real user data, real account IDs, or private resource names. The
-events and screenshots are either modeled for the lab or sanitized for public
-review.
+URLs, real user data, real account IDs, or private resource names. Screenshots
+are sanitized, and sample events use public-safe placeholders.
+
+The live Datadog tenant should not be described as active after closure. The
+project should be presented as a completed lab with preserved evidence and
+responsible cost control.

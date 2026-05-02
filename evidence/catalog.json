@@ -130,5 +130,13 @@
     "path": "docs/coverage-and-gaps.md",
     "proves": "The project separates validated lab coverage from partial, planned, and not-claimed areas.",
     "scenario_ids": ["pipeline_health", "source_pipeline_health", "identity_account_takeover", "aws_iam_key_misuse", "eks_secret_access_chain", "endpoint_to_mongodb_pivot", "s3_data_access_exfiltration"]
+  },
+  {
+    "id": "release-qa",
+    "title": "Release QA Notes",
+    "type": "qa-note",
+    "path": "docs/release-qa.md",
+    "proves": "The final review gates are documented for local validation, browser QA, and public-safe release boundaries.",
+    "scenario_ids": ["pipeline_health", "source_pipeline_health", "identity_account_takeover", "aws_iam_key_misuse", "eks_secret_access_chain", "endpoint_to_mongodb_pivot", "s3_data_access_exfiltration"]
   }
 ]

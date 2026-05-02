@@ -10,10 +10,13 @@ dashboard screenshots.
 - Public monitor definitions.
 - Terraform-style monitor examples.
 - Sample Datadog-style events.
+- Positive, negative, and edge-case test cases.
+- Local validation results.
 - A local dashboard for walkthroughs.
-- Evidence screenshots and catalog notes.
+- Sanitized Datadog screenshots and catalog notes.
 - Runbooks for each detection scenario.
-- Local checks for detection files, dashboard files, and privacy boundaries.
+- Local checks for detection files, validation cases, dashboard files, and
+  privacy boundaries.
 
 ## Closure Boundary
 

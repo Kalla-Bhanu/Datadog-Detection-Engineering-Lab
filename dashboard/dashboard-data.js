@@ -321,7 +321,7 @@ window.DD_LAB_DATA = {
     { label: "Real evidence preserved", state: "passed", detail: "Datadog logs, monitors, and metrics screenshots are sanitized and documented." },
     { label: "Privacy check", state: "passed", detail: "Secrets, emails, account IDs, and token-like strings are blocked." },
     { label: "Coverage gaps written", state: "passed", detail: "The repo says what is validated, partial, planned, and not claimed." },
-    { label: "Final browser QA", state: "pending", detail: "Run after this dashboard pass and before publishing." }
+    { label: "Final browser QA", state: "passed", detail: "Desktop and mobile evidence views were checked locally." }
   ],
   codePreview: [
     "resource \"datadog_monitor\" \"aws_credential_misuse\" {",
