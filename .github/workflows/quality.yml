@@ -1,0 +1,21 @@
+name: quality
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Validate detections
+        run: npm run validate
+      - name: Verify dashboard
+        run: npm run verify:dashboard
+      - name: Public-safe scan
+        shell: pwsh
+        run: ./tools/verify-public-safe.ps1

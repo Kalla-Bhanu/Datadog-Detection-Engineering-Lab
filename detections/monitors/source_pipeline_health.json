@@ -1,0 +1,20 @@
+{
+  "id": "source_pipeline_health",
+  "name": "CloudSec Live Source - Pipeline Health Pattern",
+  "type": "log alert",
+  "scenario_id": "source_pipeline_health",
+  "severity": "medium",
+  "query": "logs(\"cloudsec pipeline-health\").index(\"*\").rollup(\"count\").last(\"15m\") < 1",
+  "message": "Pipeline health event missing for a modeled source. This public-safe definition represents the lab pattern without private source IDs.",
+  "tags": ["cloudsec", "live-source", "pipeline-health"],
+  "options": {
+    "include_tags": true,
+    "notify_no_data": true,
+    "renotify_interval": 0,
+    "on_missing_data": "show_no_data",
+    "thresholds": { "critical": 1 }
+  },
+  "triage": "Confirm expected source heartbeat, ingestion freshness, pipeline filters, and whether the gap is telemetry loss or real source inactivity.",
+  "evidence_refs": ["monitor-inventory", "source-health"]
+}
+

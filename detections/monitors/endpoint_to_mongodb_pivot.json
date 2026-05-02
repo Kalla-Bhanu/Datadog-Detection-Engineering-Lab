@@ -1,0 +1,20 @@
+{
+  "id": "endpoint_to_mongodb_pivot",
+  "name": "CloudSec Test Harness - Endpoint To MongoDB Pivot",
+  "type": "log alert",
+  "scenario_id": "endpoint_to_mongodb_pivot",
+  "severity": "high",
+  "query": "logs(\"source:test-harness @synthetic:true @purpose:detection-rule-validation @scenario:endpoint_to_mongodb_pivot\").index(\"*\").rollup(\"count\").last(\"10m\") >= 1",
+  "message": "Synthetic endpoint to MongoDB pivot replay observed. This monitor only fires on test-harness events.",
+  "tags": ["cloudsec", "test-harness", "synthetic", "endpoint-to-mongodb-pivot"],
+  "options": {
+    "include_tags": true,
+    "notify_no_data": false,
+    "renotify_interval": 0,
+    "on_missing_data": "default",
+    "thresholds": { "critical": 1 }
+  },
+  "triage": "Review process tree, database client execution, collection access pattern, and host containment decision.",
+  "evidence_refs": ["endpoint-data-pivot", "synthetic-log-replay"]
+}
+

@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Datadog Detection Engineering Lab</title>
+  <meta name="description" content="Public-safe Datadog detection engineering portfolio dashboard.">
+  <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div class="app-shell" data-mode="engineer">
+    <aside class="side-nav" aria-label="Dashboard sections">
+      <a class="brand-mark" href="#overview" aria-label="Datadog Detection Engineering Lab home">
+        <span class="brand-glyph" aria-hidden="true">DD</span>
+        <span>
+          <strong>Detection Lab</strong>
+          <small>Datadog SOC workbench</small>
+        </span>
+      </a>
+
+      <nav id="stageNav"></nav>
+
+      <section class="rail-card">
+        <span class="rail-status"></span>
+        <p>Review posture</p>
+        <strong>Lab-validated</strong>
+        <small>No tenant IDs, keys, emails, or private screenshots.</small>
+      </section>
+    </aside>
+
+    <main class="workspace">
+      <header class="topbar">
+        <div class="topbar-copy">
+          <div class="crumbs">
+            <span>Lab</span>
+            <span>Detection Engineering</span>
+            <strong>Datadog</strong>
+          </div>
+          <h1 id="stageTitle">Datadog detection engineering review surface.</h1>
+          <p id="stageSummary">Public-safe SOC workbench for detection design, validation, and evidence preservation.</p>
+        </div>
+        <div class="topbar-actions">
+          <span id="environmentLabel" class="scope-pill">PUBLIC-SAFE LAB</span>
+          <span id="updateLabel" class="status-text">v1.0 local validation</span>
+          <div class="mode-toggle" aria-label="View mode">
+            <button class="active" data-mode="engineer">Engineer</button>
+            <button data-mode="recruiter">Recruiter</button>
+          </div>
+        </div>
+      </header>
+
+      <section id="stageFrame" class="stage-frame" aria-live="polite"></section>
+    </main>
+  </div>
+
+  <script src="./dashboard-data.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>

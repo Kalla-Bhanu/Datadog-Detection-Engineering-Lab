@@ -1,0 +1,111 @@
+[
+  {
+    "event_id": "evt-pipeline-001",
+    "timestamp": "2026-05-02T13:00:00Z",
+    "scenario_id": "pipeline_health",
+    "service": "datadog-detection-test-harness",
+    "source": "test-harness",
+    "status": "info",
+    "severity": "low",
+    "message": "Synthetic replay heartbeat observed for detection validation pipeline.",
+    "tags": ["source:test-harness", "synthetic:true", "purpose:detection-rule-validation", "scenario:pipeline_health"],
+    "expected_detection": "CloudSec Test Harness - Pipeline Health"
+  },
+  {
+    "event_id": "evt-identity-001",
+    "timestamp": "2026-05-02T13:05:00Z",
+    "scenario_id": "identity_account_takeover",
+    "service": "identity-audit-feed",
+    "source": "test-harness",
+    "status": "warning",
+    "severity": "high",
+    "message": "Synthetic account takeover pattern: impossible travel followed by MFA reset request.",
+    "tags": ["source:test-harness", "synthetic:true", "scenario:identity_account_takeover", "platform:identity"],
+    "expected_detection": "CloudSec Test Harness - Identity Account Takeover"
+  },
+  {
+    "event_id": "evt-cloud-001",
+    "timestamp": "2026-05-02T13:10:00Z",
+    "scenario_id": "aws_iam_key_misuse",
+    "service": "cloud-audit-feed",
+    "source": "test-harness",
+    "status": "warning",
+    "severity": "high",
+    "message": "Synthetic access-key misuse pattern: unusual API burst from a new location.",
+    "tags": ["source:test-harness", "synthetic:true", "scenario:aws_iam_key_misuse", "platform:cloud"],
+    "expected_detection": "CloudSec Test Harness - AWS Credential Misuse"
+  },
+  {
+    "event_id": "evt-eks-001",
+    "timestamp": "2026-05-02T13:15:00Z",
+    "scenario_id": "eks_secret_access_chain",
+    "service": "runtime-audit-feed",
+    "source": "test-harness",
+    "status": "warning",
+    "severity": "critical",
+    "message": "Synthetic EKS workload identity chain accessed a protected secret path.",
+    "tags": ["source:test-harness", "synthetic:true", "scenario:eks_secret_access_chain", "platform:runtime"],
+    "expected_detection": "CloudSec Test Harness - EKS Secret Access Chain"
+  },
+  {
+    "event_id": "evt-mongodb-001",
+    "timestamp": "2026-05-02T13:20:00Z",
+    "scenario_id": "endpoint_to_mongodb_pivot",
+    "service": "endpoint-data-correlation",
+    "source": "test-harness",
+    "status": "warning",
+    "severity": "high",
+    "message": "Synthetic endpoint process spawned a database client and queried a sensitive collection.",
+    "tags": ["source:test-harness", "synthetic:true", "scenario:endpoint_to_mongodb_pivot", "platform:endpoint"],
+    "expected_detection": "CloudSec Test Harness - Endpoint To MongoDB Pivot"
+  },
+  {
+    "event_id": "evt-s3-001",
+    "timestamp": "2026-05-02T13:25:00Z",
+    "scenario_id": "s3_data_access_exfiltration",
+    "service": "data-access-feed",
+    "source": "test-harness",
+    "status": "warning",
+    "severity": "critical",
+    "message": "Synthetic object-store access spike followed by archive download behavior.",
+    "tags": ["source:test-harness", "synthetic:true", "scenario:s3_data_access_exfiltration", "platform:data"],
+    "expected_detection": "CloudSec Test Harness - S3 Data Access Exfiltration"
+  },
+  {
+    "event_id": "evt-okta-health-001",
+    "timestamp": "2026-05-02T13:30:00Z",
+    "scenario_id": "source_pipeline_health",
+    "service": "okta-source-health",
+    "source": "synthetic-source-check",
+    "status": "ok",
+    "severity": "low",
+    "message": "Synthetic Okta source heartbeat confirms pipeline health monitor pattern.",
+    "tags": ["cloudsec", "live-source", "okta", "pipeline-health"],
+    "expected_detection": "CloudSec Live Source - Okta Pipeline Health"
+  },
+  {
+    "event_id": "evt-workspace-health-001",
+    "timestamp": "2026-05-02T13:35:00Z",
+    "scenario_id": "source_pipeline_health",
+    "service": "workspace-source-health",
+    "source": "synthetic-source-check",
+    "status": "ok",
+    "severity": "low",
+    "message": "Synthetic workspace source heartbeat confirms pipeline health monitor pattern.",
+    "tags": ["cloudsec", "live-source", "google-workspace", "pipeline-health"],
+    "expected_detection": "CloudSec Live Source - Google Workspace Pipeline Health"
+  },
+  {
+    "event_id": "evt-mongodb-health-001",
+    "timestamp": "2026-05-02T13:40:00Z",
+    "scenario_id": "source_pipeline_health",
+    "service": "mongodb-source-health",
+    "source": "synthetic-source-check",
+    "status": "ok",
+    "severity": "low",
+    "message": "Synthetic MongoDB source heartbeat confirms pipeline health monitor pattern.",
+    "tags": ["cloudsec", "live-source", "mongodb", "pipeline-health"],
+    "expected_detection": "CloudSec Live Source - MongoDB Pipeline Health"
+  }
+]
+

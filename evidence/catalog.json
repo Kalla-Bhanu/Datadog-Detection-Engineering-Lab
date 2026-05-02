@@ -1,0 +1,62 @@
+[
+  {
+    "id": "monitor-inventory",
+    "title": "Datadog Monitor Inventory",
+    "type": "generated-panel",
+    "proves": "Custom monitors were designed around synthetic validation and source health.",
+    "scenario_ids": ["pipeline_health", "source_pipeline_health"]
+  },
+  {
+    "id": "synthetic-log-replay",
+    "title": "Synthetic Log Replay",
+    "type": "generated-panel",
+    "proves": "Replay events carry source:test-harness and synthetic:true boundaries.",
+    "scenario_ids": ["identity_account_takeover", "aws_iam_key_misuse", "eks_secret_access_chain", "endpoint_to_mongodb_pivot", "s3_data_access_exfiltration"]
+  },
+  {
+    "id": "identity-scenario",
+    "title": "Identity Account Takeover Triage",
+    "type": "runbook",
+    "proves": "The account takeover detection has a repeatable analyst workflow.",
+    "scenario_ids": ["identity_account_takeover"]
+  },
+  {
+    "id": "endpoint-data-pivot",
+    "title": "Endpoint To MongoDB Pivot",
+    "type": "runbook",
+    "proves": "Endpoint and data-access context are correlated into a single alert story.",
+    "scenario_ids": ["endpoint_to_mongodb_pivot"]
+  },
+  {
+    "id": "dashboard-overview-local",
+    "title": "Command Center Overview Screenshot",
+    "type": "browser-screenshot",
+    "path": "evidence/dashboard-overview-local.png",
+    "proves": "The public-safe dashboard presents KPIs, ATT&CK coverage, active scenarios, signal stream, and validation path.",
+    "scenario_ids": ["identity_account_takeover", "aws_iam_key_misuse", "eks_secret_access_chain", "endpoint_to_mongodb_pivot", "s3_data_access_exfiltration"]
+  },
+  {
+    "id": "dashboard-monitor-inventory-local",
+    "title": "Detection Lifecycle Screenshot",
+    "type": "browser-screenshot",
+    "path": "evidence/dashboard-monitor-inventory-local.png",
+    "proves": "The monitor inventory is presented as detection lifecycle evidence with query scope and detection-as-code context.",
+    "scenario_ids": ["pipeline_health", "source_pipeline_health"]
+  },
+  {
+    "id": "dashboard-scenarios-local",
+    "title": "Scenario Walkthrough Screenshot",
+    "type": "browser-screenshot",
+    "path": "evidence/dashboard-scenarios-local.png",
+    "proves": "Threat scenarios are mapped to kill-chain stage, trigger, triage, outcome, and evidence reference.",
+    "scenario_ids": ["identity_account_takeover", "aws_iam_key_misuse", "eks_secret_access_chain", "endpoint_to_mongodb_pivot", "s3_data_access_exfiltration"]
+  },
+  {
+    "id": "dashboard-mobile-local",
+    "title": "Mobile Dashboard Screenshot",
+    "type": "browser-screenshot",
+    "path": "evidence/dashboard-mobile-local.png",
+    "proves": "The command-center dashboard remains usable on a narrow reviewer viewport.",
+    "scenario_ids": ["identity_account_takeover", "aws_iam_key_misuse", "eks_secret_access_chain", "endpoint_to_mongodb_pivot", "s3_data_access_exfiltration"]
+  }
+]

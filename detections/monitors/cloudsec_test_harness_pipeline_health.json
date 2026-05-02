@@ -1,0 +1,20 @@
+{
+  "id": "cloudsec_test_harness_pipeline_health",
+  "name": "CloudSec Test Harness - Pipeline Health",
+  "type": "log alert",
+  "scenario_id": "pipeline_health",
+  "severity": "low",
+  "query": "logs(\"source:test-harness @synthetic:true @purpose:detection-rule-validation\").index(\"*\").rollup(\"count\").last(\"5m\") >= 1",
+  "message": "Synthetic detection test harness replay observed. This monitor is intentionally scoped to source:test-harness and synthetic:true.",
+  "tags": ["cloudsec", "test-harness", "synthetic", "pipeline-health"],
+  "options": {
+    "include_tags": true,
+    "notify_no_data": false,
+    "renotify_interval": 0,
+    "on_missing_data": "default",
+    "thresholds": { "critical": 1 }
+  },
+  "triage": "Confirm replay ID, event count, and source:test-harness boundary before using this as validation proof.",
+  "evidence_refs": ["monitor-inventory", "synthetic-log-replay"]
+}
+
