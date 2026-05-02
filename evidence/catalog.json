@@ -90,5 +90,21 @@
     "path": "evidence/datadog-metrics-overview-sanitized.png",
     "proves": "The lab tenant had live metric telemetry available while detection evidence was preserved.",
     "scenario_ids": ["source_pipeline_health"]
+  },
+  {
+    "id": "detection-test-cases",
+    "title": "Paired Detection Test Cases",
+    "type": "validation-input",
+    "path": "data/test-cases.json",
+    "proves": "Every monitor has positive, negative, and edge-case validation pressure.",
+    "scenario_ids": ["pipeline_health", "source_pipeline_health", "identity_account_takeover", "aws_iam_key_misuse", "eks_secret_access_chain", "endpoint_to_mongodb_pivot", "s3_data_access_exfiltration"]
+  },
+  {
+    "id": "local-validation-results",
+    "title": "Local Detection Validation Results",
+    "type": "validation-report",
+    "path": "evidence/validation-results.json",
+    "proves": "The local harness evaluated 21 cases across 7 monitors with all expected outcomes met.",
+    "scenario_ids": ["pipeline_health", "source_pipeline_health", "identity_account_takeover", "aws_iam_key_misuse", "eks_secret_access_chain", "endpoint_to_mongodb_pivot", "s3_data_access_exfiltration"]
   }
 ]
