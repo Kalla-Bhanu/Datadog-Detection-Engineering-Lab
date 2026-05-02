@@ -73,3 +73,14 @@ resource "datadog_monitor" "s3_data_access_exfiltration" {
   renotify_interval = 0
 }
 
+resource "datadog_monitor" "source_pipeline_health" {
+  name    = "Datadog Source Health - Pipeline Health Pattern"
+  type    = "log alert"
+  query   = "logs(\"datadog-detection-lab pipeline-health\").index(\"*\").rollup(\"count\").last(\"15m\") < 1"
+  message = "Pipeline health event missing for a modeled source. This public-safe definition represents the lab pattern without private source IDs."
+  tags    = ["datadog-detection-lab", "live-source", "pipeline-health"]
+
+  include_tags      = true
+  notify_no_data    = true
+  renotify_interval = 0
+}

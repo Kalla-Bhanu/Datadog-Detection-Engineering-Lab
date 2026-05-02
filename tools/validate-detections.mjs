@@ -4,6 +4,8 @@ import path from "node:path";
 const root = process.cwd();
 const monitorsDir = path.join(root, "detections", "monitors");
 const eventsPath = path.join(root, "data", "events.json");
+const evidenceCatalogPath = path.join(root, "evidence", "catalog.json");
+const terraformPath = path.join(root, "detections", "terraform", "datadog_monitors.tf");
 
 const requiredMonitorFields = [
   "id",
@@ -42,9 +44,13 @@ function readJson(file) {
 }
 
 const monitorFiles = fs.readdirSync(monitorsDir).filter((file) => file.endsWith(".json"));
-if (monitorFiles.length < 6) {
-  fail("Expected at least six monitor definitions.");
+if (monitorFiles.length !== 7) {
+  fail(`Expected exactly seven active monitor definitions, found ${monitorFiles.length}.`);
 }
+
+const evidenceCatalog = readJson(evidenceCatalogPath);
+const evidenceIds = new Set(evidenceCatalog.map((entry) => entry.id));
+const terraform = fs.readFileSync(terraformPath, "utf8").replace(/\\"/g, "\"");
 
 const monitors = monitorFiles.map((file) => {
   const fullPath = path.join(monitorsDir, file);
@@ -60,11 +66,22 @@ const monitors = monitorFiles.map((file) => {
   if (!Array.isArray(monitor.evidence_refs) || monitor.evidence_refs.length === 0) {
     fail(`${file} must include evidence refs.`);
   }
+  for (const evidenceRef of monitor.evidence_refs) {
+    if (!evidenceIds.has(evidenceRef)) {
+      fail(`${file} references missing evidence catalog id ${evidenceRef}.`);
+    }
+  }
   if (monitor.type !== "log alert") {
     fail(`${file} must be a log alert.`);
   }
   if (monitor.tags.includes("test-harness") && !monitor.query.includes("source:test-harness")) {
     fail(`${file} test-harness monitor is missing source:test-harness in query.`);
+  }
+  if (!terraform.includes(monitor.name)) {
+    fail(`${file} is missing from Terraform-style examples by monitor name.`);
+  }
+  if (!terraform.includes(monitor.query)) {
+    fail(`${file} is missing from Terraform-style examples by query.`);
   }
   return monitor;
 });
@@ -94,4 +111,3 @@ if (process.exitCode) {
 }
 
 console.log(`Validated ${monitors.length} monitors and ${events.length} synthetic events.`);
-

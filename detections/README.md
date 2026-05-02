@@ -7,6 +7,8 @@ IDs, tenant URLs, keys, notification channels, or user emails.
 ## Files
 
 - `monitors/*.json`: portable monitor definitions for review.
+- `field-correlation-examples/*.json`: non-active examples that show how a
+  scenario-scoped lab monitor can mature toward field-level production logic.
 - `terraform/datadog_monitors.tf`: Terraform-style examples for the same logic.
 
 ## Query Pattern

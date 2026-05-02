@@ -31,3 +31,37 @@ outcome, not only a sample event that looks suspicious.
 | `expected_outcome` | `fire` or `suppress`. |
 | `rationale` | Why this outcome is expected. |
 | `events` | One or more modeled Datadog-style events. Missing-data monitors may use an empty array for a positive case. |
+
+## Harness Control Case Schema
+
+`harness-control-cases.json` holds intentionally broken controls used by
+`npm run validate:harness-controls`. These controls prove that the local
+harness fails safely instead of only proving the happy path.
+
+| Field | Purpose |
+| --- | --- |
+| `control_id` | Stable identifier for the control self-test. |
+| `failure_category` | The class of failure being proven. |
+| `expected_failure_contains` | Error text the harness must emit for the control to pass. |
+| `monitor` | Minimal monitor object used by the control. |
+| `group` | Minimal case group used to trigger the intended failure. |
+
+The controls cover malformed monitor queries, missing event fields, expected
+outcome mismatches, threshold inversions, and monitor identity drift.
+
+## Field-Correlation Example Case Schema
+
+`field-correlation-example-cases.json` uses the same group and case shape as
+`test-cases.json`, but it targets non-active examples under
+`detections/field-correlation-examples`. The current release includes one AWS
+credential misuse example that validates nested CloudTrail-style fields without
+changing the seven active lab monitors.
+
+The field example is intentionally small:
+
+- One positive IAM policy-write case.
+- One approved automation lookalike.
+- One read-only enumeration edge case.
+
+The validation report is written to
+`evidence/field-correlation-example-results.json`.

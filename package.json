@@ -7,8 +7,12 @@
   "scripts": {
     "validate": "node tools/validate-detections.mjs",
     "validate:cases": "node tools/validate-detection-cases.mjs",
+    "validate:harness-controls": "node tools/validate-harness-controls.mjs",
+    "validate:field-examples": "node tools/validate-field-examples.mjs",
+    "verify:catalog": "node tools/verify-evidence-catalog.mjs",
     "verify:dashboard": "node tools/verify-dashboard.mjs",
-    "verify:all": "npm run validate && npm run validate:cases && npm run verify:dashboard"
+    "verify:release-manifest": "node tools/verify-release-manifest.mjs",
+    "verify:all": "npm run validate && npm run validate:cases && npm run validate:harness-controls && npm run validate:field-examples && npm run verify:catalog && npm run verify:release-manifest && npm run verify:dashboard"
   },
   "engines": {
     "node": ">=18"

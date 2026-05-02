@@ -14,8 +14,14 @@ Expected result:
 
 - Monitor and sample-event validation passes.
 - Local detection case validation reports 21 passing cases and 0 failures.
+- Harness control self-test reports all intentional failures were caught.
+- AWS field-correlation example validation reports 3 passing cases and 0
+  failures.
+- Evidence catalog and release manifest verification pass.
 - Dashboard static verification passes.
 - Public-safe verification passes.
+- Final red-team review is completed in
+  [docs/final-red-team-review.md](final-red-team-review.md).
 
 ## Browser QA
 
@@ -35,4 +41,4 @@ Preserved browser QA screenshots:
 
 The repo is ready to publish when the checks above pass and the README still
 describes the project as a completed lab with preserved evidence, not as an
-active Datadog tenant.
+active Datadog tenant or a video-dependent demo.

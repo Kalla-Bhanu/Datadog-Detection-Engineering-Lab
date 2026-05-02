@@ -43,6 +43,13 @@ for (const token of ["validation", "evidenceArtifacts", "21/21", "Real Datadog e
   }
 }
 
+for (const forbidden of ["status: \"planned\"", "planned ATT&CK", "partial, planned"]) {
+  if (data.includes(forbidden) || app.includes(forbidden)) {
+    console.error(`dashboard contains overclaim token ${forbidden}`);
+    failed = true;
+  }
+}
+
 for (const token of ["validationPanel", "artifactTrail", "evidence-hero"]) {
   if (!app.includes(token)) {
     console.error(`app.js missing upgraded evidence renderer ${token}`);

@@ -1,0 +1,87 @@
+[
+  {
+    "monitor_id": "aws_credential_misuse_field_correlation",
+    "monitor_name": "Datadog Example - AWS Credential Misuse Field Correlation",
+    "cases": [
+      {
+        "case_id": "aws_field_correlation_positive",
+        "case_type": "positive",
+        "expected_outcome": "fire",
+        "rationale": "A lab IAM user attaching policy through the validation replay contains the exact field-level behavior this example is meant to catch.",
+        "events": [
+          {
+            "event_id": "field-aws-positive-001",
+            "timestamp": "2026-05-02T14:00:00Z",
+            "service": "cloud-audit-feed",
+            "source": "test-harness",
+            "status": "warning",
+            "severity": "high",
+            "message": "IAM user attached a policy from a new lab source during credential misuse replay.",
+            "tags": ["source:test-harness", "synthetic:true", "purpose:detection-rule-validation", "platform:cloud"],
+            "scenario_id": "aws_iam_key_misuse",
+            "aws": {
+              "eventSource": "iam.amazonaws.com",
+              "eventName": "AttachUserPolicy",
+              "sourceIPAddress": "198.51.100.37",
+              "userAgent": "aws-cli/2.x lab",
+              "userIdentity": { "arn": "arn:aws:iam::<ACCOUNT_ID>:user/lab-build-user", "type": "IAMUser" },
+              "requestParameters": { "policyArn": "arn:aws:iam::aws:policy/AdministratorAccess" }
+            }
+          }
+        ]
+      },
+      {
+        "case_id": "aws_field_correlation_negative",
+        "case_type": "negative",
+        "expected_outcome": "suppress",
+        "rationale": "Approved automation can attach policy during a release, but it is not an IAM user replay event and should not satisfy the field-correlation query.",
+        "events": [
+          {
+            "event_id": "field-aws-negative-001",
+            "timestamp": "2026-05-02T14:01:00Z",
+            "service": "cloud-audit-feed",
+            "source": "test-harness",
+            "status": "info",
+            "severity": "low",
+            "message": "Approved deployment role attached a policy during a documented release window.",
+            "tags": ["source:test-harness", "synthetic:true", "purpose:release-window", "platform:cloud"],
+            "scenario_id": "aws_deployment_runner",
+            "aws": {
+              "eventSource": "iam.amazonaws.com",
+              "eventName": "AttachUserPolicy",
+              "sourceIPAddress": "192.0.2.30",
+              "userAgent": "ci-runner/lab",
+              "userIdentity": { "arn": "arn:aws:iam::<ACCOUNT_ID>:role/approved-ci-runner", "type": "AssumedRole" }
+            }
+          }
+        ]
+      },
+      {
+        "case_id": "aws_field_correlation_edge",
+        "case_type": "edge_case",
+        "expected_outcome": "suppress",
+        "rationale": "Enumeration by an IAM user is useful context, but this example intentionally separates read-only IAM activity from write-policy changes.",
+        "events": [
+          {
+            "event_id": "field-aws-edge-001",
+            "timestamp": "2026-05-02T14:02:00Z",
+            "service": "cloud-audit-feed",
+            "source": "test-harness",
+            "status": "warning",
+            "severity": "medium",
+            "message": "IAM user listed access keys without making a write-policy change.",
+            "tags": ["source:test-harness", "synthetic:true", "purpose:detection-rule-validation", "platform:cloud"],
+            "scenario_id": "aws_iam_key_misuse",
+            "aws": {
+              "eventSource": "iam.amazonaws.com",
+              "eventName": "ListAccessKeys",
+              "sourceIPAddress": "203.0.113.90",
+              "userAgent": "aws-cli/2.x lab",
+              "userIdentity": { "arn": "arn:aws:iam::<ACCOUNT_ID>:user/lab-readonly-user", "type": "IAMUser" }
+            }
+          }
+        ]
+      }
+    ]
+  }
+]

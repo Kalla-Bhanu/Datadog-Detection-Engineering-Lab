@@ -1,0 +1,73 @@
+{
+  "project_name": "datadog-detection-engineering-lab",
+  "display_name": "Datadog Detection Engineering Lab",
+  "version": "1.0.0",
+  "release_date": "2026-05-02",
+  "review_mode": "completed_public_safe_lab",
+  "live_services_required": false,
+  "video_included": false,
+  "active_monitor_count": 7,
+  "detection_case_count": 21,
+  "harness_control_count": 5,
+  "field_correlation_example_count": 1,
+  "field_correlation_example_case_count": 3,
+  "catalog_entry_count": 27,
+  "attack_coverage": {
+    "validated_count": 4,
+    "partial_count": 2,
+    "partial_boundaries": [
+      {
+        "technique": "T1098",
+        "covered_behavior": "IAM policy pressure inside the AWS credential misuse scenario.",
+        "not_claimed": "Trust-policy changes, group membership changes, account creation, or broad account-manipulation coverage."
+      },
+      {
+        "technique": "T1021",
+        "covered_behavior": "Endpoint process activity reaching a remote MongoDB service.",
+        "not_claimed": "SMB, RDP, SSH, credential replay, database compromise, or broad lateral movement protocol coverage."
+      }
+    ],
+    "not_claimed": ["T1041", "T1562"]
+  },
+  "lab_modeling_disclosure": {
+    "real_preserved_evidence": [
+      "Sanitized Datadog Logs Explorer screenshot",
+      "Sanitized Datadog monitor inventory screenshot",
+      "Sanitized identity monitor detail screenshot",
+      "Sanitized Datadog metrics overview screenshot"
+    ],
+    "real_local_execution": [
+      "21 active monitor validation cases",
+      "5 harness control self-tests",
+      "3 AWS field-correlation example cases",
+      "Evidence catalog verification",
+      "Release manifest verification",
+      "Dashboard static verification",
+      "Public-safe scan",
+      "Browser QA"
+    ],
+    "lab_modeled_artifacts": [
+      "Scenario-tagged replay events",
+      "Lab-modeled tuning histories",
+      "Production re-open triggers",
+      "Telemetry tradeoff and cost/noise analysis"
+    ],
+    "not_claimed": [
+      "Active production deployment",
+      "Production false-positive rates",
+      "Full Datadog query-engine parity",
+      "Live paid Datadog or AWS dependency",
+      "Walkthrough video"
+    ]
+  },
+  "verification_commands": [
+    "npm run verify:all",
+    "powershell -NoLogo -NoProfile -ExecutionPolicy Bypass -File .\\tools\\verify-public-safe.ps1"
+  ],
+  "boundaries": [
+    "Scenario-tagged active monitors are deterministic lab replay artifacts.",
+    "One AWS field-correlation example shows the production-maturation path without increasing the active monitor count.",
+    "Sanitized screenshots prove the temporary Datadog lab existed, but no live tenant is required for review.",
+    "T1041 and T1562 are documented as not-claimed ATT&CK boundaries, not dashboard coverage."
+  ]
+}

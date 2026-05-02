@@ -14,6 +14,46 @@
     "scenario_ids": ["identity_account_takeover", "aws_iam_key_misuse", "eks_secret_access_chain", "endpoint_to_mongodb_pivot", "s3_data_access_exfiltration"]
   },
   {
+    "id": "synthetic-log-replay",
+    "title": "Synthetic Log Replay Fixture",
+    "type": "validation-input",
+    "path": "data/events.json",
+    "proves": "Public-safe replay events support the active monitor scenarios without requiring a live tenant.",
+    "scenario_ids": ["pipeline_health", "source_pipeline_health", "identity_account_takeover", "aws_iam_key_misuse", "eks_secret_access_chain", "endpoint_to_mongodb_pivot", "s3_data_access_exfiltration"]
+  },
+  {
+    "id": "cloud-credential-misuse",
+    "title": "AWS Credential Misuse Triage Path",
+    "type": "runbook",
+    "path": "docs/triage-runbooks.md",
+    "proves": "The cloud credential misuse monitor has a documented analyst handoff path.",
+    "scenario_ids": ["aws_iam_key_misuse"]
+  },
+  {
+    "id": "runtime-secret-access",
+    "title": "Runtime Secret Access Triage Path",
+    "type": "runbook",
+    "path": "docs/triage-runbooks.md",
+    "proves": "The EKS secret access monitor has a documented runtime investigation path.",
+    "scenario_ids": ["eks_secret_access_chain"]
+  },
+  {
+    "id": "s3-data-access",
+    "title": "S3 Data Access Triage Path",
+    "type": "runbook",
+    "path": "docs/triage-runbooks.md",
+    "proves": "The S3 data access monitor has a documented containment and exposure-review path.",
+    "scenario_ids": ["s3_data_access_exfiltration"]
+  },
+  {
+    "id": "source-health",
+    "title": "Source Health Evidence Path",
+    "type": "analysis-note",
+    "path": "docs/coverage-and-gaps.md",
+    "proves": "Source health is represented as an ingestion visibility pattern, not as attacker-caused impairment proof.",
+    "scenario_ids": ["source_pipeline_health"]
+  },
+  {
     "id": "identity-scenario",
     "title": "Identity Account Takeover Triage",
     "type": "runbook",
@@ -124,11 +164,43 @@
     "scenario_ids": ["pipeline_health", "source_pipeline_health", "identity_account_takeover", "aws_iam_key_misuse", "eks_secret_access_chain", "endpoint_to_mongodb_pivot", "s3_data_access_exfiltration"]
   },
   {
+    "id": "harness-control-self-tests",
+    "title": "Harness Control Self-Test Results",
+    "type": "validation-report",
+    "path": "evidence/harness-control-results.json",
+    "proves": "The local evaluator catches malformed queries, missing fields, mismatched outcomes, threshold errors, and monitor identity drift.",
+    "scenario_ids": ["pipeline_health", "source_pipeline_health", "identity_account_takeover", "aws_iam_key_misuse", "eks_secret_access_chain", "endpoint_to_mongodb_pivot", "s3_data_access_exfiltration"]
+  },
+  {
+    "id": "aws-field-correlation-example",
+    "title": "AWS Field-Correlation Example",
+    "type": "monitor-example",
+    "path": "detections/field-correlation-examples/aws_credential_misuse_field_correlation.json",
+    "proves": "The repo includes one non-active field-level AWS monitor example to show how scenario replay would mature toward production logic.",
+    "scenario_ids": ["aws_iam_key_misuse"]
+  },
+  {
+    "id": "field-correlation-example-results",
+    "title": "Field-Correlation Example Results",
+    "type": "validation-report",
+    "path": "evidence/field-correlation-example-results.json",
+    "proves": "The AWS field-correlation example is tested with positive, negative, and edge cases.",
+    "scenario_ids": ["aws_iam_key_misuse"]
+  },
+  {
+    "id": "release-manifest",
+    "title": "Release Manifest",
+    "type": "release-artifact",
+    "path": "release_manifest.json",
+    "proves": "The final repo counts, evidence boundaries, and no-video/no-live-service assumptions are captured in one locally verifiable file.",
+    "scenario_ids": ["pipeline_health", "source_pipeline_health", "identity_account_takeover", "aws_iam_key_misuse", "eks_secret_access_chain", "endpoint_to_mongodb_pivot", "s3_data_access_exfiltration"]
+  },
+  {
     "id": "coverage-and-gaps",
     "title": "Coverage And Gap Analysis",
     "type": "analysis-note",
     "path": "docs/coverage-and-gaps.md",
-    "proves": "The project separates validated lab coverage from partial, planned, and not-claimed areas.",
+    "proves": "The project separates validated lab coverage from partial and not-claimed areas.",
     "scenario_ids": ["pipeline_health", "source_pipeline_health", "identity_account_takeover", "aws_iam_key_misuse", "eks_secret_access_chain", "endpoint_to_mongodb_pivot", "s3_data_access_exfiltration"]
   },
   {

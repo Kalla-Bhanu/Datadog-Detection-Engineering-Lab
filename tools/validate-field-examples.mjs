@@ -8,19 +8,19 @@ import {
 } from "./harness-core.mjs";
 
 const root = process.cwd();
-const monitorsDir = path.join(root, "detections", "monitors");
-const testCasesPath = path.join(root, "data", "test-cases.json");
-const reportPath = path.join(root, "evidence", "validation-results.json");
+const examplesDir = path.join(root, "detections", "field-correlation-examples");
+const testCasesPath = path.join(root, "data", "field-correlation-example-cases.json");
+const reportPath = path.join(root, "evidence", "field-correlation-example-results.json");
 
 function fail(message) {
   throw new Error(message);
 }
 
-function loadMonitors() {
-  return fs.readdirSync(monitorsDir)
+function loadExamples() {
+  return fs.readdirSync(examplesDir)
     .filter((file) => file.endsWith(".json"))
     .map((file) => {
-      const monitor = readJson(path.join(monitorsDir, file));
+      const monitor = readJson(path.join(examplesDir, file));
       return [
         monitor.id,
         { ...buildMonitorEvaluator(monitor), file }
@@ -28,30 +28,22 @@ function loadMonitors() {
     });
 }
 
-function latestTimestamp(groups) {
-  const timestamps = groups.flatMap((group) =>
-    group.cases.flatMap((testCase) =>
-      testCase.events
-        .map((event) => event.timestamp)
-        .filter(Boolean)
-    )
-  );
-  return timestamps.sort().at(-1) || "fixture-without-timestamps";
-}
-
-const monitorMap = new Map(loadMonitors());
+const examples = new Map(loadExamples());
 const groups = readJson(testCasesPath);
 
 if (!Array.isArray(groups)) {
-  fail("data/test-cases.json must be an array.");
+  fail("data/field-correlation-example-cases.json must be an array.");
+}
+if (examples.size !== 1) {
+  fail("Exactly one field-correlation example is expected for this release.");
 }
 
 const results = [];
 
 for (const group of groups) {
-  const monitor = monitorMap.get(group.monitor_id);
+  const monitor = examples.get(group.monitor_id);
   if (!monitor) {
-    fail(`${group.monitor_id} does not map to a monitor definition.`);
+    fail(`${group.monitor_id} does not map to a field-correlation example.`);
   }
   validateGroupShape(group, monitor);
 
@@ -80,11 +72,10 @@ const passedCount = results.filter((result) => result.passed).length;
 const failedCount = results.length - passedCount;
 
 const report = {
-  report_type: "local_detection_validation",
-  validation_window_end: latestTimestamp(groups),
-  scope: "Public-safe local replay approximation of the Datadog log monitor queries in detections/monitors.",
+  report_type: "field_correlation_example_validation",
+  scope: "One non-active AWS example that validates nested CloudTrail-style fields without changing the 7 active lab monitors.",
   summary: {
-    monitor_count: groups.length,
+    example_count: examples.size,
     case_count: results.length,
     passed_count: passedCount,
     failed_count: failedCount,
@@ -96,8 +87,8 @@ const report = {
 fs.mkdirSync(path.dirname(reportPath), { recursive: true });
 fs.writeFileSync(reportPath, `${JSON.stringify(report, null, 2)}\n`);
 
-console.log("Local detection validation");
-console.log(`Monitors: ${report.summary.monitor_count}`);
+console.log("Field-correlation example validation");
+console.log(`Examples: ${report.summary.example_count}`);
 console.log(`Cases: ${report.summary.case_count}`);
 console.log(`Passed: ${report.summary.passed_count}`);
 console.log(`Failed: ${report.summary.failed_count}`);

@@ -1,5 +1,4 @@
 const data = window.DD_LAB_DATA;
-let activeStage = data.stages[0].id;
 let activeFilter = "all";
 let viewMode = "engineer";
 
@@ -11,6 +10,13 @@ const stageTitle = document.querySelector("#stageTitle");
 const stageSummary = document.querySelector("#stageSummary");
 const envLabel = document.querySelector("#environmentLabel");
 const updateLabel = document.querySelector("#updateLabel");
+
+function stageFromHash() {
+  const hashStage = window.location.hash.replace("#", "");
+  return data.stages.some((stage) => stage.id === hashStage) ? hashStage : data.stages[0].id;
+}
+
+let activeStage = stageFromHash();
 
 function cssClass(value) {
   return String(value).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
@@ -41,8 +47,7 @@ function renderNav() {
 
   nav.querySelectorAll("button").forEach((button) => {
     button.addEventListener("click", () => {
-      activeStage = button.dataset.stage;
-      render();
+      setStage(button.dataset.stage);
     });
   });
 }
@@ -82,7 +87,6 @@ function coverageMatrix(compact = false) {
         <div class="legend">
           <span class="validated">Checked</span>
           <span class="partial">Partial</span>
-          <span class="planned">Planned</span>
         </div>
       </div>
       <div class="coverage-grid">${cells}</div>
@@ -96,7 +100,7 @@ function scenarioQueue() {
       <div class="panel-head">
         <div>
           <span class="section-kicker">Scenario queue</span>
-          <h3>Alert paths ready for walkthrough</h3>
+          <h3>Alert paths ready for review</h3>
         </div>
       </div>
       <div class="queue-list">
@@ -517,8 +521,7 @@ function wireStageActions() {
 
   document.querySelectorAll(".queue-item").forEach((button) => {
     button.addEventListener("click", () => {
-      activeStage = button.dataset.stage;
-      render();
+      setStage(button.dataset.stage);
       const target = document.getElementById(button.dataset.scenario);
       if (target) {
         target.scrollIntoView({ block: "start" });
@@ -527,10 +530,21 @@ function wireStageActions() {
   });
 }
 
+function setStage(stageId, { updateHash = true } = {}) {
+  if (!data.stages.some((stage) => stage.id === stageId)) {
+    return;
+  }
+  activeStage = stageId;
+  if (updateHash && window.location.hash !== `#${stageId}`) {
+    window.history.replaceState(null, "", `#${stageId}`);
+  }
+  render();
+}
+
 function render() {
   shell.dataset.mode = viewMode;
   renderNav();
-  const stage = data.stages.find((item) => item.id === activeStage);
+  const stage = data.stages.find((item) => item.id === activeStage) || data.stages[0];
   setChromeText(stage);
   frame.innerHTML = renderStage(stage);
   wireStageActions();
@@ -542,6 +556,10 @@ modeButtons.forEach((button) => {
     modeButtons.forEach((item) => item.classList.toggle("active", item.dataset.mode === viewMode));
     render();
   });
+});
+
+window.addEventListener("hashchange", () => {
+  setStage(stageFromHash(), { updateHash: false });
 });
 
 render();

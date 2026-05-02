@@ -1,0 +1,47 @@
+{
+  "report_type": "harness_control_self_test",
+  "scope": "Intentional negative controls that prove the local evaluator fails safely on malformed or inconsistent inputs.",
+  "summary": {
+    "control_count": 5,
+    "passed_count": 5,
+    "failed_count": 0,
+    "pass_rate": 1
+  },
+  "results": [
+    {
+      "control_id": "reject_malformed_monitor_query",
+      "failure_category": "malformed_query",
+      "expected_failure_contains": "Unsupported monitor query shape",
+      "passed": true,
+      "observed_failure": "Unsupported monitor query shape: events(\"source:test-harness @scenario:control\").rollup(\"count\").last(\"10m\") >= 1"
+    },
+    {
+      "control_id": "reject_missing_required_event_field",
+      "failure_category": "missing_required_event_field",
+      "expected_failure_contains": "is missing source",
+      "passed": true,
+      "observed_failure": "control-missing-source-001 is missing source."
+    },
+    {
+      "control_id": "detect_expected_outcome_mismatch",
+      "failure_category": "expected_outcome_mismatch",
+      "expected_failure_contains": "expected suppress, got fire",
+      "passed": true,
+      "observed_failure": "control_outcome_mismatch_negative expected suppress, got fire"
+    },
+    {
+      "control_id": "detect_threshold_logic_inversion",
+      "failure_category": "threshold_logic_inversion",
+      "expected_failure_contains": "expected fire, got suppress",
+      "passed": true,
+      "observed_failure": "control_threshold_inversion_positive expected fire, got suppress"
+    },
+    {
+      "control_id": "reject_monitor_identity_mismatch",
+      "failure_category": "monitor_identity_mismatch",
+      "expected_failure_contains": "does not match monitor id",
+      "passed": true,
+      "observed_failure": "control_identity_target does not match monitor id control_identity_source."
+    }
+  ]
+}

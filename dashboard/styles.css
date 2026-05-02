@@ -463,7 +463,6 @@ h3 {
 
 .legend .validated::before { background: var(--green); }
 .legend .partial::before { background: var(--amber); }
-.legend .planned::before { background: var(--soft); }
 
 .coverage-grid {
   display: grid;
@@ -487,10 +486,6 @@ h3 {
 .coverage-cell.partial {
   border-color: rgba(242, 201, 76, 0.45);
   background: rgba(242, 201, 76, 0.08);
-}
-
-.coverage-cell.planned {
-  border-color: rgba(124, 116, 141, 0.52);
 }
 
 .coverage-cell span,
@@ -1283,15 +1278,13 @@ dd {
   }
 
   #stageNav {
-    display: flex;
-    grid-template-columns: none;
-    overflow-x: auto;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    overflow: visible;
     max-width: 100%;
-    padding-bottom: 4px;
   }
 
   .nav-item {
-    flex: 0 0 128px;
     min-height: 40px;
     padding: 8px 10px;
   }

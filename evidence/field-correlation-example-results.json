@@ -1,0 +1,78 @@
+{
+  "report_type": "field_correlation_example_validation",
+  "scope": "One non-active AWS example that validates nested CloudTrail-style fields without changing the 7 active lab monitors.",
+  "summary": {
+    "example_count": 1,
+    "case_count": 3,
+    "passed_count": 3,
+    "failed_count": 0,
+    "pass_rate": 1
+  },
+  "results": [
+    {
+      "monitor_id": "aws_credential_misuse_field_correlation",
+      "monitor_name": "Datadog Example - AWS Credential Misuse Field Correlation",
+      "case_id": "aws_field_correlation_positive",
+      "case_type": "positive",
+      "expected_outcome": "fire",
+      "actual_outcome": "fire",
+      "passed": true,
+      "matched_event_count": 1,
+      "matched_event_ids": [
+        "field-aws-positive-001"
+      ],
+      "threshold": ">= 1",
+      "query_terms": [
+        "source:test-harness",
+        "@synthetic:true",
+        "@purpose:detection-rule-validation",
+        "@aws.eventSource:iam.amazonaws.com",
+        "@aws.eventName:AttachUserPolicy",
+        "@aws.userIdentity.type:IAMUser"
+      ],
+      "rationale": "A lab IAM user attaching policy through the validation replay contains the exact field-level behavior this example is meant to catch."
+    },
+    {
+      "monitor_id": "aws_credential_misuse_field_correlation",
+      "monitor_name": "Datadog Example - AWS Credential Misuse Field Correlation",
+      "case_id": "aws_field_correlation_negative",
+      "case_type": "negative",
+      "expected_outcome": "suppress",
+      "actual_outcome": "suppress",
+      "passed": true,
+      "matched_event_count": 0,
+      "matched_event_ids": [],
+      "threshold": ">= 1",
+      "query_terms": [
+        "source:test-harness",
+        "@synthetic:true",
+        "@purpose:detection-rule-validation",
+        "@aws.eventSource:iam.amazonaws.com",
+        "@aws.eventName:AttachUserPolicy",
+        "@aws.userIdentity.type:IAMUser"
+      ],
+      "rationale": "Approved automation can attach policy during a release, but it is not an IAM user replay event and should not satisfy the field-correlation query."
+    },
+    {
+      "monitor_id": "aws_credential_misuse_field_correlation",
+      "monitor_name": "Datadog Example - AWS Credential Misuse Field Correlation",
+      "case_id": "aws_field_correlation_edge",
+      "case_type": "edge_case",
+      "expected_outcome": "suppress",
+      "actual_outcome": "suppress",
+      "passed": true,
+      "matched_event_count": 0,
+      "matched_event_ids": [],
+      "threshold": ">= 1",
+      "query_terms": [
+        "source:test-harness",
+        "@synthetic:true",
+        "@purpose:detection-rule-validation",
+        "@aws.eventSource:iam.amazonaws.com",
+        "@aws.eventName:AttachUserPolicy",
+        "@aws.userIdentity.type:IAMUser"
+      ],
+      "rationale": "Enumeration by an IAM user is useful context, but this example intentionally separates read-only IAM activity from write-policy changes."
+    }
+  ]
+}

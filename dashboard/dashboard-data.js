@@ -36,7 +36,7 @@ window.DD_LAB_DATA = {
       badge: "10",
       kicker: "Evidence trail",
       title: "Real Datadog evidence, local validation, and a clean review trail.",
-      summary: "This section keeps the strongest proof visible: sanitized Datadog screenshots, 21 passing validation cases, source health notes, and the preserved artifacts behind each claim."
+      summary: "This section keeps the strongest proof visible: sanitized Datadog screenshots, 21 passing validation cases, 5 harness controls, a field-correlation example, source health notes, and the preserved artifacts behind each claim."
     },
     {
       id: "readiness",
@@ -49,9 +49,9 @@ window.DD_LAB_DATA = {
   ],
   kpis: [
     { label: "Monitor patterns", value: "7", note: "6 detections + source health", tone: "green", spark: [44, 55, 49, 68, 73, 88] },
-    { label: "Validation cases", value: "21/21", note: "Positive, negative, edge", tone: "violet", spark: [30, 42, 58, 70, 86, 100] },
+    { label: "Validation cases", value: "21+5+3", note: "Cases, controls, example", tone: "violet", spark: [30, 42, 58, 70, 86, 100] },
     { label: "Real evidence", value: "4", note: "Sanitized Datadog captures", tone: "blue", spark: [20, 34, 45, 57, 73, 88] },
-    { label: "ATT&CK entries", value: "8", note: "Validated, partial, planned", tone: "amber", spark: [22, 26, 34, 41, 51, 58] },
+    { label: "ATT&CK entries", value: "6", note: "Validated and partial", tone: "amber", spark: [22, 26, 34, 41, 51, 58] },
     { label: "Critical paths", value: "2", note: "Runtime and data exposure", tone: "red", spark: [18, 32, 39, 56, 72, 86] },
     { label: "Safety scan", value: "Pass", note: "No private tenant material", tone: "slate", spark: [75, 76, 75, 78, 79, 80] }
   ],
@@ -61,9 +61,7 @@ window.DD_LAB_DATA = {
     { tactic: "Privilege Escalation", technique: "T1098", name: "Account Manipulation", status: "partial", scenario: "aws_iam_key_misuse", source: "CloudTrail" },
     { tactic: "Discovery", technique: "T1613", name: "Container and Resource Discovery", status: "validated", scenario: "eks_secret_access_chain", source: "Kubernetes" },
     { tactic: "Lateral Movement", technique: "T1021", name: "Remote Services", status: "partial", scenario: "endpoint_to_mongodb_pivot", source: "Endpoint" },
-    { tactic: "Collection", technique: "T1530", name: "Data from Cloud Storage", status: "validated", scenario: "s3_data_access_exfiltration", source: "S3" },
-    { tactic: "Exfiltration", technique: "T1041", name: "Exfiltration Over C2 Channel", status: "planned", scenario: "s3_data_access_exfiltration", source: "Network" },
-    { tactic: "Defense Evasion", technique: "T1562", name: "Impair Defenses", status: "planned", scenario: "source_pipeline_health", source: "Datadog" }
+    { tactic: "Collection", technique: "T1530", name: "Data from Cloud Storage", status: "validated", scenario: "s3_data_access_exfiltration", source: "S3" }
   ],
   sourceHealth: [
     { source: "CloudTrail", path: "AWS -> Datadog Logs", lag: "5m", schema: "datadog-lab.v1", state: "healthy" },
@@ -83,7 +81,7 @@ window.DD_LAB_DATA = {
     { step: "Threat idea", detail: "Scenario and risky behavior are written down first.", state: "complete" },
     { step: "Monitor logic", detail: "Query scope, threshold, tags, and route are versioned.", state: "complete" },
     { step: "Test pressure", detail: "Positive, negative, and edge cases are paired to each monitor.", state: "complete" },
-    { step: "Validation result", detail: "The local harness reports 21 passing cases across 7 monitors.", state: "complete" },
+    { step: "Validation result", detail: "The local harness reports 21 passing cases and 5 intentional failure controls.", state: "complete" },
     { step: "Evidence package", detail: "Screenshots, tuning notes, and gaps remain after trial shutdown.", state: "complete" }
   ],
   replayTimeline: [
@@ -215,7 +213,7 @@ window.DD_LAB_DATA = {
       confidence: 84,
       hypothesis: "Source-level silence can hide real security signals and should be visible in the portfolio.",
       rationale: "Health monitoring demonstrates operational ownership beyond detection content.",
-      fp: "Trial shutdown and planned connector removal are expected exceptions.",
+      fp: "Trial shutdown and intentional connector retirement are expected exceptions.",
       validation: "Checked against sanitized source health status events.",
       route: "P3 platform review",
       mitre: "N/A"
@@ -287,11 +285,13 @@ window.DD_LAB_DATA = {
     headline: "21/21",
     label: "test cases passed",
     report: "evidence/validation-results.json",
-    summary: "The harness checks every monitor against a true-positive case, a benign lookalike, and an edge case.",
+    summary: "The harness checks every active monitor against a true-positive case, a benign lookalike, and an edge case. Separate control and field-correlation checks prove the evaluator catches bad assumptions and can inspect real CloudTrail-style fields.",
     breakdown: [
       { label: "Positive", count: 7, note: "Expected to fire" },
       { label: "Negative", count: 7, note: "Expected to suppress" },
-      { label: "Edge", count: 7, note: "Boundary decision documented" }
+      { label: "Edge", count: 7, note: "Boundary decision documented" },
+      { label: "Controls", count: 5, note: "Intentional failures caught" },
+      { label: "Field Example", count: 3, note: "AWS field cases checked" }
     ]
   },
   evidenceArtifacts: [
@@ -300,14 +300,17 @@ window.DD_LAB_DATA = {
     { title: "Identity Monitor Detail", type: "Real screenshot", path: "evidence/datadog-monitor-detail-identity-sanitized.png", proves: "The identity monitor existed with query, threshold, status, and message detail.", state: "preserved" },
     { title: "Metrics Overview", type: "Real screenshot", path: "evidence/datadog-metrics-overview-sanitized.png", proves: "The lab tenant had live telemetry available while evidence was captured.", state: "preserved" },
     { title: "Validation Results", type: "Local report", path: "evidence/validation-results.json", proves: "The repo can re-check monitor behavior without a paid Datadog account.", state: "repeatable" },
-    { title: "Coverage And Gaps", type: "Analysis note", path: "docs/coverage-and-gaps.md", proves: "Validated, partial, planned, and not-claimed areas are separated clearly.", state: "reviewed" }
+    { title: "Harness Controls", type: "Self-test report", path: "evidence/harness-control-results.json", proves: "The evaluator catches malformed queries, missing fields, mismatches, threshold errors, and monitor identity drift.", state: "repeatable" },
+    { title: "AWS Field Correlation", type: "Example report", path: "evidence/field-correlation-example-results.json", proves: "A non-active AWS example validates nested CloudTrail-style fields without increasing the active monitor count.", state: "repeatable" },
+    { title: "Coverage And Gaps", type: "Analysis note", path: "docs/coverage-and-gaps.md", proves: "Validated, partial, and not-claimed areas are separated clearly.", state: "reviewed" },
+    { title: "Release Manifest", type: "Release artifact", path: "release_manifest.json", proves: "Counts, boundaries, and no-video/no-live-service assumptions are locally verifiable.", state: "reviewed" }
   ],
   evidence: [
     { id: "real-datadog", title: "Real Datadog Proof", claim: "Sanitized screenshots preserve logs, monitors, and metrics without private tenant details.", tone: "monitor", score: 97 },
-    { id: "local-validation", title: "Validation Harness", claim: "All 21 public-safe cases passed against the monitor query patterns.", tone: "log", score: 98 },
+    { id: "local-validation", title: "Validation Harness", claim: "All 21 public-safe cases passed and 5 control failures were caught by the harness.", tone: "log", score: 98 },
     { id: "test-pressure", title: "False-Positive Pressure", claim: "Each monitor includes a benign lookalike and an edge decision, not only a positive sample.", tone: "health", score: 95 },
     { id: "tuning-record", title: "Tuning Record", claim: "Noise, exceptions, and production next steps are written as detection engineering decisions.", tone: "runbook", score: 94 },
-    { id: "coverage-gaps", title: "Coverage Honesty", claim: "The project separates validated lab coverage from partial and planned ATT&CK claims.", tone: "code", score: 93 },
+    { id: "coverage-gaps", title: "Coverage Honesty", claim: "The project separates validated lab coverage from partial coverage and explicit not-claimed ATT&CK boundaries.", tone: "code", score: 93 },
     { id: "retirement-ready", title: "Closure Ready", claim: "The work remains reviewable after paid lab services are shut down.", tone: "retire", score: 96 }
   ],
   tuning: [
@@ -317,10 +320,11 @@ window.DD_LAB_DATA = {
   ],
   readiness: [
     { label: "Monitor JSON checked", state: "passed", detail: "Required fields, tags, query scope, and evidence references are present." },
-    { label: "Validation harness", state: "passed", detail: "21 positive, negative, and edge cases matched their expected outcomes." },
+    { label: "Validation harness", state: "passed", detail: "21 positive, negative, and edge cases matched expectations; 5 controls failed safely." },
     { label: "Real evidence preserved", state: "passed", detail: "Datadog logs, monitors, and metrics screenshots are sanitized and documented." },
     { label: "Privacy check", state: "passed", detail: "Secrets, emails, account IDs, and token-like strings are blocked." },
-    { label: "Coverage gaps written", state: "passed", detail: "The repo says what is validated, partial, planned, and not claimed." },
+    { label: "Coverage gaps written", state: "passed", detail: "The repo says what is validated, partial, and not claimed." },
+    { label: "Release manifest", state: "passed", detail: "Final counts, evidence boundaries, and no-video review mode are checked by script." },
     { label: "Final browser QA", state: "passed", detail: "Desktop and mobile evidence views were checked locally." }
   ],
   codePreview: [
@@ -333,8 +337,9 @@ window.DD_LAB_DATA = {
     "}"
   ],
   changelog: [
+    { version: "v1.5", change: "Added evidence catalog checks, release manifest verification, Terraform parity, and one AWS field-correlation example." },
     { version: "v1.4", change: "Added validation results, real evidence trail, and coverage gaps to the dashboard." },
-    { version: "v1.3", change: "Added the local detection validation harness and 21 passing test cases." },
+    { version: "v1.3", change: "Added the local detection validation harness, 21 passing test cases, and control self-tests." },
     { version: "v1.2", change: "Preserved sanitized Datadog screenshots for logs, monitors, and metrics." },
     { version: "v1.1", change: "Added tuning history, monitor changelog, and coverage analysis." }
   ]

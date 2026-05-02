@@ -16,7 +16,9 @@ powershell -NoLogo -NoProfile -ExecutionPolicy Bypass -File .\tools\verify-publi
 ```
 
 `npm run verify:all` validates monitor files, runs the local detection case
-harness, and verifies the dashboard files.
+harness, runs the harness control self-test, validates the AWS field-correlation
+example, checks the evidence catalog and release manifest, and verifies the
+dashboard files.
 
 ## Local Dashboard
 

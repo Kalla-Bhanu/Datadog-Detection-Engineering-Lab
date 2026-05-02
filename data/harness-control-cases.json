@@ -1,0 +1,171 @@
+[
+  {
+    "control_id": "reject_malformed_monitor_query",
+    "failure_category": "malformed_query",
+    "expected_failure_contains": "Unsupported monitor query shape",
+    "monitor": {
+      "id": "control_malformed_query",
+      "name": "Control - Malformed Query",
+      "query": "events(\"source:test-harness @scenario:control\").rollup(\"count\").last(\"10m\") >= 1"
+    },
+    "group": {
+      "monitor_id": "control_malformed_query",
+      "monitor_name": "Control - Malformed Query",
+      "cases": [
+        {
+          "case_id": "control_malformed_query_positive",
+          "case_type": "positive",
+          "expected_outcome": "fire",
+          "events": [
+            {
+              "event_id": "control-malformed-query-001",
+              "timestamp": "2026-05-02T14:00:00Z",
+              "scenario_id": "control",
+              "service": "control-feed",
+              "source": "test-harness",
+              "status": "warning",
+              "severity": "high",
+              "message": "This event should never be evaluated because the query shape is unsupported.",
+              "tags": ["source:test-harness", "scenario:control"]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "control_id": "reject_missing_required_event_field",
+    "failure_category": "missing_required_event_field",
+    "expected_failure_contains": "is missing source",
+    "monitor": {
+      "id": "control_missing_field",
+      "name": "Control - Missing Required Field",
+      "query": "logs(\"source:test-harness @scenario:control_missing_field\").index(\"*\").rollup(\"count\").last(\"10m\") >= 1"
+    },
+    "group": {
+      "monitor_id": "control_missing_field",
+      "monitor_name": "Control - Missing Required Field",
+      "cases": [
+        {
+          "case_id": "control_missing_source_positive",
+          "case_type": "positive",
+          "expected_outcome": "fire",
+          "events": [
+            {
+              "event_id": "control-missing-source-001",
+              "timestamp": "2026-05-02T14:01:00Z",
+              "scenario_id": "control_missing_field",
+              "service": "control-feed",
+              "status": "warning",
+              "severity": "high",
+              "message": "This fixture intentionally omits source so the harness rejects incomplete events.",
+              "tags": ["source:test-harness", "scenario:control_missing_field"]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "control_id": "detect_expected_outcome_mismatch",
+    "failure_category": "expected_outcome_mismatch",
+    "expected_failure_contains": "expected suppress, got fire",
+    "monitor": {
+      "id": "control_outcome_mismatch",
+      "name": "Control - Outcome Mismatch",
+      "query": "logs(\"source:test-harness @scenario:control_outcome_mismatch\").index(\"*\").rollup(\"count\").last(\"10m\") >= 1"
+    },
+    "group": {
+      "monitor_id": "control_outcome_mismatch",
+      "monitor_name": "Control - Outcome Mismatch",
+      "cases": [
+        {
+          "case_id": "control_outcome_mismatch_negative",
+          "case_type": "negative",
+          "expected_outcome": "suppress",
+          "events": [
+            {
+              "event_id": "control-outcome-mismatch-001",
+              "timestamp": "2026-05-02T14:02:00Z",
+              "scenario_id": "control_outcome_mismatch",
+              "service": "control-feed",
+              "source": "test-harness",
+              "status": "warning",
+              "severity": "high",
+              "message": "This matching event is intentionally labeled suppress to prove mismatches fail.",
+              "tags": ["source:test-harness", "scenario:control_outcome_mismatch"]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "control_id": "detect_threshold_logic_inversion",
+    "failure_category": "threshold_logic_inversion",
+    "expected_failure_contains": "expected fire, got suppress",
+    "monitor": {
+      "id": "control_threshold_inversion",
+      "name": "Control - Threshold Inversion",
+      "query": "logs(\"source:test-harness @scenario:control_threshold_inversion\").index(\"*\").rollup(\"count\").last(\"10m\") >= 2"
+    },
+    "group": {
+      "monitor_id": "control_threshold_inversion",
+      "monitor_name": "Control - Threshold Inversion",
+      "cases": [
+        {
+          "case_id": "control_threshold_inversion_positive",
+          "case_type": "positive",
+          "expected_outcome": "fire",
+          "events": [
+            {
+              "event_id": "control-threshold-inversion-001",
+              "timestamp": "2026-05-02T14:03:00Z",
+              "scenario_id": "control_threshold_inversion",
+              "service": "control-feed",
+              "source": "test-harness",
+              "status": "warning",
+              "severity": "high",
+              "message": "One matching event should not satisfy a threshold of two.",
+              "tags": ["source:test-harness", "scenario:control_threshold_inversion"]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "control_id": "reject_monitor_identity_mismatch",
+    "failure_category": "monitor_identity_mismatch",
+    "expected_failure_contains": "does not match monitor id",
+    "monitor": {
+      "id": "control_identity_source",
+      "name": "Control - Identity Source",
+      "query": "logs(\"source:test-harness @scenario:control_identity_source\").index(\"*\").rollup(\"count\").last(\"10m\") >= 1"
+    },
+    "group": {
+      "monitor_id": "control_identity_target",
+      "monitor_name": "Control - Identity Source",
+      "cases": [
+        {
+          "case_id": "control_identity_positive",
+          "case_type": "positive",
+          "expected_outcome": "fire",
+          "events": [
+            {
+              "event_id": "control-identity-001",
+              "timestamp": "2026-05-02T14:04:00Z",
+              "scenario_id": "control_identity_source",
+              "service": "control-feed",
+              "source": "test-harness",
+              "status": "warning",
+              "severity": "high",
+              "message": "This fixture intentionally points the group to the wrong monitor id.",
+              "tags": ["source:test-harness", "scenario:control_identity_source"]
+            }
+          ]
+        }
+      ]
+    }
+  }
+]

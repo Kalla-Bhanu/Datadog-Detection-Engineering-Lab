@@ -16,10 +16,15 @@ need production telemetry.
   source-health scenarios.
 - Monitor-as-code artifacts in JSON and Terraform-style form.
 - Positive, negative, and edge-case validation for every monitor.
-- A local validation harness with 21 passing cases across 7 monitors.
+- A local validation harness with 21 passing cases across 7 monitors and 5
+  negative-control self-tests.
+- One non-active AWS field-correlation example that shows how scenario replay
+  would mature toward production-style CloudTrail field logic.
 - Sanitized Datadog screenshots from Logs Explorer, monitor inventory, monitor
   detail, and metrics overview.
 - Tuning history, monitor changelog, coverage analysis, and triage runbooks.
+- Conservative ATT&CK mapping with 4 validated entries, 2 bounded partial
+  entries, and T1041/T1562 explicitly not claimed.
 - A polished dashboard that presents the project for recruiters and technical
   interviewers.
 
@@ -28,11 +33,18 @@ need production telemetry.
 1. Open the dashboard and start with the Evidence section.
 2. Review [evidence/validation-results.json](evidence/validation-results.json)
    for the 21/21 local validation result.
-3. Read [docs/tuning-history.md](docs/tuning-history.md) to see the false
+3. Read [docs/validation-harness.md](docs/validation-harness.md) to see how
+   the harness proves passing behavior, intentional failure controls, and the
+   AWS field-correlation example.
+4. Read [docs/tuning-history.md](docs/tuning-history.md) to see the false
    positive and production-readiness thinking.
-4. Read [docs/coverage-and-gaps.md](docs/coverage-and-gaps.md) to see what is
-   validated, partial, planned, and not claimed.
-5. Inspect [detections/monitors](detections/monitors) for the monitor logic.
+5. Read [docs/coverage-and-gaps.md](docs/coverage-and-gaps.md) to see what is
+   validated, partial, and not claimed.
+6. Inspect [detections/monitors](detections/monitors) for the monitor logic.
+
+No walkthrough video is included by design. The project is meant to be reviewed
+through the local dashboard, preserved screenshots, checked-in evidence files,
+and runnable verification commands.
 
 ## How This Is Different From CloudSec SOC Detection Lab
 
@@ -63,7 +75,7 @@ The dashboard includes:
   mapping, critical paths, and safety checks.
 - Detection cards with query focus, tuning notes, expected noise, and analyst
   handoff.
-- Scenario walkthroughs for identity, AWS credential misuse, EKS secret access,
+- Scenario paths for identity, AWS credential misuse, EKS secret access,
   endpoint-to-MongoDB pivot, and S3 data access.
 - Evidence cards for sanitized Datadog screenshots, local validation, tuning,
   coverage gaps, and closure-ready artifacts.
@@ -82,6 +94,9 @@ powershell -NoLogo -NoProfile -ExecutionPolicy Bypass -File .\tools\verify-publi
 
 - Monitor and sample-event schema validation.
 - Positive, negative, and edge-case detection validation.
+- Harness control self-tests for intentional failure paths.
+- One AWS field-correlation example with positive, negative, and edge cases.
+- Evidence catalog and release manifest verification.
 - Static dashboard verification.
 
 The validation harness is documented in
@@ -103,9 +118,10 @@ tools/                  Local checks for detections, dashboard, cases, privacy
 Suggested resume bullet:
 
 > Built a Datadog detection engineering lab with monitor-as-code artifacts,
-> positive/negative/edge-case validation, sanitized Datadog evidence, tuning
-> history, and a portfolio dashboard demonstrating alert logic, false-positive
-> handling, ATT&CK coverage, and detection lifecycle ownership.
+> positive/negative/edge-case validation, harness failure controls, sanitized
+> Datadog evidence, tuning history, and a portfolio dashboard demonstrating
+> alert logic, false-positive handling, ATT&CK coverage, and detection
+> lifecycle ownership.
 
 Short interview framing:
 

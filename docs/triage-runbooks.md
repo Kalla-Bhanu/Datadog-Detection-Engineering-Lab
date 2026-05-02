@@ -1,5 +1,13 @@
 # Triage Runbooks
 
+## Replay Pipeline Health
+
+1. Confirm the alert came from `source:test-harness`.
+2. Review the replay window, validation purpose tag, and expected test run.
+3. Treat missing replay evidence as a lab validation issue, not a security
+   incident.
+4. Rerun the local harness before using the dashboard as evidence.
+
 ## Identity Account Takeover
 
 1. Confirm the alert is part of the test harness data.
@@ -34,3 +42,12 @@
 2. Review object volume, actor, client, bucket sensitivity, and timing.
 3. Determine whether data exposure occurred.
 4. Block access, preserve logs, and escalate to incident response.
+
+## Source Pipeline Health
+
+1. Confirm which modeled source heartbeat is missing.
+2. Review expected freshness, connector state, filters, and maintenance context.
+3. Treat source silence as an ingestion-health review before calling it
+   attacker-caused impairment.
+4. Reopen detection coverage only after source heartbeat, owner, and expected
+   event flow are restored.
