@@ -1,0 +1,514 @@
+[
+  {
+    "monitor_id": "datadog_replay_pipeline_health",
+    "monitor_name": "Datadog Lab Replay - Pipeline Health",
+    "cases": [
+      {
+        "case_id": "pipeline_health_positive",
+        "case_type": "positive",
+        "expected_outcome": "fire",
+        "rationale": "A current synthetic replay heartbeat should prove the test harness is alive.",
+        "events": [
+          {
+            "event_id": "tc-pipeline-positive-001",
+            "timestamp": "2026-05-02T13:00:00Z",
+            "service": "datadog-detection-test-harness",
+            "source": "test-harness",
+            "status": "info",
+            "severity": "low",
+            "message": "Replay heartbeat observed for the detection test pipeline.",
+            "tags": ["source:test-harness", "synthetic:true", "purpose:detection-rule-validation", "scenario:pipeline_health"],
+            "scenario_id": "pipeline_health",
+            "evt": { "name": "pipeline_heartbeat", "category": "validation" }
+          }
+        ]
+      },
+      {
+        "case_id": "pipeline_health_negative",
+        "case_type": "negative",
+        "expected_outcome": "suppress",
+        "rationale": "A normal host metric event should not prove the detection replay harness is alive.",
+        "events": [
+          {
+            "event_id": "tc-pipeline-negative-001",
+            "timestamp": "2026-05-02T13:02:00Z",
+            "service": "datadog-agent",
+            "source": "agent",
+            "status": "info",
+            "severity": "low",
+            "message": "Agent metric sample received from lab host.",
+            "tags": ["source:agent", "env:lab", "metric:system.cpu.idle"],
+            "scenario_id": "pipeline_health",
+            "metric": { "name": "system.cpu.idle", "value": 94.2 }
+          }
+        ]
+      },
+      {
+        "case_id": "pipeline_health_edge",
+        "case_type": "edge_case",
+        "expected_outcome": "suppress",
+        "rationale": "A synthetic event without the detection-rule-validation purpose tag should not count as replay proof.",
+        "events": [
+          {
+            "event_id": "tc-pipeline-edge-001",
+            "timestamp": "2026-05-02T13:04:00Z",
+            "service": "datadog-detection-test-harness",
+            "source": "test-harness",
+            "status": "info",
+            "severity": "low",
+            "message": "Synthetic setup event emitted outside the validation phase.",
+            "tags": ["source:test-harness", "synthetic:true", "purpose:setup-check", "scenario:pipeline_health"],
+            "scenario_id": "pipeline_health",
+            "evt": { "name": "setup_check", "category": "maintenance" }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "monitor_id": "identity_account_takeover",
+    "monitor_name": "Datadog Lab Replay - Identity Account Takeover",
+    "cases": [
+      {
+        "case_id": "identity_account_takeover_positive",
+        "case_type": "positive",
+        "expected_outcome": "fire",
+        "rationale": "MFA fatigue, new device, and privileged follow-on action should trigger the identity monitor.",
+        "events": [
+          {
+            "event_id": "tc-identity-positive-001",
+            "timestamp": "2026-05-02T13:05:00Z",
+            "service": "identity-audit-feed",
+            "source": "test-harness",
+            "status": "warning",
+            "severity": "high",
+            "message": "MFA failures from a new location followed by a successful sign-in.",
+            "tags": ["source:test-harness", "synthetic:true", "purpose:detection-rule-validation", "scenario:identity_account_takeover", "platform:identity"],
+            "scenario_id": "identity_account_takeover",
+            "usr": { "id": "user-lab-042", "email": "analyst@example.test" },
+            "network": { "client": { "ip": "198.51.100.24", "geo": { "country": "DE", "city": "Berlin" } } },
+            "evt": { "name": "user.authentication.sso", "outcome": "success" },
+            "device": { "id": "device-new-lab", "trusted": false }
+          }
+        ]
+      },
+      {
+        "case_id": "identity_account_takeover_negative",
+        "case_type": "negative",
+        "expected_outcome": "suppress",
+        "rationale": "A helpdesk-assisted MFA reset is a benign lookalike unless paired with risky follow-on behavior.",
+        "events": [
+          {
+            "event_id": "tc-identity-negative-001",
+            "timestamp": "2026-05-02T13:06:00Z",
+            "service": "identity-audit-feed",
+            "source": "test-harness",
+            "status": "info",
+            "severity": "low",
+            "message": "Helpdesk MFA reset completed from an approved support workflow.",
+            "tags": ["source:test-harness", "synthetic:true", "purpose:helpdesk-validation", "scenario:identity_helpdesk_reset", "platform:identity"],
+            "scenario_id": "identity_helpdesk_reset",
+            "usr": { "id": "user-lab-077", "email": "employee@example.test" },
+            "support": { "ticket": "LAB-TICKET-1042", "approved": true },
+            "evt": { "name": "user.mfa.factor.reset", "outcome": "success" }
+          }
+        ]
+      },
+      {
+        "case_id": "identity_account_takeover_edge",
+        "case_type": "edge_case",
+        "expected_outcome": "suppress",
+        "rationale": "Travel from a new country is review-worthy, but without the validation purpose and follow-on action it should not fire this lab monitor.",
+        "events": [
+          {
+            "event_id": "tc-identity-edge-001",
+            "timestamp": "2026-05-02T13:07:00Z",
+            "service": "identity-audit-feed",
+            "source": "test-harness",
+            "status": "warning",
+            "severity": "medium",
+            "message": "Executive sign-in from a new geography without MFA reset or privilege action.",
+            "tags": ["source:test-harness", "synthetic:true", "purpose:travel-review", "scenario:identity_account_takeover", "platform:identity"],
+            "scenario_id": "identity_account_takeover",
+            "usr": { "id": "user-lab-009", "email": "executive@example.test" },
+            "network": { "client": { "ip": "203.0.113.44", "geo": { "country": "SG", "city": "Singapore" } } },
+            "evt": { "name": "user.session.start", "outcome": "success" }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "monitor_id": "aws_credential_misuse",
+    "monitor_name": "Datadog Lab Replay - AWS Credential Misuse",
+    "cases": [
+      {
+        "case_id": "aws_credential_misuse_positive",
+        "case_type": "positive",
+        "expected_outcome": "fire",
+        "rationale": "A known key used from a new source for sensitive IAM actions should trigger the monitor.",
+        "events": [
+          {
+            "event_id": "tc-aws-positive-001",
+            "timestamp": "2026-05-02T13:10:00Z",
+            "service": "cloud-audit-feed",
+            "source": "test-harness",
+            "status": "warning",
+            "severity": "high",
+            "message": "First-seen access key enumerated IAM and attached a policy.",
+            "tags": ["source:test-harness", "synthetic:true", "purpose:detection-rule-validation", "scenario:aws_iam_key_misuse", "platform:cloud"],
+            "scenario_id": "aws_iam_key_misuse",
+            "aws": {
+              "eventSource": "iam.amazonaws.com",
+              "eventName": "AttachUserPolicy",
+              "sourceIPAddress": "198.51.100.37",
+              "userAgent": "aws-cli/2.x lab",
+              "userIdentity": { "arn": "arn:aws:iam::<ACCOUNT_ID>:user/lab-build-user", "type": "IAMUser" },
+              "requestParameters": { "policyArn": "arn:aws:iam::aws:policy/AdministratorAccess" }
+            }
+          }
+        ]
+      },
+      {
+        "case_id": "aws_credential_misuse_negative",
+        "case_type": "negative",
+        "expected_outcome": "suppress",
+        "rationale": "A known deployment runner can generate an API burst, but approved automation should not fire this monitor.",
+        "events": [
+          {
+            "event_id": "tc-aws-negative-001",
+            "timestamp": "2026-05-02T13:11:00Z",
+            "service": "cloud-audit-feed",
+            "source": "test-harness",
+            "status": "info",
+            "severity": "low",
+            "message": "Approved deployment runner listed roles during a scheduled release.",
+            "tags": ["source:test-harness", "synthetic:true", "purpose:release-window", "scenario:aws_deployment_runner", "platform:cloud"],
+            "scenario_id": "aws_deployment_runner",
+            "aws": {
+              "eventSource": "iam.amazonaws.com",
+              "eventName": "ListRoles",
+              "sourceIPAddress": "192.0.2.30",
+              "userAgent": "ci-runner/lab",
+              "userIdentity": { "arn": "arn:aws:iam::<ACCOUNT_ID>:role/approved-ci-runner", "type": "AssumedRole" }
+            }
+          }
+        ]
+      },
+      {
+        "case_id": "aws_credential_misuse_edge",
+        "case_type": "edge_case",
+        "expected_outcome": "fire",
+        "rationale": "The current lab monitor fires on the scenario tag; production tuning would separate enumeration-only behavior from policy changes.",
+        "events": [
+          {
+            "event_id": "tc-aws-edge-001",
+            "timestamp": "2026-05-02T13:12:00Z",
+            "service": "cloud-audit-feed",
+            "source": "test-harness",
+            "status": "warning",
+            "severity": "medium",
+            "message": "First-seen key enumerated IAM without making a write change.",
+            "tags": ["source:test-harness", "synthetic:true", "purpose:detection-rule-validation", "scenario:aws_iam_key_misuse", "platform:cloud"],
+            "scenario_id": "aws_iam_key_misuse",
+            "aws": {
+              "eventSource": "iam.amazonaws.com",
+              "eventName": "ListAccessKeys",
+              "sourceIPAddress": "203.0.113.90",
+              "userAgent": "aws-cli/2.x lab",
+              "userIdentity": { "arn": "arn:aws:iam::<ACCOUNT_ID>:user/lab-readonly-user", "type": "IAMUser" }
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "monitor_id": "eks_secret_access_chain",
+    "monitor_name": "Datadog Lab Replay - EKS Secret Access Chain",
+    "cases": [
+      {
+        "case_id": "eks_secret_access_chain_positive",
+        "case_type": "positive",
+        "expected_outcome": "fire",
+        "rationale": "Workload identity touching a protected secret path should trigger runtime response.",
+        "events": [
+          {
+            "event_id": "tc-eks-positive-001",
+            "timestamp": "2026-05-02T13:15:00Z",
+            "service": "runtime-audit-feed",
+            "source": "test-harness",
+            "status": "warning",
+            "severity": "critical",
+            "message": "Service account retrieved a protected secret path outside expected namespace.",
+            "tags": ["source:test-harness", "synthetic:true", "purpose:detection-rule-validation", "scenario:eks_secret_access_chain", "platform:runtime"],
+            "scenario_id": "eks_secret_access_chain",
+            "kubernetes": {
+              "audit": { "verb": "get", "resource": "secrets", "namespace": "critical-service" },
+              "user": { "username": "system:serviceaccount:payments:job-runner" },
+              "objectRef": { "name": "prod-db-credential" }
+            }
+          }
+        ]
+      },
+      {
+        "case_id": "eks_secret_access_chain_negative",
+        "case_type": "negative",
+        "expected_outcome": "suppress",
+        "rationale": "A tagged maintenance job reading its own namespace secret is expected behavior.",
+        "events": [
+          {
+            "event_id": "tc-eks-negative-001",
+            "timestamp": "2026-05-02T13:16:00Z",
+            "service": "runtime-audit-feed",
+            "source": "test-harness",
+            "status": "info",
+            "severity": "low",
+            "message": "Approved maintenance service account read a rotation secret in its own namespace.",
+            "tags": ["source:test-harness", "synthetic:true", "purpose:maintenance", "scenario:eks_approved_secret_read", "platform:runtime"],
+            "scenario_id": "eks_approved_secret_read",
+            "kubernetes": {
+              "audit": { "verb": "get", "resource": "secrets", "namespace": "maintenance" },
+              "user": { "username": "system:serviceaccount:maintenance:rotator" },
+              "objectRef": { "name": "rotation-token" }
+            }
+          }
+        ]
+      },
+      {
+        "case_id": "eks_secret_access_chain_edge",
+        "case_type": "edge_case",
+        "expected_outcome": "fire",
+        "rationale": "A decrypt event paired with secret access is intentionally escalated by the lab monitor.",
+        "events": [
+          {
+            "event_id": "tc-eks-edge-001",
+            "timestamp": "2026-05-02T13:17:00Z",
+            "service": "runtime-audit-feed",
+            "source": "test-harness",
+            "status": "warning",
+            "severity": "high",
+            "message": "KMS decrypt followed by service account access to a protected secret.",
+            "tags": ["source:test-harness", "synthetic:true", "purpose:detection-rule-validation", "scenario:eks_secret_access_chain", "platform:runtime"],
+            "scenario_id": "eks_secret_access_chain",
+            "aws": { "eventSource": "kms.amazonaws.com", "eventName": "Decrypt", "sourceIPAddress": "198.51.100.55" },
+            "kubernetes": { "audit": { "verb": "get", "resource": "secrets", "namespace": "critical-service" } }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "monitor_id": "endpoint_to_mongodb_pivot",
+    "monitor_name": "Datadog Lab Replay - Endpoint To MongoDB Pivot",
+    "cases": [
+      {
+        "case_id": "endpoint_to_mongodb_pivot_positive",
+        "case_type": "positive",
+        "expected_outcome": "fire",
+        "rationale": "Suspicious process activity followed by MongoDB access should trigger the pivot monitor.",
+        "events": [
+          {
+            "event_id": "tc-endpoint-positive-001",
+            "timestamp": "2026-05-02T13:20:00Z",
+            "service": "endpoint-data-correlation",
+            "source": "test-harness",
+            "status": "warning",
+            "severity": "high",
+            "message": "Office spawned PowerShell and then a MongoDB client on a finance workstation.",
+            "tags": ["source:test-harness", "synthetic:true", "purpose:detection-rule-validation", "scenario:endpoint_to_mongodb_pivot", "platform:endpoint"],
+            "scenario_id": "endpoint_to_mongodb_pivot",
+            "process": { "parent": "WINWORD.EXE", "name": "powershell.exe", "command_line": "powershell -EncodedCommand <LAB_PAYLOAD>" },
+            "host": { "name": "finance-ws-lab", "role": "workstation" },
+            "mongodb": { "operation": "find", "collection": "payments.customers", "client_ip": "198.51.100.61" }
+          }
+        ]
+      },
+      {
+        "case_id": "endpoint_to_mongodb_pivot_negative",
+        "case_type": "negative",
+        "expected_outcome": "suppress",
+        "rationale": "A database admin using approved tools from an admin host should not fire this detection.",
+        "events": [
+          {
+            "event_id": "tc-endpoint-negative-001",
+            "timestamp": "2026-05-02T13:21:00Z",
+            "service": "endpoint-data-correlation",
+            "source": "test-harness",
+            "status": "info",
+            "severity": "low",
+            "message": "Approved MongoDB shell execution from a database administration jump host.",
+            "tags": ["source:test-harness", "synthetic:true", "purpose:admin-maintenance", "scenario:mongodb_admin_access", "platform:endpoint"],
+            "scenario_id": "mongodb_admin_access",
+            "process": { "parent": "cmd.exe", "name": "mongosh.exe", "command_line": "mongosh --host lab-cluster.example.test" },
+            "host": { "name": "db-admin-jump-lab", "role": "admin-jump-host" },
+            "mongodb": { "operation": "find", "collection": "admin.audit", "client_ip": "192.0.2.80" }
+          }
+        ]
+      },
+      {
+        "case_id": "endpoint_to_mongodb_pivot_edge",
+        "case_type": "edge_case",
+        "expected_outcome": "suppress",
+        "rationale": "A developer MongoDB query is suspicious enough to review but should not fire without the endpoint process chain.",
+        "events": [
+          {
+            "event_id": "tc-endpoint-edge-001",
+            "timestamp": "2026-05-02T13:22:00Z",
+            "service": "endpoint-data-correlation",
+            "source": "test-harness",
+            "status": "warning",
+            "severity": "medium",
+            "message": "Developer host queried MongoDB without the suspicious endpoint process chain.",
+            "tags": ["source:test-harness", "synthetic:true", "purpose:data-access-review", "scenario:mongodb_developer_query", "platform:endpoint"],
+            "scenario_id": "mongodb_developer_query",
+            "process": { "parent": "terminal", "name": "mongosh", "command_line": "mongosh --readPreference secondary" },
+            "host": { "name": "dev-ws-lab", "role": "developer-workstation" },
+            "mongodb": { "operation": "find", "collection": "payments.customers", "client_ip": "203.0.113.72" }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "monitor_id": "s3_data_access_exfiltration",
+    "monitor_name": "Datadog Lab Replay - S3 Data Access Exfiltration",
+    "cases": [
+      {
+        "case_id": "s3_data_access_exfiltration_positive",
+        "case_type": "positive",
+        "expected_outcome": "fire",
+        "rationale": "High-volume reads from a sensitive bucket by an unusual actor should trigger data response.",
+        "events": [
+          {
+            "event_id": "tc-s3-positive-001",
+            "timestamp": "2026-05-02T13:25:00Z",
+            "service": "data-access-feed",
+            "source": "test-harness",
+            "status": "warning",
+            "severity": "critical",
+            "message": "Sensitive bucket listed from a new context followed by object download spike.",
+            "tags": ["source:test-harness", "synthetic:true", "purpose:detection-rule-validation", "scenario:s3_data_access_exfiltration", "platform:data"],
+            "scenario_id": "s3_data_access_exfiltration",
+            "aws": {
+              "eventSource": "s3.amazonaws.com",
+              "eventName": "GetObject",
+              "sourceIPAddress": "203.0.113.120",
+              "userIdentity": { "arn": "arn:aws:iam::<ACCOUNT_ID>:role/lab-data-reader", "type": "AssumedRole" },
+              "requestParameters": { "bucketName": "sensitive-lab-bucket", "key": "exports/customer-export.parquet" }
+            },
+            "data": { "bucket_sensitivity": "restricted", "object_count": 340, "bytes": 894000000 }
+          }
+        ]
+      },
+      {
+        "case_id": "s3_data_access_exfiltration_negative",
+        "case_type": "negative",
+        "expected_outcome": "suppress",
+        "rationale": "A scheduled backup job can create read volume but should be handled by allowlist context.",
+        "events": [
+          {
+            "event_id": "tc-s3-negative-001",
+            "timestamp": "2026-05-02T13:26:00Z",
+            "service": "data-access-feed",
+            "source": "test-harness",
+            "status": "info",
+            "severity": "low",
+            "message": "Approved backup job copied objects during the documented backup window.",
+            "tags": ["source:test-harness", "synthetic:true", "purpose:backup-window", "scenario:s3_backup_job", "platform:data"],
+            "scenario_id": "s3_backup_job",
+            "aws": {
+              "eventSource": "s3.amazonaws.com",
+              "eventName": "GetObject",
+              "sourceIPAddress": "192.0.2.20",
+              "userIdentity": { "arn": "arn:aws:iam::<ACCOUNT_ID>:role/approved-backup-role", "type": "AssumedRole" },
+              "requestParameters": { "bucketName": "backup-lab-bucket", "key": "daily/backup.tar" }
+            },
+            "data": { "bucket_sensitivity": "internal", "object_count": 500, "bytes": 1200000000, "approved_job": true }
+          }
+        ]
+      },
+      {
+        "case_id": "s3_data_access_exfiltration_edge",
+        "case_type": "edge_case",
+        "expected_outcome": "fire",
+        "rationale": "The current lab monitor fires on the scenario tag; production tuning would separate list-only behavior from bulk download.",
+        "events": [
+          {
+            "event_id": "tc-s3-edge-001",
+            "timestamp": "2026-05-02T13:27:00Z",
+            "service": "data-access-feed",
+            "source": "test-harness",
+            "status": "warning",
+            "severity": "medium",
+            "message": "Sensitive bucket was listed from a new context without object downloads.",
+            "tags": ["source:test-harness", "synthetic:true", "purpose:detection-rule-validation", "scenario:s3_data_access_exfiltration", "platform:data"],
+            "scenario_id": "s3_data_access_exfiltration",
+            "aws": {
+              "eventSource": "s3.amazonaws.com",
+              "eventName": "ListBucket",
+              "sourceIPAddress": "198.51.100.88",
+              "userIdentity": { "arn": "arn:aws:iam::<ACCOUNT_ID>:role/lab-data-reader", "type": "AssumedRole" },
+              "requestParameters": { "bucketName": "sensitive-lab-bucket" }
+            },
+            "data": { "bucket_sensitivity": "restricted", "object_count": 0, "bytes": 0 }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "monitor_id": "source_pipeline_health",
+    "monitor_name": "Datadog Source Health - Pipeline Health Pattern",
+    "cases": [
+      {
+        "case_id": "source_pipeline_health_positive",
+        "case_type": "positive",
+        "expected_outcome": "fire",
+        "rationale": "No heartbeat events in the evaluation window should trigger a missing-data source health alert.",
+        "events": []
+      },
+      {
+        "case_id": "source_pipeline_health_negative",
+        "case_type": "negative",
+        "expected_outcome": "suppress",
+        "rationale": "A valid source heartbeat should suppress the missing-data monitor.",
+        "events": [
+          {
+            "event_id": "tc-source-health-negative-001",
+            "timestamp": "2026-05-02T13:30:00Z",
+            "service": "okta-source-health",
+            "source": "synthetic-source-check",
+            "status": "ok",
+            "severity": "low",
+            "message": "Okta source heartbeat confirms source pipeline health.",
+            "tags": ["datadog-detection-lab", "live-source", "okta", "pipeline-health"],
+            "scenario_id": "source_pipeline_health",
+            "evt": { "name": "source_heartbeat", "outcome": "ok" }
+          }
+        ]
+      },
+      {
+        "case_id": "source_pipeline_health_edge",
+        "case_type": "edge_case",
+        "expected_outcome": "fire",
+        "rationale": "A generic live-source event without the pipeline-health marker should not satisfy source heartbeat coverage.",
+        "events": [
+          {
+            "event_id": "tc-source-health-edge-001",
+            "timestamp": "2026-05-02T13:31:00Z",
+            "service": "mongodb-source-health",
+            "source": "synthetic-source-check",
+            "status": "ok",
+            "severity": "low",
+            "message": "MongoDB source inventory check ran but did not emit a heartbeat marker.",
+            "tags": ["datadog-detection-lab", "live-source", "mongodb", "inventory-check"],
+            "scenario_id": "source_pipeline_health",
+            "evt": { "name": "source_inventory", "outcome": "ok" }
+          }
+        ]
+      }
+    ]
+  }
+]
+
