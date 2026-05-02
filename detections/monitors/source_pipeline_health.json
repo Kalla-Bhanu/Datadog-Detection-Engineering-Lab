@@ -1,12 +1,12 @@
 {
   "id": "source_pipeline_health",
-  "name": "CloudSec Live Source - Pipeline Health Pattern",
+  "name": "Datadog Source Health - Pipeline Health Pattern",
   "type": "log alert",
   "scenario_id": "source_pipeline_health",
   "severity": "medium",
-  "query": "logs(\"cloudsec pipeline-health\").index(\"*\").rollup(\"count\").last(\"15m\") < 1",
+  "query": "logs(\"datadog-detection-lab pipeline-health\").index(\"*\").rollup(\"count\").last(\"15m\") < 1",
   "message": "Pipeline health event missing for a modeled source. This public-safe definition represents the lab pattern without private source IDs.",
-  "tags": ["cloudsec", "live-source", "pipeline-health"],
+  "tags": ["datadog-detection-lab", "live-source", "pipeline-health"],
   "options": {
     "include_tags": true,
     "notify_no_data": true,

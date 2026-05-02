@@ -12,6 +12,8 @@ way.
 - Show enough technical depth for an interview without exposing private account
   details.
 - Keep every claim tied to monitor logic, sample events, runbooks, or evidence.
+- Make the project feel like a Datadog detection engineering workshop, not a
+  duplicate SOC investigation lab.
 
 ## Changes Made
 
@@ -23,6 +25,8 @@ way.
 - Added source health, replay timing, evidence confidence, and wrap-up checks.
 - Added Engineer and Recruiter views so the same project can support both quick
   screening and deeper technical review.
+- Added project positioning and detection design notes so reviewers can see the
+  engineering lifecycle behind the monitors.
 
 ## Boundaries
 

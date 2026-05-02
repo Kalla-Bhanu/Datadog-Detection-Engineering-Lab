@@ -1,12 +1,12 @@
 {
   "id": "s3_data_access_exfiltration",
-  "name": "CloudSec Test Harness - S3 Data Access Exfiltration",
+  "name": "Datadog Lab Replay - S3 Data Access Exfiltration",
   "type": "log alert",
   "scenario_id": "s3_data_access_exfiltration",
   "severity": "critical",
   "query": "logs(\"source:test-harness @synthetic:true @purpose:detection-rule-validation @scenario:s3_data_access_exfiltration\").index(\"*\").rollup(\"count\").last(\"10m\") >= 1",
   "message": "Synthetic S3 data access and exfiltration replay observed. This monitor only fires on test-harness events.",
-  "tags": ["cloudsec", "test-harness", "synthetic", "s3-data-access-exfiltration"],
+  "tags": ["datadog-detection-lab", "test-harness", "synthetic", "s3-data-access-exfiltration"],
   "options": {
     "include_tags": true,
     "notify_no_data": false,

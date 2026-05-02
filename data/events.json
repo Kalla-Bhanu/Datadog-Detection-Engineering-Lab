@@ -9,7 +9,7 @@
     "severity": "low",
     "message": "Sample replay heartbeat observed for the detection test pipeline.",
     "tags": ["source:test-harness", "synthetic:true", "purpose:detection-rule-validation", "scenario:pipeline_health"],
-    "expected_detection": "CloudSec Test Harness - Pipeline Health"
+    "expected_detection": "Datadog Lab Replay - Pipeline Health"
   },
   {
     "event_id": "evt-identity-001",
@@ -21,7 +21,7 @@
     "severity": "high",
     "message": "Synthetic account takeover pattern: impossible travel followed by MFA reset request.",
     "tags": ["source:test-harness", "synthetic:true", "scenario:identity_account_takeover", "platform:identity"],
-    "expected_detection": "CloudSec Test Harness - Identity Account Takeover"
+    "expected_detection": "Datadog Lab Replay - Identity Account Takeover"
   },
   {
     "event_id": "evt-cloud-001",
@@ -33,7 +33,7 @@
     "severity": "high",
     "message": "Synthetic access-key misuse pattern: unusual API burst from a new location.",
     "tags": ["source:test-harness", "synthetic:true", "scenario:aws_iam_key_misuse", "platform:cloud"],
-    "expected_detection": "CloudSec Test Harness - AWS Credential Misuse"
+    "expected_detection": "Datadog Lab Replay - AWS Credential Misuse"
   },
   {
     "event_id": "evt-eks-001",
@@ -45,7 +45,7 @@
     "severity": "critical",
     "message": "Synthetic EKS workload identity chain accessed a protected secret path.",
     "tags": ["source:test-harness", "synthetic:true", "scenario:eks_secret_access_chain", "platform:runtime"],
-    "expected_detection": "CloudSec Test Harness - EKS Secret Access Chain"
+    "expected_detection": "Datadog Lab Replay - EKS Secret Access Chain"
   },
   {
     "event_id": "evt-mongodb-001",
@@ -57,7 +57,7 @@
     "severity": "high",
     "message": "Synthetic endpoint process spawned a database client and queried a sensitive collection.",
     "tags": ["source:test-harness", "synthetic:true", "scenario:endpoint_to_mongodb_pivot", "platform:endpoint"],
-    "expected_detection": "CloudSec Test Harness - Endpoint To MongoDB Pivot"
+    "expected_detection": "Datadog Lab Replay - Endpoint To MongoDB Pivot"
   },
   {
     "event_id": "evt-s3-001",
@@ -69,7 +69,7 @@
     "severity": "critical",
     "message": "Synthetic object-store access spike followed by archive download behavior.",
     "tags": ["source:test-harness", "synthetic:true", "scenario:s3_data_access_exfiltration", "platform:data"],
-    "expected_detection": "CloudSec Test Harness - S3 Data Access Exfiltration"
+    "expected_detection": "Datadog Lab Replay - S3 Data Access Exfiltration"
   },
   {
     "event_id": "evt-okta-health-001",
@@ -80,8 +80,8 @@
     "status": "ok",
     "severity": "low",
     "message": "Synthetic Okta source heartbeat confirms pipeline health monitor pattern.",
-    "tags": ["cloudsec", "live-source", "okta", "pipeline-health"],
-    "expected_detection": "CloudSec Live Source - Okta Pipeline Health"
+    "tags": ["datadog-detection-lab", "live-source", "okta", "pipeline-health"],
+    "expected_detection": "Datadog Source Health - Okta Pipeline Health"
   },
   {
     "event_id": "evt-workspace-health-001",
@@ -92,8 +92,8 @@
     "status": "ok",
     "severity": "low",
     "message": "Synthetic workspace source heartbeat confirms pipeline health monitor pattern.",
-    "tags": ["cloudsec", "live-source", "google-workspace", "pipeline-health"],
-    "expected_detection": "CloudSec Live Source - Google Workspace Pipeline Health"
+    "tags": ["datadog-detection-lab", "live-source", "google-workspace", "pipeline-health"],
+    "expected_detection": "Datadog Source Health - Google Workspace Pipeline Health"
   },
   {
     "event_id": "evt-mongodb-health-001",
@@ -104,7 +104,7 @@
     "status": "ok",
     "severity": "low",
     "message": "Synthetic MongoDB source heartbeat confirms pipeline health monitor pattern.",
-    "tags": ["cloudsec", "live-source", "mongodb", "pipeline-health"],
-    "expected_detection": "CloudSec Live Source - MongoDB Pipeline Health"
+    "tags": ["datadog-detection-lab", "live-source", "mongodb", "pipeline-health"],
+    "expected_detection": "Datadog Source Health - MongoDB Pipeline Health"
   }
 ]

@@ -1,7 +1,7 @@
 window.DD_LAB_DATA = {
   meta: {
     title: "Datadog Detection Engineering Lab",
-    subtitle: "A reviewer-friendly Datadog security portfolio with detection logic, sample events, and clear evidence.",
+    subtitle: "A Datadog-native detection engineering workshop with monitor logic, validation events, and clear evidence.",
     environment: "Safe to share",
     update: "Checked locally"
   },
@@ -10,25 +10,25 @@ window.DD_LAB_DATA = {
       id: "overview",
       label: "Overview",
       badge: "5",
-      kicker: "Project overview",
+      kicker: "Detection workshop",
       title: "Datadog Detection Engineering Lab.",
-      summary: "This dashboard shows the work behind the lab: monitor patterns, mapped threat scenarios, ATT&CK coverage, sample alert flow, and the evidence needed to discuss it after the trial tenant is closed."
+      summary: "This dashboard shows the work behind the lab: threat hypotheses, monitor patterns, validation events, ATT&CK coverage, tuning notes, and the evidence needed to discuss it after the trial tenant is closed."
     },
     {
       id: "monitors",
       label: "Detections",
       badge: "7",
-      kicker: "Monitor design",
-      title: "Monitor logic with context, tuning notes, and analyst handoff.",
-      summary: "Each detection explains the idea behind the alert, the data it uses, how I tested it, and how an analyst would respond."
+      kicker: "Monitor lifecycle",
+      title: "Threat hypothesis, source assumptions, query logic, validation, and tuning.",
+      summary: "Each detection explains the idea behind the alert, the data it uses, how I tested it, and what should be checked before escalation."
     },
     {
       id: "scenarios",
       label: "Scenarios",
       badge: "5",
-      kicker: "Threat walkthroughs",
-      title: "Scenario paths show how an alert becomes an investigation decision.",
-      summary: "The sample events are grouped into practical stories with trigger, triage path, expected outcome, and evidence references."
+      kicker: "Validation paths",
+      title: "Scenario paths prove the monitor behavior instead of retelling the same incident story.",
+      summary: "The sample events are grouped into validation paths with trigger, expected alert behavior, response boundary, and evidence references."
     },
     {
       id: "evidence",
@@ -66,7 +66,7 @@ window.DD_LAB_DATA = {
     { tactic: "Defense Evasion", technique: "T1562", name: "Impair Defenses", status: "planned", scenario: "source_pipeline_health", source: "Datadog" }
   ],
   sourceHealth: [
-    { source: "CloudTrail", path: "AWS -> Datadog Logs", lag: "5m", schema: "cloudsec.v1", state: "healthy" },
+    { source: "CloudTrail", path: "AWS -> Datadog Logs", lag: "5m", schema: "datadog-lab.v1", state: "healthy" },
     { source: "Okta", path: "System Log -> Datadog", lag: "6m", schema: "identity.v1", state: "healthy" },
     { source: "Kubernetes", path: "Audit replay -> Logs", lag: "8m", schema: "runtime.v1", state: "watch" },
     { source: "Endpoint", path: "Modeled EDR -> Logs", lag: "9m", schema: "endpoint.v1", state: "healthy" },
@@ -95,7 +95,7 @@ window.DD_LAB_DATA = {
   ],
   monitors: [
     {
-      name: "CloudSec Test Harness - Pipeline Health",
+      name: "Datadog Lab Replay - Pipeline Health",
       severity: "Low",
       status: "Validation",
       scenario: "pipeline_health",
@@ -113,7 +113,7 @@ window.DD_LAB_DATA = {
       mitre: "N/A"
     },
     {
-      name: "CloudSec Test Harness - Identity Account Takeover",
+      name: "Datadog Lab Replay - Identity Account Takeover",
       severity: "High",
       status: "Detection",
       scenario: "identity_account_takeover",
@@ -131,7 +131,7 @@ window.DD_LAB_DATA = {
       mitre: "T1078.004"
     },
     {
-      name: "CloudSec Test Harness - AWS Credential Misuse",
+      name: "Datadog Lab Replay - AWS Credential Misuse",
       severity: "High",
       status: "Detection",
       scenario: "aws_iam_key_misuse",
@@ -149,7 +149,7 @@ window.DD_LAB_DATA = {
       mitre: "T1552.007"
     },
     {
-      name: "CloudSec Test Harness - EKS Secret Access Chain",
+      name: "Datadog Lab Replay - EKS Secret Access Chain",
       severity: "Critical",
       status: "Detection",
       scenario: "eks_secret_access_chain",
@@ -167,7 +167,7 @@ window.DD_LAB_DATA = {
       mitre: "T1613"
     },
     {
-      name: "CloudSec Test Harness - Endpoint To MongoDB Pivot",
+      name: "Datadog Lab Replay - Endpoint To MongoDB Pivot",
       severity: "High",
       status: "Detection",
       scenario: "endpoint_to_mongodb_pivot",
@@ -185,7 +185,7 @@ window.DD_LAB_DATA = {
       mitre: "T1021"
     },
     {
-      name: "CloudSec Test Harness - S3 Data Access Exfiltration",
+      name: "Datadog Lab Replay - S3 Data Access Exfiltration",
       severity: "Critical",
       status: "Detection",
       scenario: "s3_data_access_exfiltration",
@@ -203,14 +203,14 @@ window.DD_LAB_DATA = {
       mitre: "T1530"
     },
     {
-      name: "CloudSec Live Source - Pipeline Health Pattern",
+      name: "Datadog Source Health - Pipeline Health Pattern",
       severity: "Medium",
       status: "Source health",
       scenario: "source_pipeline_health",
       source: "Live source heartbeat",
       type: "missing data",
       window: "15 minutes",
-      query: "cloudsec pipeline-health",
+      query: "datadog-detection-lab pipeline-health",
       owner: "Platform",
       confidence: 84,
       hypothesis: "Source-level silence can hide real security signals and should be visible in the portfolio.",
@@ -306,7 +306,7 @@ window.DD_LAB_DATA = {
   ],
   codePreview: [
     "resource \"datadog_monitor\" \"aws_credential_misuse\" {",
-    "  name    = \"CloudSec Test Harness - AWS Credential Misuse\"",
+    "  name    = \"Datadog Lab Replay - AWS Credential Misuse\"",
     "  type    = \"log alert\"",
     "  query   = \"logs(\\\"@scenario:aws_iam_key_misuse\\\").index(\\\"main\\\").rollup(\\\"count\\\").last(\\\"10m\\\") > 0\"",
     "  message = \"Sample validation alert. Follow docs/triage-runbooks.md.\"",

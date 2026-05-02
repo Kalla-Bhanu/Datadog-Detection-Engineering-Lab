@@ -1,12 +1,12 @@
 {
-  "id": "cloudsec_test_harness_pipeline_health",
-  "name": "CloudSec Test Harness - Pipeline Health",
+  "id": "datadog_replay_pipeline_health",
+  "name": "Datadog Lab Replay - Pipeline Health",
   "type": "log alert",
   "scenario_id": "pipeline_health",
   "severity": "low",
   "query": "logs(\"source:test-harness @synthetic:true @purpose:detection-rule-validation\").index(\"*\").rollup(\"count\").last(\"5m\") >= 1",
   "message": "Synthetic detection test harness replay observed. This monitor is intentionally scoped to source:test-harness and synthetic:true.",
-  "tags": ["cloudsec", "test-harness", "synthetic", "pipeline-health"],
+  "tags": ["datadog-detection-lab", "test-harness", "synthetic", "pipeline-health"],
   "options": {
     "include_tags": true,
     "notify_no_data": false,

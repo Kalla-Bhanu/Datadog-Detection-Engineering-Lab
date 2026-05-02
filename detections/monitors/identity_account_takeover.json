@@ -1,12 +1,12 @@
 {
   "id": "identity_account_takeover",
-  "name": "CloudSec Test Harness - Identity Account Takeover",
+  "name": "Datadog Lab Replay - Identity Account Takeover",
   "type": "log alert",
   "scenario_id": "identity_account_takeover",
   "severity": "high",
   "query": "logs(\"source:test-harness @synthetic:true @purpose:detection-rule-validation @scenario:identity_account_takeover\").index(\"*\").rollup(\"count\").last(\"10m\") >= 1",
   "message": "Synthetic identity account takeover replay observed. This monitor only fires on test-harness events.",
-  "tags": ["cloudsec", "test-harness", "synthetic", "identity-account-takeover"],
+  "tags": ["datadog-detection-lab", "test-harness", "synthetic", "identity-account-takeover"],
   "options": {
     "include_tags": true,
     "notify_no_data": false,
